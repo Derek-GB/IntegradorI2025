@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asignación de Recursos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="formulario.css">
+  <link rel="stylesheet" href="pages/index.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div id="sidebar-container"></div>
+<script>
+  fetch('sidebar.html')
+    .then(res => res.text())
+    .then(html => document.getElementById('sidebar-container').innerHTML = html);
+</script>
+
+  <div class="container mt-4">
+    <h2>
+      <button
+        onclick="window.location.href='index.html'"
+        type="button"
+        class="btn btn-secondary"
+        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar"
+      >
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+          arrow_back
+        </span>
+      </button>
+      Asignación de Recursos
+    </h2>
+
+    <form id="recursoForm" class="form-control mt-4">
+      <details open>
+        <summary><strong>Asignación de Recursos</strong></summary>
+        <fieldset class="mt-2">
+          <label for="codigoFamilia">Código de Familia:</label>
+          <input type="text" id="codigoFamilia" name="codigoFamilia" class="form-control mb-2" placeholder="Ingrese el código" required>
+
+          <div id="itemsContainer">
+            <div class="form-select mb-3">
+              <label for="articulo0">Artículo:</label>
+              <select name="articulo[]" id="articulo0" class="form-select mb-2">
+                <option value="Cobija">Cobija</option>
+                <option value="Cama">Cama</option>
+                <option value="Kit de cocina">Kit de cocina</option>
+                <option value="Agua embotellada">Agua embotellada</option>
+              </select>
+
+              <label for="cantidad0">Cantidad:</label>
+              <input type="number" name="cantidad[]" id="cantidad0" class="form-control mb-2" min="1" placeholder="Ingrese la cantidad" required>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-outline-primary mb-3" onclick="agregarItem()">+ Agregar otro artículo</button>
+        </fieldset>
+      </details>
+
+      <button type="submit" class="btn btn-success mt-3">Guardar asignación</button>
+      <button type="reset" class="btn btn-secondary mt-3">Limpiar</button>
+    </form>
+  </div>
+
+  <script>
+    let itemCount = 1;
+
+    function agregarItem() {
+      const container = document.getElementById("itemsContainer");
+      const item = document.createElement("div");
+      item.classList.add("item", "mb-3");
+
+      item.innerHTML = `
+        <label for="articulo${itemCount}">Artículo:</label>
+        <select name="articulo[]" id="articulo${itemCount}" class="form-select mb-2">
+          <option value="Cobija">Cobija</option>
+          <option value="Cama">Cama</option>
+          <option value="Kit de cocina">Kit de cocina</option>
+          <option value="Agua embotellada">Agua embotellada</option>
+        </select>
+
+        <label for="cantidad${itemCount}">Cantidad:</label>
+        <input type="number" name="cantidad[]" id="cantidad${itemCount}" class="form-control mb-2" min="1" placeholder="Ingrese la cantidad" required>
+      `;
+      itemCount++;
+      container.appendChild(item);
+    }
+
+    document.getElementById("recursoForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const codigoFamilia = document.getElementById("codigoFamilia").value;
+      const articulos = document.querySelectorAll("select[name='articulo[]']");
+      const cantidades = document.querySelectorAll("input[name='cantidad[]']");
+
+      const asignaciones = [];
+      for (let i = 0; i < articulos.length; i++) {
+        asignaciones.push({
+          articulo: articulos[i].value,
+          cantidad: cantidades[i].value
+        });
+      }
+
+      console.log("Código de Familia:", codigoFamilia);
+      console.log("Recursos asignados:", asignaciones);
+
+      alert("Asignación registrada con éxito.");
+      this.reset();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

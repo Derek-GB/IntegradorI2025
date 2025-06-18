@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="formulario.css">
+  <link rel="stylesheet" href="pages/index.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Evento o Emergencia</title>
+</head>
+<body>
+    <!-- Sidebar fijo -->
+    <div id="sidebar-container"></div>
+    <script>
+      fetch('sidebar.html')
+        .then(res => res.text())
+        .then(html => document.getElementById('sidebar-container').innerHTML = html);
+    </script>
+
+  <div class="container">
+    <h2>
+      <button
+        onclick="window.location.href='index.html'"
+        type="button"
+        class="btn btn-secondary"
+        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar"
+      >
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+          arrow_back
+        </span>
+      </button>
+      Evento o Emergencia
+    </h2>
+
+    <form id="formularioAlbergue">
+      <details open>
+        <summary><strong>Información del Evento</strong></summary>
+        <fieldset class="mt-2">
+          <label for="evento">Tipo de Evento o Emergencia:</label>
+          <select name="evento" id="evento" class="form-control mb-2">
+            <option value="">Seleccione una opción</option>
+            <option value="inundacion">Inundación</option>
+            <option value="terremoto">Terremoto</option>
+            <option value="incendio">Incendio</option>
+            <option value="deslizamiento">Deslizamiento</option>
+          </select>
+
+          <label for="integrantes">Cantidad de Integrantes en la Familia:</label>
+          <input name="integrantes" type="number" id="integrantes" class="form-control mb-2" placeholder="Ingrese la cantidad" />
+        </fieldset>
+      </details>
+
+      <button type="button" class="btn btn-primary mt-3 pre" onclick="guardarCantidadYContinuar()"   >  Continuar</button>
+    </form>
+  </div>
+
+  <script>
+    function guardarCantidadYContinuar() {
+      const cantidad = document.getElementById("integrantes").value;
+      if (!cantidad || cantidad < 0) {
+        alert("Por favor, ingrese una cantidad válida de integrantes.");
+        return;
+      }
+      localStorage.setItem("cantidadIntegrantes", cantidad -1);
+      window.location.href = "formulario.html";
+    }
+  </script>
+</body>
+</html>

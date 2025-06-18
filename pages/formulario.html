@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro de Albergue</title>
+  <link rel="stylesheet" href="./formulario.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
+  <style>
+    #signature-pad {
+      border: 1px solid #ccc;
+      width: 100%;
+      height: 200px;
+    }
+  </style>
+</head>
+<nav>
+  <a href="./index.html"></a>
+  <a href="./formulario.html"></a>
+</nav>
+
+<body>
+
+  <div id="sidebar-container"></div>
+<script>
+  fetch('sidebar.html')
+    .then(res => res.text())
+    .then(html => document.getElementById('sidebar-container').innerHTML = html);
+</script>
+
+  <div class="container mt-4">
+    <h2>
+      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary"
+        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar">
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+          arrow_back
+        </span>
+      </button>
+      Registro de Datos - Albergue
+    </h2>
+
+    <form id="formularioAlbergue">
+
+
+      <!-- Información del Albergue -->
+      <details open>
+        <summary><strong>Información del Albergue</strong></summary>
+        <fieldset class="mt-2">
+          <label>Nombre del Albergue:</label>
+          <input name="nombreAlbergue" type="text" class="form-control mb-2" />
+          <label>Código Familia:</label>
+          <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="ALB-YYYY-Evento-001" />
+        </fieldset>
+      </details>
+
+      <!-- Información Personal -->
+      <details>
+        <summary><strong>Información Personal</strong></summary>
+        <fieldset class="mt-2">
+          <label>Nombre Completo:</label>
+          <input name="nombreCompleto" type="text" class="form-control mb-2" />
+          <label>Tipo de Identificación:</label>
+          <select name="tipoIdentificacion" class="form-select mb-2">
+            <option selected>Cédula</option>
+            <option>DIMEX</option>
+            <option>Permiso laboral</option>
+            <option>Pasaporte</option>
+            <option>No presenta</option>
+          </select>
+          <label>Número de Identificación:</label>
+          <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
+          <label>Nacionalidad:</label>
+          <input name="nacionalidad" type="text" class="form-control mb-2" />
+          <label>Parentesco:</label>
+          <input name="parentesco" type="text" class="form-control mb-2" />
+          <label>Fecha de Nacimiento:</label>
+          <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
+          <label>Edad (Automático):</label>
+          <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
+          <label>Sexo:</label>
+          <select name="sexo" class="form-select mb-2">
+            <option>Masculino</option>
+            <option>Femenino</option>
+            <option>Otro</option>
+          </select>
+          <label>Género:</label>
+          <select name="genero" class="form-select mb-2">
+            <option>Transexual</option>
+            <option>No binario</option>
+            <option>Genero fluido</option>
+            <option selected>Cisgenero</option>
+            <option>Otro</option>
+          </select>
+          <label>Teléfono:</label>
+          <input name="telefono" type="tel" class="form-control mb-2" />
+          <label>Contacto de Emergencia:</label>
+          <input name="telefono" type="tel" class="form-control mb-2" />
+        </fieldset>
+      </details>
+
+      <!-- Ubicación -->
+      <details>
+        <summary><strong>Ubicación</strong></summary>
+        <fieldset class="mt-2">
+          <label>Provincia:</label>
+          <input name="provincia" type="text" class="form-control mb-2" />
+          <label>Cantón:</label>
+          <input name="canton" type="text" class="form-control mb-2" />
+          <label>Distrito:</label>
+          <input name="distrito" type="text" class="form-control mb-2" />
+          <label>Dirección:</label>
+          <textarea name="direccion" class="form-control mb-2"></textarea>
+        </fieldset>
+      </details>
+
+
+
+      <!-- Condiciones Especiales -->
+      <details>
+        <summary><strong>Condiciones Especiales</strong></summary>
+        <fieldset class="mt-2">
+          <label>Discapacidad:</label>
+          <select name="discapacidad" class="form-select mb-2">
+            <option>Sí</option>
+            <option selected>No</option>
+          </select>
+
+          <label>Tipo de Discapacidad:</label>
+          <select name="discapacidad" class="form-select mb-2">
+            <option>Fisica</option>
+            <option>Sensorial</option>
+            <option>Intelectual</option>
+            <option>Mental o Psicologica</option>
+            <option>Múltiple</option>
+          </select>
+
+          <label>Condición de Salud Especial:</label>
+          <select name="discapacidad" class="form-select mb-2">
+            <option>Visual</option>
+            <option>Sindrome</option>
+            <option>Esquizofrenia</option>
+            <option>Auditiva</option>
+            <option>Trans-Bipolar</option>
+          </select>
+          <button type="" class="btn btn-primary mt-3">+</button>
+        </fieldset>
+      </details>
+
+      <!-- Características Poblacionales -->
+      <details>
+        <summary><strong>Características Poblacionales</strong></summary>
+        <fieldset class="mt-2">
+          <label>Migrante:</label>
+          <select name="migrante" class="form-select mb-2">
+            <option>Sí</option>
+            <option selected>No</option>
+          </select>
+          <label>Población Indígena:</label>
+          <select name="poblacionIndigena" class="form-select mb-2">
+            <option>Sí</option>
+            <option selected>No</option>
+          </select>
+        </fieldset>
+      </details>
+
+
+      <!-- Observaciones -->
+
+      <details>
+        <summary><strong>Observaciones</strong></summary>
+        <textarea name="Observacion" class="form-control mb-2"></textarea>
+
+      </details>
+
+      <!-- Firma Digital -->
+      <details>
+        <summary><strong>Firma Digital</strong></summary>
+        <fieldset class="mt-2">
+          <label>Firma:</label>
+          <canvas id="signature-pad" width="600" height="200"></canvas>
+          <button type="button" onclick="limpiarFirma()" class="mt-2 btn btn-link text-primary">Limpiar firma</button>
+        </fieldset>
+      </details>
+
+
+
+      <!-- Template para duplicar el nuevo form modificado  -->
+<template id="templateFormulario">
+  <h2>Informacion  de Integrantes </h2>
+  <form id="formularioAlbergue">
+
+    <!-- Información Personal -->
+    <details open>
+      <summary><strong>Información Personal</strong></summary>
+      <fieldset class="mt-2">
+        <label>Nombre Completo:</label>
+        <input name="nombreCompleto" type="text" class="form-control mb-2" />
+        <label>Tipo de Identificación:</label>
+        <select name="tipoIdentificacion" class="form-select mb-2">
+          <option selected>Cédula</option>
+          <option>DIMEX</option>
+          <option>Permiso laboral</option>
+          <option>Pasaporte</option>
+          <option>No presenta</option>
+        </select>
+        <label>Número de Identificación:</label>
+        <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
+        <label>Nacionalidad:</label>
+        <input name="nacionalidad" type="text" class="form-control mb-2" />
+        <label>Parentesco:</label>
+        <input name="parentesco" type="text" class="form-control mb-2" />
+        <label>Fecha de Nacimiento:</label>
+        <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
+        <label>Edad (Automático):</label>
+        <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
+        <label>Sexo:</label>
+        <select name="sexo" class="form-select mb-2">
+          <option>Masculino</option>
+          <option>Femenino</option>
+          <option>Otro</option>
+        </select>
+        <label>Género:</label>
+        <select name="genero" class="form-select mb-2">
+          <option>Transexual</option>
+          <option>No binario</option>
+          <option>Genero fluido</option>
+          <option selected>Cisgenero</option>
+          <option>Otro</option>
+        </select>
+        <label>Teléfono:</label>
+        <input name="telefono" type="tel" class="form-control mb-2" />
+        <label>Contacto de Emergencia:</label>
+        <input name="telefono" type="tel" class="form-control mb-2" />
+      </fieldset>
+    </details>
+
+    <!-- Condiciones Especiales -->
+    <details>
+      <summary><strong>Condiciones Especiales</strong></summary>
+      <fieldset class="mt-2">
+        <label>Discapacidad:</label>
+        <select name="discapacidad" class="form-select mb-2">
+          <option>Sí</option>
+          <option selected>No</option>
+        </select>
+
+        <label>Tipo de Discapacidad:</label>
+        <select name="discapacidad" class="form-select mb-2">
+          <option>Fisica</option>
+          <option>Sensorial</option>
+          <option>Intelectual</option>
+          <option>Mental o Psicologica</option>
+          <option>Múltiple</option>
+        </select>
+
+        <label>Condición de Salud Especial:</label>
+        <select name="discapacidad" class="form-select mb-2">
+          <option>Visual</option>
+          <option>Sindrome</option>
+          <option>Esquizofrenia</option>
+          <option>Auditiva</option>
+          <option>Trans-Bipolar</option>
+        </select>
+        <button type="" class="btn btn-primary mt-3">+</button>
+      </fieldset>
+    </details>
+
+    <!-- Características Poblacionales -->
+    <details>
+      <summary><strong>Características Poblacionales</strong></summary>
+      <fieldset class="mt-2">
+        <label>Migrante:</label>
+        <select name="migrante" class="form-select mb-2">
+          <option>Sí</option>
+          <option selected>No</option>
+        </select>
+        <label>Población Indígena:</label>
+        <select name="poblacionIndigena" class="form-select mb-2">
+          <option>Sí</option>
+          <option selected>No</option>
+        </select>
+      </fieldset>
+    </details>
+
+    <!-- Observaciones -->
+    <details>
+      <summary><strong>Observaciones</strong></summary>
+      <textarea name="Observacion" class="form-control mb-2"></textarea>
+    </details>
+
+  </form>
+</template>
+
+      <!-- fin del tempalte modificado -->
+    <div id="contenedorFormularios"></div>
+
+    <!-- Botones -->
+    <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+    <button type="reset" class="btn btn-secondary mt-3">Limpiar</button>
+    </form>
+
+    <hr class="my-4" />
+    <div class="mt-4">
+      <h2>Exportar Información</h2>
+      <select id="usuariosSelect" class="form-select mb-2"></select>
+      <div class="btn-group">
+        <button class="btn btn-danger" onclick="exportarUsuario('pdf')">Exportar a PDF</button>
+        <button class="btn btn-success" onclick="exportarUsuario('excel')">Exportar a Excel</button>
+        <button class="btn btn-primary" onclick="exportarUsuario('word')">Exportar a Word</button>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+
+  <!-- Esto es para crear mas formularios -->
+  <script>
+   const cantidad = localStorage.getItem("cantidadIntegrantes"); 
+const contenedor = document.getElementById("contenedorFormularios");
+const template = document.getElementById("templateFormulario");
+
+for (let i = 1; i <= cantidad; i++) {
+  const clon = template.content.cloneNode(true);
+  contenedor.appendChild(clon); 
+}
+  </script>
+
+
+
+  <!-- Fin del script de clonado de fomularios -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+
+<script>
+  function exportarRegistroDoc(datos, codigo) {
+    if (!datos) {
+      alert('Datos no encontrados.');
+      return;
+    }
+
+    const etiquetas = {
+      nombreAlbergue: "Nombre del Albergue",
+      codigoFamilia: "Código Familia",
+      nombreCompleto: "Nombre Completo",
+      tipoIdentificacion: "Tipo de Identificación",
+      numeroIdentificacion: "Número de Identificación",
+      nacionalidad: "Nacionalidad",
+      parentesco: "Parentesco",
+      fechaNacimiento: "Fecha de Nacimiento",
+      edad: "Edad",
+      sexo: "Sexo",
+      telefono: "Teléfono",
+      provincia: "Provincia",
+      canton: "Cantón",
+      distrito: "Distrito",
+      direccion: "Dirección",
+      espumas: "Espumas",
+      cobijas: "Cobijas",
+      racion: "Ración de Diario",
+      pichingas: "Pichingas",
+      catres: "Catres",
+      otros: "Otros",
+      discapacidad: "Discapacidad",
+      tipoDiscapacidad: "Tipo de Discapacidad",
+      condicionSalud: "Condición de Salud Especial",
+      migrante: "Migrante",
+      poblacionIndigena: "Población Indígena"
+    };
+
+    function capitalizar(str) {
+      return str
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, s => s.toUpperCase())
+        .trim();
+    }
+
+    const html = `
+    <div class="titulo-container">
+      <h1>REPÚBLICA DE COSTA RICA</h1>
+      <h2>MUNICIPALIDAD DE CAÑAS</h2>
+      <h3>Registro de Albergue</h3>
+    </div>
+    <hr />
+    ${Object.entries(datos).map(([clave, valor]) => {
+      if (clave !== 'firmaDigital') {
+        const etiqueta = etiquetas[clave] || capitalizar(clave);
+        return `<p><strong>${etiqueta}:</strong> ${valor}</p>`;
+      }
+      return '';
+    }).join('')}
+    ${datos.firmaDigital ? `
+      <div class="firma-container">
+        <p><strong>Firma:</strong></p>
+        <img src="${datos.firmaDigital}" />
+      </div>` : ''
+      }
+  `;
+
+    const blob = new Blob(['\ufeff', html], {
+      type: 'application/msword',
+    });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${codigo}_registro.doc`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+
+  // Calcular edad automáticamente
+  document.getElementById("fechaNacimiento").addEventListener("change", function () {
+    const fecha = new Date(this.value);
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - fecha.getFullYear();
+    const mes = hoy.getMonth() - fecha.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
+      edad--;
+    }
+    document.getElementById("edad").value = isNaN(edad) ? '' : edad;
+  });
+
+
+
+  // Firma digital
+  const canvas = document.getElementById("signature-pad");
+  const signaturePad = new SignaturePad(canvas);
+
+  function limpiarFirma() {
+    signaturePad.clear();
+  }
+
+  function obtenerUsuariosGuardados() {
+    return JSON.parse(localStorage.getItem("registrosAlbergue")) || {};
+  }
+
+  function guardarDatos() {
+    const form = document.getElementById('formularioAlbergue');
+    const datos = {};
+    const numeroIdentificacion = form.numeroIdentificacion.value.trim();
+    if (!numeroIdentificacion) return alert("Debe ingresar un Número de Identificación.");
+
+    form.querySelectorAll('input, select, textarea').forEach((input, index) => {
+      let key = input.name || input.id;
+      if (!key) key = `${input.tagName.toLowerCase()}-${index}`;
+      datos[key] = (input.type === 'radio' || input.type === 'checkbox') ? input.checked : input.value;
+    });
+
+    datos.firmaDigital = !signaturePad.isEmpty() ? signaturePad.toDataURL() : null;
+
+    const registros = obtenerUsuariosGuardados();
+    registros[numeroIdentificacion] = datos;
+    localStorage.setItem("registrosAlbergue", JSON.stringify(registros));
+    actualizarSelectUsuarios();
+    alert("Datos guardados correctamente.");
+  }
+
+  function cargarDatos(numeroIdentificacion = null) {
+    const registros = obtenerUsuariosGuardados();
+    if (!numeroIdentificacion) {
+      numeroIdentificacion = document.getElementById("usuariosSelect").value;
+    }
+    if (!numeroIdentificacion || !registros[numeroIdentificacion]) return;
+
+    const datos = registros[numeroIdentificacion];
+    const form = document.getElementById('formularioAlbergue');
+
+    form.querySelectorAll('input, select, textarea').forEach((input, index) => {
+      let key = input.name || input.id;
+      if (!key) key = `${input.tagName.toLowerCase()}-${index}`;
+      if (datos.hasOwnProperty(key)) {
+        if (input.type === 'checkbox' || input.type === 'radio') {
+          input.checked = datos[key];
+        } else {
+          input.value = datos[key];
+          if (input.id === 'fechaNacimiento') input.dispatchEvent(new Event('change'));
+        }
+      }
+    });
+
+    if (datos.firmaDigital) {
+      const img = new Image();
+      img.src = datos.firmaDigital;
+      img.onload = () => {
+        signaturePad.clear();
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+    } else {
+      signaturePad.clear();
+    }
+  }
+
+  function actualizarSelectUsuarios() {
+    const registros = obtenerUsuariosGuardados();
+    const select = document.getElementById("usuariosSelect");
+    select.innerHTML = "<option value=''>Seleccione un usuario</option>";
+    for (const key in registros) {
+      const option = document.createElement("option");
+      option.value = key;
+      option.textContent = key;
+      select.appendChild(option);
+    }
+  }
+
+  function capitalizarCadaPalabra(texto) {
+    if (!texto) return "";
+    return texto
+      .toString()
+      .toLowerCase()
+      .split(' ')
+      .filter(w => w.trim() !== '')
+      .map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1))
+      .join(' ');
+  }
+
+  async function exportarUsuario(formato) {
+    const codigo = document.getElementById("usuariosSelect").value;
+    const registros = obtenerUsuariosGuardados();
+    const datos = registros[codigo];
+    if (!codigo || !datos) return alert("Seleccione un usuario para exportar.");
+
+    if (formato === "pdf") {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Encabezado formal
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text("REPÚBLICA DE COSTA RICA", 105, 15, null, null, "center");
+      doc.text("MUNICIPALIDAD DE CAÑAS", 105, 23, null, null, "center");
+      doc.text("Registro de Albergue", 105, 31, null, null, "center");
+
+      // Línea separadora
+      doc.setLineWidth(0.5);
+      doc.line(15, 35, 195, 35);
+
+      // Ajustes de texto para el contenido
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "normal");
+
+      let y = 45;
+
+      // Mostrar datos con nombres capitalizados y separados por espacios
+      for (const [k, v] of Object.entries(datos)) {
+        if (k === "firmaDigital") continue;
+
+        const etiquetas = {
+          nombreAlbergue: "Nombre del Albergue",
+          codigoFamilia: "Código Familia",
+          nombreCompleto: "Nombre Completo",
+          tipoIdentificacion: "Tipo de Identificación",
+          numeroIdentificacion: "Número de Identificación",
+          nacionalidad: "Nacionalidad",
+          parentesco: "Parentesco",
+          fechaNacimiento: "Fecha de Nacimiento",
+          edad: "Edad",
+          sexo: "Sexo",
+          telefono: "Teléfono",
+          provincia: "Provincia",
+          canton: "Cantón",
+          distrito: "Distrito",
+          direccion: "Dirección",
+          espumas: "Espumas",
+          cobijas: "Cobijas",
+          racion: "Ración de Diario",
+          pichingas: "Pichingas",
+          catres: "Catres",
+          otros: "Otros",
+          discapacidad: "Discapacidad",
+          tipoDiscapacidad: "Tipo de Discapacidad",
+          condicionSalud: "Condición de Salud Especial",
+          migrante: "Migrante",
+          poblacionIndigena: "Población Indígena"
+        };
+
+        const etiqueta = etiquetas[k] || capitalizarCadaPalabra(k.replace(/([A-Z])/g, ' $1').trim());
+        const valor = typeof v === "string" ? capitalizarCadaPalabra(v) : v;
+
+        // Si el texto es muy largo, hacerlo multilinea en PDF
+        const texto = `${etiqueta}: ${valor}`;
+        const splitText = doc.splitTextToSize(texto, 180);
+        doc.text(splitText, 15, y);
+        y += splitText.length * 7;
+
+        // Salto de página si es necesario
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+      }
+
+      if (datos.firmaDigital) {
+        const img = new Image();
+        img.src = datos.firmaDigital;
+        img.onload = () => {
+          if (y + 50 > 280) {
+            doc.addPage();
+            y = 20;
+          }
+          doc.text("Firma:", 15, y);
+          doc.addImage(img, 'PNG', 15, y + 5, 100, 40);
+          doc.save(`${codigo}.pdf`);
+        };
+      } else {
+        doc.save(`${codigo}.pdf`);
+      }
+    }
+    if (formato === "excel") {
+      // Función para convertir camelCase o snake_case a "Título Separado"
+      function formatearTitulo(campo) {
+        // Primero reemplaza mayúsculas por espacio + mayúscula (camelCase)
+        let result = campo.replace(/([A-Z])/g, ' $1');
+        // Luego, separa por guiones bajos o espacios si existen
+        result = result.replace(/[_\-]+/g, ' ');
+        // Poner la primera letra de cada palabra en mayúscula
+        result = result.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+        return result.trim();
+      }
+
+      // Crear un arreglo con los datos transformados con títulos amigables
+      const datosFormateados = {};
+      Object.keys(datos).forEach(key => {
+        datosFormateados[formatearTitulo(key)] = datos[key];
+      });
+
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet([datosFormateados]);
+      XLSX.utils.book_append_sheet(wb, ws, "Datos");
+
+      const numeroIdentificacion = datos.numeroIdentificacion || "exportacion";
+      XLSX.writeFile(wb, `${numeroIdentificacion}.xlsx`);
+    }
+
+    if (formato === "word") {
+      exportarRegistroDoc(datos, codigo);
+    }
+  }
+
+  document.getElementById("usuariosSelect").addEventListener("change", function () {
+    cargarDatos(this.value);
+  });
+
+  window.addEventListener("load", () => {
+    actualizarSelectUsuarios();
+  });
+
+  document.getElementById("formularioAlbergue").addEventListener("submit", function (e) {
+    e.preventDefault(); // Evita que se recargue la página
+    guardarDatos();
+  });
+</script>
+
+
+
+<button id="accesibilidad-toggle" aria-label="Configuración">
+  <span class="material-icons">settings</span>
+</button>
+<div id="accesibilidad-panel">
+  <button onclick="toggleContraste()">Contraste oscuro</button>
+  <button onclick="resaltarEnlaces()">Resaltar enlaces</button>
+  <button onclick="cambiarTamanoFuente('aumentar')">Agrandar texto</button>
+  <button onclick="cambiarTamanoFuente('disminuir')">Reducir texto</button>
+  <button onclick="document.body.classList.toggle('espaciado-texto')">Espaciado de texto</button>
+  <button onclick="document.body.classList.toggle('cursor-grande')">Activar Cursor</button>
+  <button onclick="alinearTexto()">Texto alineado</button>
+  <button onclick="document.body.classList.toggle('saturacion')">Activar Saturación</button>
+  <button onclick="cambiarAlturaLinea()">Altura de la línea</button>
+</div>
+
+<script>
+  document.getElementById('accesibilidad-toggle').addEventListener('click', () => {
+    document.getElementById('accesibilidad-panel').classList.toggle('active');
+  });
+
+  function toggleContraste() {
+    document.body.classList.toggle('contraste');
+  }
+
+  function resaltarEnlaces() {
+    document.body.classList.toggle('resaltado');
+  }
+
+  let fontSize = 1;
+  function cambiarTamanoFuente(accion) {
+    if (accion === 'aumentar') fontSize += 0.1;
+    if (accion === 'disminuir') fontSize = Math.max(1, fontSize - 0.1);
+    document.body.style.fontSize = fontSize + 'em';
+  }
+
+  function cambiarEspaciadoTexto() {
+    document.body.classList.toggle('espaciado-activo');
+  }
+
+
+
+  function cambiarCursor() {
+    document.body.classList.toggle('cursor-grande');
+  }
+
+  function alinearTexto() {
+    document.body.classList.toggle('texto-centrado');
+  }
+
+  function cambiarAlturaLinea() {
+    document.body.classList.toggle('alto-linea');
+  }
+
+  function cambiarSaturacion() {
+    document.body.classList.toggle('saturado');
+  }
+
+</script>
+
+<script>
+
+
+</script>
+
+</html>
