@@ -39,19 +39,12 @@
     <div class="container1 text-center">
 
     <form class="search-bar" action="#" method="get">
-        <input type="text" name="query" placeholder="Buscar albergue...">
-        <input type="text" name="id" placeholder="Buscar por ID...">
-        <select name="provincia">
-            <option value="">Todas las provincias</option>
-            <option value="San José">San José</option>
-            <option value="Alajuela">Alajuela</option>
-            <option value="Cartago">Cartago</option>
-            <option value="Heredia">Heredia</option>
-            <option value="Guanacaste">Guanacaste</option>
-            <option value="Puntarenas">Puntarenas</option>
-            <option value="Limón">Limón</option>
-        </select>
-        <button type="submit" class="btn btn-accent">Buscar</button>
+        <select id="busquedaProvincia" class="form-select mb-2" ></select>
+        <select id="busquedaCanton" class="form-select mb-2" disabled></select>
+        <select id="busquedaDistrito" class="form-select mb-2" disabled></select>
+        <input type="text" id="busquedaId" class="form-control mb-2" placeholder="ID de albergue">
+        <input type="text" id="busquedaNombre" class="form-control mb-2" placeholder="Nombre de albergue">
+        <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 
     </div>
@@ -77,6 +70,15 @@
         </ul>
     </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="ubicaciones.js"></script>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  inicializarUbiSelects('busquedaProvincia', 'busquedaCanton', 'busquedaDistrito');
+});
+
+
+</script>
 </body>
 </html>

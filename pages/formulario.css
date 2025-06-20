@@ -152,7 +152,10 @@ form#recursoForm .item {
 .btn-primary {
     background-color: #FBC02D;
     color: #fff;
+
 }
+
+
 
 /* este de pre es para cambiar el color del form preformulario */
 
@@ -161,7 +164,7 @@ form#recursoForm .item {
 }
 
 .btn-primary:hover {
-    background-color: #FBC02D;
+    background-color: #bd9122;
 }
 
 .btn-secondary {
@@ -170,7 +173,7 @@ form#recursoForm .item {
 }
 
 .btn-secondary:hover {
-    background-color: #FBC02D;
+    background-color: #bd9122;
 }
 
 .btn-link {
