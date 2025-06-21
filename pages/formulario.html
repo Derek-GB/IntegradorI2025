@@ -28,11 +28,11 @@
 <body>
 
   <div id="sidebar-container"></div>
-<script>
-  fetch('sidebar.html')
-    .then(res => res.text())
-    .then(html => document.getElementById('sidebar-container').innerHTML = html);
-</script>
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+  </script>
 
   <div class="container mt-4">
     <h2>
@@ -56,7 +56,7 @@
           <label>Nombre del Albergue:</label>
           <input name="nombreAlbergue" type="text" class="form-control mb-2" />
           <label>Código Familia:</label>
-          <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="ALB-YYYY-Evento-001" />
+          <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="YYYY-Prov-Canton-N°Familia" />
         </fieldset>
       </details>
 
@@ -120,7 +120,7 @@
         </fieldset>
       </details>
 
-     
+
 
 
       <!-- Condiciones Especiales -->
@@ -159,15 +159,16 @@
         <summary><strong>Características Poblacionales</strong></summary>
         <fieldset class="mt-2">
           <label>Migrante:</label>
-          <select name="migrante" class="form-select mb-2">
-            <option>Sí</option>
-            <option selected>No</option>
-          </select>
+          <div class="radio-group mb-2">
+            <label><input type="radio" name="migrante" value="Sí"> Sí</label>
+            <label><input type="radio" name="migrante" value="No" checked> No</label>
+          </div>
+
           <label>Población Indígena:</label>
-          <select name="poblacionIndigena" class="form-select mb-2">
-            <option>Sí</option>
-            <option selected>No</option>
-          </select>
+          <div class="radio-group mb-2">
+            <label><input type="radio" name="poblacionIndigena" value="Sí"> Sí</label>
+            <label><input type="radio" name="poblacionIndigena" value="No" checked> No</label>
+          </div>
         </fieldset>
       </details>
 
@@ -193,118 +194,119 @@
 
 
       <!-- Template para duplicar el nuevo form modificado  -->
-<template id="templateFormulario">
-  <h2>Informacion  de Integrantes </h2>
-  <form id="formularioAlbergue">
+      <template id="templateFormulario">
+        <h2>Informacion de Integrantes </h2>
+        <form id="formularioAlbergue">
 
-    <!-- Información Personal -->
-    <details open>
-      <summary><strong>Información Personal</strong></summary>
-      <fieldset class="mt-2">
-        <label>Nombre Completo:</label>
-        <input name="nombreCompleto" type="text" class="form-control mb-2" />
-        <label>Tipo de Identificación:</label>
-        <select name="tipoIdentificacion" class="form-select mb-2">
-          <option selected>Cédula</option>
-          <option>DIMEX</option>
-          <option>Permiso laboral</option>
-          <option>Pasaporte</option>
-          <option>No presenta</option>
-        </select>
-        <label>Número de Identificación:</label>
-        <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
-        <label>Nacionalidad:</label>
-        <input name="nacionalidad" type="text" class="form-control mb-2" />
-        <label>Parentesco:</label>
-        <input name="parentesco" type="text" class="form-control mb-2" />
-        <label>Fecha de Nacimiento:</label>
-        <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
-        <label>Edad (Automático):</label>
-        <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
-        <label>Sexo:</label>
-        <select name="sexo" class="form-select mb-2">
-          <option>Masculino</option>
-          <option>Femenino</option>
-          <option>Otro</option>
-        </select>
-        <label>Género:</label>
-        <select name="genero" class="form-select mb-2">
-          <option>Transexual</option>
-          <option>No binario</option>
-          <option>Genero fluido</option>
-          <option selected>Cisgenero</option>
-          <option>Otro</option>
-        </select>
-        <label>Teléfono:</label>
-        <input name="telefono" type="tel" class="form-control mb-2" />
-        <label>Contacto de Emergencia:</label>
-        <input name="telefono" type="tel" class="form-control mb-2" />
-      </fieldset>
-    </details>
+          <!-- Información Personal -->
+          <details open>
+            <summary><strong>Información Personal</strong></summary>
+            <fieldset class="mt-2">
+              <label>Nombre Completo:</label>
+              <input name="nombreCompleto" type="text" class="form-control mb-2" />
+              <label>Tipo de Identificación:</label>
+              <select name="tipoIdentificacion" class="form-select mb-2">
+                <option selected>Cédula</option>
+                <option>DIMEX</option>
+                <option>Permiso laboral</option>
+                <option>Pasaporte</option>
+                <option>No presenta</option>
+              </select>
+              <label>Número de Identificación:</label>
+              <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
+              <label>Nacionalidad:</label>
+              <input name="nacionalidad" type="text" class="form-control mb-2" />
+              <label>Parentesco:</label>
+              <input name="parentesco" type="text" class="form-control mb-2" />
+              <label>Fecha de Nacimiento:</label>
+              <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
+              <label>Edad (Automático):</label>
+              <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
+              <label>Sexo:</label>
+              <select name="sexo" class="form-select mb-2">
+                <option>Masculino</option>
+                <option>Femenino</option>
+                <option>Otro</option>
+              </select>
+              <label>Género:</label>
+              <select name="genero" class="form-select mb-2">
+                <option>Transexual</option>
+                <option>No binario</option>
+                <option>Genero fluido</option>
+                <option selected>Cisgenero</option>
+                <option>Otro</option>
+              </select>
+              <label>Teléfono:</label>
+              <input name="telefono" type="tel" class="form-control mb-2" />
+              <label>Contacto de Emergencia:</label>
+              <input name="telefono" type="tel" class="form-control mb-2" />
+            </fieldset>
+          </details>
 
-    <!-- Condiciones Especiales -->
-    <details>
-      <summary><strong>Condiciones Especiales</strong></summary>
-      <fieldset class="mt-2">
-        <label>Discapacidad:</label>
-        <select name="discapacidad" class="form-select mb-2">
-          <option>Sí</option>
-          <option selected>No</option>
-        </select>
+          <!-- Condiciones Especiales -->
+          <details>
+            <summary><strong>Condiciones Especiales</strong></summary>
+            <fieldset class="mt-2">
+              <label>Discapacidad:</label>
+              <select name="discapacidad" class="form-select mb-2">
+                <option>Sí</option>
+                <option selected>No</option>
+              </select>
 
-        <label>Tipo de Discapacidad:</label>
-        <select name="discapacidad" class="form-select mb-2">
-          <option>Fisica</option>
-          <option>Sensorial</option>
-          <option>Intelectual</option>
-          <option>Mental o Psicologica</option>
-          <option>Múltiple</option>
-        </select>
+              <label>Tipo de Discapacidad:</label>
+              <select name="discapacidad" class="form-select mb-2">
+                <option>Fisica</option>
+                <option>Sensorial</option>
+                <option>Intelectual</option>
+                <option>Mental o Psicologica</option>
+                <option>Múltiple</option>
+              </select>
 
-        <label>Condición de Salud Especial:</label>
-        <select name="discapacidad" class="form-select mb-2">
-          <option>Visual</option>
-          <option>Sindrome</option>
-          <option>Esquizofrenia</option>
-          <option>Auditiva</option>
-          <option>Trans-Bipolar</option>
-        </select>
-        <button type="" class="btn btn-primary mt-3">+</button>
-      </fieldset>
-    </details>
+              <label>Condición de Salud Especial:</label>
+              <select name="discapacidad" class="form-select mb-2">
+                <option>Visual</option>
+                <option>Sindrome</option>
+                <option>Esquizofrenia</option>
+                <option>Auditiva</option>
+                <option>Trans-Bipolar</option>
+              </select>
+              <button type="" class="btn btn-primary mt-3">+</button>
+            </fieldset>
+          </details>
 
-    <!-- Características Poblacionales -->
-    <details>
-      <summary><strong>Características Poblacionales</strong></summary>
-      <fieldset class="mt-2">
-        <label>Migrante:</label>
-        <select name="migrante" class="form-select mb-2">
-          <option>Sí</option>
-          <option selected>No</option>
-        </select>
-        <label>Población Indígena:</label>
-        <select name="poblacionIndigena" class="form-select mb-2">
-          <option>Sí</option>
-          <option selected>No</option>
-        </select>
-      </fieldset>
-    </details>
+          <!-- Características Poblacionales -->
+          <details>
+        <summary><strong>Características Poblacionales</strong></summary>
+        <fieldset class="mt-2">
+          <label>Migrante:</label>
+          <div class="radio-group mb-2">
+            <label><input type="radio" name="migrante" value="Sí"> Sí</label>
+            <label><input type="radio" name="migrante" value="No" checked> No</label>
+          </div>
 
-    <!-- Observaciones -->
-    <details>
-      <summary><strong>Observaciones</strong></summary>
-      <textarea name="Observacion" class="form-control mb-2"></textarea>
-    </details>
+          <label>Población Indígena:</label>
+          <div class="radio-group mb-2">
+            <label><input type="radio" name="poblacionIndigena" value="Sí"> Sí</label>
+            <label><input type="radio" name="poblacionIndigena" value="No" checked> No</label>
+          </div>
+        </fieldset>
+      </details>
 
-  </form>
-</template>
+          <!-- Observaciones -->
+          <details>
+            <summary><strong>Observaciones</strong></summary>
+            <textarea name="Observacion" class="form-control mb-2"></textarea>
+          </details>
+
+        </form>
+      </template>
 
       <!-- fin del tempalte modificado -->
-    <div id="contenedorFormularios"></div>
+      <div id="contenedorFormularios"></div>
 
-    <!-- Botones -->
-    <button type="submit" class="btn btn-primary mt-3">Enviar</button>
-    <button type="reset" class="btn btn-secondary mt-3">Limpiar</button>
+      <!-- Botones -->
+      <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+      <button type="reset" class="btn btn-secondary mt-3">Limpiar</button>
     </form>
 
     <hr class="my-4" />
@@ -324,33 +326,33 @@
 
   <!-- Esto es para crear mas formularios -->
   <script>
-   const cantidad = localStorage.getItem("cantidadIntegrantes"); 
-const contenedor = document.getElementById("contenedorFormularios");
-const template = document.getElementById("templateFormulario");
+    const cantidad = localStorage.getItem("cantidadIntegrantes");
+    const contenedor = document.getElementById("contenedorFormularios");
+    const template = document.getElementById("templateFormulario");
 
-for (let i = 1; i <= cantidad; i++) {
-  const clon = template.content.cloneNode(true);
-  contenedor.appendChild(clon); 
-}
+    for (let i = 1; i <= cantidad; i++) {
+      const clon = template.content.cloneNode(true);
+      contenedor.appendChild(clon);
+    }
   </script>
 
 
 
   <!-- Fin del script de clonado de fomularios -->
 
-  
-  
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="ubicaciones.js"></script>
 
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  inicializarUbiSelects('provincia', 'canton', 'distrito');
-});
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarUbiSelects('provincia', 'canton', 'distrito');
+    });
 
 
-</script>
+  </script>
 
 </body>
 

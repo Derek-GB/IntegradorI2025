@@ -33,29 +33,53 @@
     </h2>
 
     <form id="recursoForm" class="form-control mt-4">
-      <details open>
-        <summary><strong>Asignación de Recursos</strong></summary>
-        <fieldset class="mt-2">
-          <label for="codigoFamilia">Código de Familia:</label>
-          <input type="text" id="codigoFamilia" name="codigoFamilia" class="form-control mb-2" placeholder="Ingrese el código" required>
+     <details open>
+  <summary><strong>Asignación de Recursos</strong></summary>
 
-          <div id="itemsContainer">
-            <div class="form-select mb-3">
-              <label for="articulo0">Artículo:</label>
-              <select name="articulo[]" id="articulo0" class="form-select mb-2">
-                <option value="Cobija">Cobija</option>
-                <option value="Cama">Cama</option>
-                <option value="Kit de cocina">Kit de cocina</option>
-                <option value="Agua embotellada">Agua embotellada</option>
-              </select>
+  
 
-              <label for="cantidad0">Cantidad:</label>
-              <input type="number" name="cantidad[]" id="cantidad0" class="form-control mb-2" min="1" placeholder="Ingrese la cantidad" required>
-            </div>
-          </div>
+  <fieldset class="mt-2">
+    <label for="codigoFamilia">Código de Familia:</label>
+    <input type="text" id="codigoFamilia" name="codigoFamilia" class="form-control mb-2" placeholder="Ingrese el código" required>
 
-          <button type="button" class="btn btn-outline-primary mb-3" onclick="agregarItem()">+ Agregar otro artículo</button>
-        </fieldset>
+    <!-- Contenedor de campos -->
+    <div id="formArticulo">
+      <label for="articulo">Artículo:</label>
+      <select id="articulo" class="form-select mb-2">
+        <option value="" disabled selected>Seleccione un artículo</option>
+        <option value="Cobija">Cobija</option>
+        <option value="Cama">Cama</option>
+        <option value="Kit de cocina">Kit de cocina</option>
+        <option value="Agua embotellada">Agua embotellada</option>
+      </select>
+
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" id="cantidad" class="form-control mb-2" min="1" placeholder="Ingrese la cantidad">
+    </div>
+    <button type="button" class="btn btn-warning mb-3" onclick="agregarItem()">+ Agregar otro artículo</button>
+
+<div class="table-responsive mt-4">
+    <table class="tabla-asignacion">
+      <thead class="table-light">
+        <tr>
+          <th>Artículo</th>
+          <th>Cantidad</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="tablaArticulos">
+        <!-- Filas dinámicas -->
+      </tbody>
+    </table>
+  </div>
+
+
+  </fieldset>
+
+  <!-- Tabla con los artículos agregados -->
+  
+  
+</details>
       </details>
 
       <button type="submit" class="btn btn-success mt-3">Guardar asignación</button>
@@ -63,52 +87,38 @@
     </form>
   </div>
 
-  <script>
-    let itemCount = 1;
+  <!-- JavaScript -->
+<script>
+  function agregarItem() {
+    const articulo = document.getElementById("articulo").value;
+    const cantidad = document.getElementById("cantidad").value;
 
-    function agregarItem() {
-      const container = document.getElementById("itemsContainer");
-      const item = document.createElement("div");
-      item.classList.add("item", "mb-3");
-
-      item.innerHTML = `
-        <label for="articulo${itemCount}">Artículo:</label>
-        <select name="articulo[]" id="articulo${itemCount}" class="form-select mb-2">
-          <option value="Cobija">Cobija</option>
-          <option value="Cama">Cama</option>
-          <option value="Kit de cocina">Kit de cocina</option>
-          <option value="Agua embotellada">Agua embotellada</option>
-        </select>
-
-        <label for="cantidad${itemCount}">Cantidad:</label>
-        <input type="number" name="cantidad[]" id="cantidad${itemCount}" class="form-control mb-2" min="1" placeholder="Ingrese la cantidad" required>
-      `;
-      itemCount++;
-      container.appendChild(item);
+    if (!articulo || !cantidad || cantidad < 1) {
+      alert("Por favor, complete el artículo y la cantidad correctamente.");
+      return;
     }
 
-    document.getElementById("recursoForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    const tabla = document.getElementById("tablaArticulos");
+    const fila = document.createElement("tr");
 
-      const codigoFamilia = document.getElementById("codigoFamilia").value;
-      const articulos = document.querySelectorAll("select[name='articulo[]']");
-      const cantidades = document.querySelectorAll("input[name='cantidad[]']");
+    fila.innerHTML = `
+      <td>${articulo}</td>
+      <td>${cantidad}</td>
+      <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarFila(this)">Eliminar</button></td>
+    `;
 
-      const asignaciones = [];
-      for (let i = 0; i < articulos.length; i++) {
-        asignaciones.push({
-          articulo: articulos[i].value,
-          cantidad: cantidades[i].value
-        });
-      }
+    tabla.appendChild(fila);
 
-      console.log("Código de Familia:", codigoFamilia);
-      console.log("Recursos asignados:", asignaciones);
+    // Limpiar campos
+    document.getElementById("articulo").selectedIndex = 0;
+    document.getElementById("cantidad").value = "";
+  }
 
-      alert("Asignación registrada con éxito.");
-      this.reset();
-    });
-  </script>
+  function eliminarFila(boton) {
+    const fila = boton.closest("tr");
+    fila.remove();
+  }
+</script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

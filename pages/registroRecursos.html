@@ -36,21 +36,33 @@
       <form id="formularioAlbergue">
 
 
-        <!-- Información del Registro de Suministros-->
-        <details open>
-          <summary><strong> Registro de Suministros</strong></summary>
-          <fieldset class="mt-2">
-            <label>Nombre del Producto:</label>
-            <input name="nombre" type="text" class="form-control mb-2"  placeholder="Ingrese el Nombre" />
-            <label>codigo:</label>
-            <label>Descripción del Producto:</label>
-            <input name="descripcionProducto" type="text" class="form-control mb-2"  placeholder="Descripcion del producto" />
-            <label>codigo:</label>
-            <input name="codigo" type="number" class="form-control mb-2" placeholder="Ingrese el codigo del producto" />
-            <label>Cantidad:</label>
-            <input name="cantidad" type="number" class="form-control mb-2" placeholder="Ingrese la cantidad" />
-          </fieldset>
-        </details>
+       <!-- Información del Registro de Suministros-->
+<details open>
+  <summary><strong> Registro de Suministros</strong></summary>
+  <fieldset class="mt-2">
+    <label>Nombre del Producto:</label>
+    <input name="nombre" type="text" class="form-control mb-2" placeholder="Ingrese el Nombre" />
+
+    <label>Descripción del Producto:</label>
+    <input name="descripcionProducto" type="text" class="form-control mb-2" placeholder="Descripción del producto" />
+
+    <label>Código:</label>
+    <input name="codigo" type="number" class="form-control mb-2" placeholder="Ingrese el código del producto" />
+
+    <label>Categoría del Producto:</label>
+    <select name="categoriaProducto" class="form-select mb-2">
+      <option selected disabled>Seleccione una categoría</option>
+      <option>Alimentos</option>
+      <option>Higiene</option>
+      <option>Ropa</option>
+      <option>Medicamentos</option>
+      <option>Otros</option>
+    </select>
+
+    <label>Cantidad:</label>
+    <input name="cantidad" type="number" class="form-control mb-2" placeholder="Ingrese la cantidad" />
+  </fieldset>
+</details>
                       
         <!-- Botones -->
         <button type="submit" class="btn btn-primary mt-3">Agregar</button>
