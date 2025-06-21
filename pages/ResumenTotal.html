@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumen Total</title>
+  <link rel="stylesheet" href="FormAbasteci.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Resumen Total de Abastecimiento</h2>
+    <div id="contenidoResumen">
+      <!-- Aquí se cargan los registros -->
+    </div>
+
+    <a href="FormAbasteci.html">
+      <button type="button">Volver al Formulario</button>
+    </a>
+  </div>
+
+  <script>
+    const registros = JSON.parse(localStorage.getItem("datosAlimentos")) || [];
+    const contenedor = document.getElementById("contenidoResumen");
+
+    if (registros.length === 0) {
+      contenedor.innerHTML = "<p>No hay registros disponibles.</p>";
+    } else {
+      registros.forEach((registro, index) => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+
+        // Sección de carnes
+        const carne = registro.carnes || {};
+        const proteina = registro.proteinas || {};
+        const verdura = registro.verduras || {};
+        const olor = registro.olores || {};
+        const limpieza = registro.limpieza || {};
+
+        let abarrotesHTML = "";
+        if (registro.abarrotes.length > 0) {
+          abarrotesHTML = "<ul>";
+          registro.abarrotes.forEach(item => {
+            abarrotesHTML += `<li>${item.cantidad} ${item.unidad} de ${item.nombre}</li>`;
+          });
+          abarrotesHTML += "</ul>";
+        } else {
+          abarrotesHTML = "<p>No se seleccionaron abarrotes.</p>";
+        }
+
+        div.innerHTML = `
+          <h3>Registro #${index + 1}</h3>
+          <p><strong>Fecha:</strong> ${registro.fecha}</p>
+
+          <h4>Carnes</h4>
+          <p>${carne.cantidad || 0} ${carne.unidad || ''} de ${carne.tipo || 'N/A'}</p>
+
+          <h4>Proteínas</h4>
+          <p>${proteina.cantidad || 0} ${proteina.unidad || ''} de ${proteina.tipo || 'N/A'}</p>
+
+          <h4>Verduras</h4>
+          <p>${verdura.cantidad || 0} ${verdura.unidad || ''} de ${verdura.tipo || 'N/A'}</p>
+
+          <h4>Olores</h4>
+          <p>${olor.cantidad || 0} ${olor.unidad || ''} de ${olor.tipo || 'N/A'}</p>
+
+          <h4>Abarrotes</h4>
+          ${abarrotesHTML}
+
+          <h4>Limpieza</h4>
+          <p>${limpieza.cantidad || 0} ${limpieza.unidad || ''} de ${limpieza.producto || 'N/A'}</p>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

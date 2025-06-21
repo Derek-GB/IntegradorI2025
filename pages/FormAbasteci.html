@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulario Abarrotes</title>
+    <link rel="stylesheet" href="FormAbasteci.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>Formulario de abastecimiento</h2>
+        <form id="formularioAbarrotes">
+
+            <details open>
+                <summary><strong>Carnes</strong></summary>
+
+                <div class="form-group">
+                    <label for="tipoCarne">Tipo de carne:</label>
+                    <select id="tipoCarne" name="tipoCarne" required>
+                        <option value="">Seleccione</option>
+                        <option value="Pollo">Pollo</option>
+                        <option value="Cerdo">Cerdo</option>
+                        <option value="Res">Res</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="unidad">Unidad de medida:</label>
+                    <select id="unidad" name="unidad" required>
+                        <option value="">Seleccione</option>
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="lb">lb</option>
+                        <option value="unidades">unidades</option>
+                        <option value="litros">litros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" min="1" step="1" required>
+                </div>
+
+                <button type="button" id="btnAgregarCarne">Agregar</button>
+
+                <div class="card">
+                    <h3>Resumen</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo de carne</th>
+                                <th>Unidad</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaResumen"></tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Proteínas</strong></summary>
+
+                <div class="form-group">
+                    <label for="tipoProteina">Producto:</label>
+                    <select id="tipoProteina" name="tipoProteina" required>
+                        <option value="">Seleccione</option>
+                        <option value="Huevos (Cartón 30 huevos)">Huevos (Cartón 30 huevos)</option>
+                        <option value="Mortadela">Mortadela</option>
+                        <option value="Salchichón">Salchichón</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="unidadProteina">Unidad de medida:</label>
+                    <select id="unidadProteina" name="unidadProteina" required>
+                        <option value="">Seleccione</option>
+                        <option value="Cartón por 30 unidades">Cartón por 30 unidades</option>
+                        <option value="Kilogramo">Kilogramo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidadProteina">Cantidad:</label>
+                    <input type="number" id="cantidadProteina" name="cantidadProteina" min="0" step="0.1" required />
+                </div>
+
+                <div class="card">
+                    <h3>Resumen</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Unidad</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaProteina"></tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Verduras</strong></summary>
+                <!-- Verdura 1 -->
+                <p><strong>Verdura 1</strong></p>
+                <select name="tipoVerdura1">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option>Yuca</option>
+                    <option>Papa</option>
+                    <option>Camote</option>
+                    <option>Chayote</option>
+                </select>
+                <label>Cantidad:</label>
+                <input type="number" name="cantidadVerdura1" min="1" />
+                <label>Unidad de medida:</label>
+                <select name="unidadVerdura1">
+                    <option>kg</option>
+                </select>
+                <br>
+                <!-- Verdura 2 -->
+                <p><strong>Verdura 2</strong></p>
+                <select name="tipoVerdura2">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option>Yuca</option>
+                    <option>Papa</option>
+                    <option>Camote</option>
+                    <option>Chayote</option>
+                </select>
+                <label>Cantidad:</label>
+                <input type="number" name="cantidadVerdura2" min="1" />
+                <label>Unidad de medida:</label>
+                <select name="unidadVerdura2">
+                    <option value="" disabled selected>Seleccione una unidad</option>
+                    <option>kg</option>
+                </select>
+            </details>
+
+            <details>
+                <summary><strong>Olores y otros</strong></summary>
+                <label>Tipo de olor:</label>
+                <select name="tipoOlor">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option>Platano</option>
+                    <option>Cebolla</option>
+                    <option>Chile Dulce</option>
+                    <option>Tomate</option>
+                    <option>Pepino</option>
+                    <option>Repollo</option>
+                    <option>Ajo</option>
+                    <option>Culantro rollo</option>
+                    <option>Apio</option>
+                    <option>Salsa Lizano</option>
+                    <option>Vinagre</option>
+                    <option>Oregano</option>
+                    <option>Pimienta</option>
+                    <option>Comino</option>
+                    <option>Salsa de Tomate</option>
+                    <option>Mayonesa</option>
+                    <option>Sal</option>
+                    <option>Mantequilla</option>
+                    <option>Achiote</option>
+                    <option>Consome</option>
+                </select>
+                <label>Cantidad:</label>
+                <input type="number" name="cantidadOlor" min="1" />
+                <label>Unidad de medida:</label>
+                <select name="unidadOlor">
+                    <option value="" disabled selected>Seleccione una unidad</option>
+                    <option>kg</option>
+                    <option>litro</option>
+                    <option>unidad</option>
+                    <option>rollo</option>
+                    <option>caja</option>
+                </select>
+            </details>
+            <details>
+                <summary><strong>Abarrotes</strong></summary>
+                <div class="card">
+                    <form id="abarroteForm">
+                        <div class="form-group">
+                            <label for="tipoAbarrote">Tipo de abarrote:</label>
+                            <select id="tipoAbarrote" required>
+                                <option value="">Seleccione</option>
+                                <option>Arroz</option>
+                                <option>Frijoles</option>
+                                <option>Azúcar</option>
+                                <option>Aceite de soya</option>
+                                <option>Café</option>
+                                <option>Espagueti</option>
+                                <option>Atún en trozos</option>
+                                <option>Avena en polvo</option>
+                                <option>Refresco</option>
+                                <option>Leche en polvo</option>
+                                <option>Agua dulce en polvo</option>
+                                <option>Pan cuadrado</option>
+                                <option>Tortillas</option>
+                                <option>Pasta de tomate</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="unidadAbarrote">Unidad de medida:</label>
+                            <select id="unidadAbarrote" required>
+                                <option value="">Seleccione</option>
+                                <option>Kilogramo</option>
+                                <option>Litro</option>
+                                <option>Paquete</option>
+                                <option>Rebanada</option>
+                                <option>Unidad</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidadAbarrote">Cantidad:</label>
+                            <input type="number" id="cantidadAbarrote" min="1" step="1" required>
+                        </div>
+                        <button type="submit">Agregar</button>
+                    </form>
+                </div>
+                <div class="card">
+                    <h3>Resumen</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Abarrote</th>
+                                <th>Unidad</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAbarroteResumen"></tbody>
+                    </table>
+                </div>
+            <!-- ... (secciones anteriores) -->
+
+            </details>
+
+            <!-- Sección Limpieza corregida -->
+            <details>
+                <summary><strong>Limpieza</strong></summary>
+                <div class="card">
+                    <form id="limpiezaForm">
+                        <div class="form-group">
+                            <label for="productoLimpiezaNuevo">Producto de limpieza:</label>
+                            <select id="productoLimpiezaNuevo" required>
+                                <option value="">Seleccione</option>
+                                <option>Bolsas para basura Grande</option>
+                                <option>Bolsas para basura medianas</option>
+                                <option>Papel Higiénico</option>
+                                <option>Pasta dental</option>
+                                <option>Jabón en polvo</option>
+                                <option>Cloro</option>
+                                <option>Jabón de baño</option>
+                                <option>Guantes de Cocina (Hule)</option>
+                                <option>Jabón lavamanos</option>
+                                <option>Jabón Lavaplatos</option>
+                                <option>Desinfectante</option>
+                                <option>Esponja lava platos</option>
+                                <option>Fósforos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="unidadLimpiezaNuevo">Unidad de medida:</label>
+                            <select id="unidadLimpiezaNuevo" required>
+                                <option value="">Seleccione</option>
+                                <option>Paquete de al menos 10 unidades</option>
+                                <option>Rollo</option>
+                                <option>Unidad</option>
+                                <option>Kilogramo</option>
+                                <option>Litro</option>
+                                <option>Par</option>
+                                <option>Caja</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidadLimpiezaNuevo">Cantidad:</label>
+                            <input type="number" id="cantidadLimpiezaNuevo" min="1" step="1" required>
+                        </div>
+                        <button type="submit">Agregar</button>
+                    </form>
+                </div>
+                <div class="card">
+                    <h3>Resumen</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Unidad</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaLimpiezaResumen"></tbody>
+                    </table>
+                </div>
+            </details>
+
+<!-- Botones de acción (Guardar, Limpiar, etc.) -->
+
+           
+
+            <button type="submit">Guardar</button>
+
+            <button type="reset">Limpiar</button>
+            <div style="margin-top: 30px;">
+                <div style="margin-bottom: 10px;">
+                    <a href="ResumenParcial.html">
+                        <button type="button"
+                            style="width: 100%; background-color: #f9b700; color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold;">
+                            Ver Resumen Parcial
+                        </button>
+                    </a>
+                </div>
+                <div>
+                    <a href="./ResumenTotal.html">
+                        <button type="button"
+                            style="width: 100%; background-color: #f9b700; color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold;">
+                            Ir al Resumen Final
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <script>
+        // Mostrar/ocultar campos de cantidad y unidad al marcar un checkbox
+        document.querySelectorAll('input[name="abarrotesSeleccionados"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const detalle = checkbox.closest('.abarrote-item').querySelector('.detalle');
+                detalle.style.display = checkbox.checked ? 'block' : 'none';
+            });
+        });
+    </script>
+
+</body>
+<script>
+    document.getElementById('formularioAbarrotes').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const datos = {
+            fecha: new Date().toLocaleDateString(),
+            carnes: {
+                tipo: this.tipoCarne.value,
+                cantidad: this.cantidad.value,
+                unidad: this.unidad.value
+            },
+            proteinas: {
+                tipo: this.tipoProteina.value,
+                cantidad: this.cantidadProteina.value,
+                unidad: this.unidadProteina.value
+            },
+            verduras: {
+                tipo: this.tipoVerdura.value,
+                cantidad: this.cantidadVerdura.value,
+                unidad: this.unidadVerdura.value
+            },
+            olores: {
+                tipo: this.tipoOlor.value,
+                cantidad: this.cantidadOlor.value,
+                unidad: this.unidadOlor.value
+            },
+            abarrotes: [],
+            limpieza: {
+                producto: this.productoLimpieza.value,
+                cantidad: this.cantidadLimpieza.value,
+                unidad: this.unidadLimpieza.value
+            }
+        };
+
+        // Recorrer los abarrotes seleccionados
+        const abarrotesSeleccionados = document.querySelectorAll('input[name="abarrotesSeleccionados"]:checked');
+        abarrotesSeleccionados.forEach(item => {
+            const nombre = item.value;
+            const cantidadInput = document.querySelector(`input[name="cantidad_${nombre.replace(/ /g, "_")}"]`);
+            const unidadSelect = document.querySelector(`select[name="unidad_${nombre.replace(/ /g, "_")}"]`);
+            datos.abarrotes.push({
+                nombre: nombre,
+                cantidad: cantidadInput?.value || 0,
+                unidad: unidadSelect?.value || ""
+            });
+        });
+
+        // Guardar en localStorage
+        const registros = JSON.parse(localStorage.getItem("datosAlimentos")) || [];
+        registros.push(datos);
+        localStorage.setItem("datosAlimentos", JSON.stringify(registros));
+
+        alert("Datos guardados correctamente.");
+        this.reset();
+        // Ocultar todos los detalles nuevamente
+        document.querySelectorAll('.detalle').forEach(detalle => detalle.style.display = 'none');
+    });
+</script>

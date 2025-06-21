@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resumen Parcial</title>
+  <link rel="stylesheet" href="FormAbasteci.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Resumen Parcial</h2>
+
+    <div id="contenidoResumenParcial" class="card">
+      <!-- Aquí se llenará el resumen con JS -->
+    </div>
+
+    <a href="FormAbasteci.html">
+      <button type="button">Volver al Formulario</button>
+    </a>
+  </div>
+
+  <script>
+    const registros = JSON.parse(localStorage.getItem("datosAlimentos")) || [];
+
+    const contenedor = document.getElementById("contenidoResumenParcial");
+
+    if (registros.length === 0) {
+      contenedor.innerHTML = "<p>No hay datos registrados aún.</p>";
+    } else {
+      const ultimo = registros[registros.length - 1];
+
+      contenedor.innerHTML = `
+        <h3>Fecha: ${ultimo.fecha}</h3>
+
+        <h4>Carnes</h4>
+        <p><strong>Tipo:</strong> ${ultimo.carnes.tipo}</p>
+        <p><strong>Cantidad:</strong> ${ultimo.carnes.cantidad} ${ultimo.carnes.unidad}</p>
+
+        <h4>Proteínas</h4>
+        <p><strong>Tipo:</strong> ${ultimo.proteinas.tipo}</p>
+        <p><strong>Cantidad:</strong> ${ultimo.proteinas.cantidad} ${ultimo.proteinas.unidad}</p>
+
+        <h4>Verduras</h4>
+        <p><strong>Tipo:</strong> ${ultimo.verduras.tipo}</p>
+        <p><strong>Cantidad:</strong> ${ultimo.verduras.cantidad} ${ultimo.verduras.unidad}</p>
+
+        <h4>Olores</h4>
+        <p><strong>Tipo:</strong> ${ultimo.olores.tipo}</p>
+        <p><strong>Cantidad:</strong> ${ultimo.olores.cantidad} ${ultimo.olores.unidad}</p>
+
+        <h4>Abarrotes</h4>
+        <ul>
+          ${ultimo.abarrotes.map(item => `<li>${item.nombre}: ${item.cantidad} ${item.unidad}</li>`).join('')}
+        </ul>
+
+        <h4>Limpieza</h4>
+        <p><strong>Producto:</strong> ${ultimo.limpieza.producto}</p>
+        <p><strong>Cantidad:</strong> ${ultimo.limpieza.cantidad} ${ultimo.limpieza.unidad}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
