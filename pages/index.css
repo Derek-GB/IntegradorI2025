@@ -319,3 +319,71 @@ h2, h4 {
     margin-left: 240px;
     padding: 30px;
 }
+.form-ayuda-revision {
+    background-color: #FAFAFA;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 850px;
+    margin: 2rem auto;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-ayuda-revision summary {
+    background-color: #00897B;
+    color: #FAFAFA;
+    font-weight: bold;
+    padding: 14px 20px;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.form-ayuda-revision fieldset {
+    border: none;
+    padding-top: 20px;
+}
+
+.form-ayuda-revision label {
+    font-weight: 600;
+    margin-top: 12px;
+    display: block;
+    color: #212121;
+}
+
+.form-ayuda-revision input,
+.form-ayuda-revision select,
+.form-ayuda-revision textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-ayuda-revision input:focus,
+.form-ayuda-revision select:focus,
+.form-ayuda-revision textarea:focus {
+    outline: none;
+    border-color: #00897B;
+}
+
+.form-ayuda-revision button {
+    background-color: #FBC02D;
+    color: #212121;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-ayuda-revision button:hover {
+    background-color: #e0ac27;
+}
+
+

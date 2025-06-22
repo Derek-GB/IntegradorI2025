@@ -35,33 +35,35 @@
             
 
             <!-- Revisión de Ayudas y Referencia a Lugares -->
-            <details open>
-                <summary><strong>Revisión de Ayudas y Referencia a Lugares</strong></summary>
-                <fieldset class="mt-2">
-                    <label>Codigo de Familia:</label>
-                    <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="Ingrese el codigo de familia" />
-                    <label>Tipo de Ayuda:</label>
-                    <select name="tipoAyuda" class="form-control mb-2">
-                        <option value="" disabled selected>Seleccione el tipo de ayuda</option>
-                        <option value="alimentos">IMAS</option>
-                        <option value="medicamentos">Cruz Roja</option>
-                        <option value="ropa">CNE</option>
-                        <option value="refugio">Refugio</option>
-                        <option value="otros">Otros</option>
-                    </select>
-                    <label>Descripción de la Ayuda:</label>
-                    <textarea name="descripcionAyuda" class="form-control mb-2" placeholder="Describa la ayuda proporcionada" rows="4"></textarea>
-                    <label>Lugar de Referencia:</label>
-                    <input name="lugarReferencia" type="text" class="form-control mb-2" placeholder="Ingrese el lugar (ej. Albergue Central, Hospital Norte)" />
-                    <label>Fecha de Entrega:</label>
-                    <input name="fechaEntrega" type="date" class="form-control mb-2" />
-                    <label>Responsable:</label>
-                    <input name="responsable" type="text" class="form-control mb-2" placeholder="Ingrese el nombre del responsable" />
-                </fieldset>
-            </details>
+           <details class="consulta-ayuda" open>
+    <summary><strong>Consultas de Ayudas</strong></summary>
+    <fieldset>
+        <label for="codigo">Código:</label>
+        <input id="codigo" name="codigo" type="text" placeholder="Ingrese el código" />
 
-            <!-- Botones -->
-            <button type="submit" class="btn btn-primary mt-3">Consultar</button>
+        <label for="nombreCabeza">Nombre de la cabeza de familia:</label>
+        <input id="nombreCabeza" name="nombreCabeza" type="text" placeholder="Ingrese el nombre completo" />
+
+        <label for="tipoAyuda">Tipo de ayuda:</label>
+        <select id="tipoAyuda" name="tipoAyuda">
+            <option value="" disabled selected>Seleccione el tipo de ayuda</option>
+            <option value="imas">IMAS</option>
+            <option value="cruzroja">Cruz Roja</option>
+            <option value="cne">CNE</option>
+            <option value="refugio">Refugio</option>
+            <option value="otros">Otros</option>
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input id="fecha" name="fecha" type="date" />
+        <label for="nombreCabeza">Responsable:</label>
+        <input id="responsable" name="responsable" type="text" placeholder="Ingrese el nombre del responsable:" />
+        
+
+        <button type="submit">Consultar</button>
+        <button type="submit">Agregar</button>
+    </fieldset>
+</details>
         </form>
     </div>
 

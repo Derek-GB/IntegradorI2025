@@ -577,3 +577,70 @@ template#templateAlbergue input[type="radio"] {
   padding: 6px 12px;
   font-size: 0.9rem;
 }
+.consulta-ayuda {
+    background-color: #FAFAFA;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    max-width: 850px;
+    margin: 1.5rem auto;
+}
+
+.consulta-ayuda summary {
+    background-color: #00897B;
+    color: #FAFAFA;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+}
+
+.consulta-ayuda summary:hover {
+    background-color: #00796B;
+}
+
+.consulta-ayuda fieldset {
+    border: none;
+    padding-top: 20px;
+}
+
+.consulta-ayuda label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #212529;
+}
+
+.consulta-ayuda input,
+.consulta-ayuda select {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.consulta-ayuda input:focus,
+.consulta-ayuda select:focus {
+    outline: none;
+    border-color: #00897B;
+}
+
+.consulta-ayuda button {
+    background-color: #FBC02D;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.consulta-ayuda button:hover {
+    background-color: #e6ac00;
+}
