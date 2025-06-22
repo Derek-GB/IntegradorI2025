@@ -7,6 +7,8 @@
   <title>Registro de Albergue</title>
   <link rel="stylesheet" href="./formulario.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -33,6 +35,34 @@
     .then(res => res.text())
     .then(html => document.getElementById('sidebar-container').innerHTML = html);
 </script>
+
+<!-- Cargar Sidebar y activar botón -->
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const headers = document.querySelectorAll('h2, h4');
+        const mainContent = document.querySelector('.main-content');
+
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+          toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
+
+          headers.forEach(h => {
+            h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
+          });
+
+          mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
+        });
+      });
+  </script>
+
+
+
 
   <div class="container mt-4">
     <h2>
@@ -351,6 +381,8 @@ for (let i = 1; i <= cantidad; i++) {
 
 
 </script>
+
+
 
 </body>
 
