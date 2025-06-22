@@ -79,6 +79,7 @@ form#formularioAlbergue input[type="radio"] {
     cursor: pointer;
 }
 
+
 /* --- Formulario Asignación de Recursos --- */
 form#recursoForm {
     background-color: #FAFAFA;
@@ -151,7 +152,7 @@ form#recursoForm .item {
 
 .btn-primary {
     background-color: #FBC02D;
-    color: #fff;
+    color: black;
 
 }
 
@@ -169,7 +170,7 @@ form#recursoForm .item {
 
 .btn-secondary {
     background-color: #FBC02D;
-    color: #fff;
+    color: black;
 }
 
 .btn-secondary:hover {
@@ -632,19 +633,36 @@ template#templateAlbergue input[type="radio"] {
     border-color: #00897B;
 }
 
-.consulta-ayuda button {
+
+
+.consulta-ayuda fieldset {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.consulta-ayuda fieldset button:first-of-type {
     background-color: #FBC02D;
-    color: white;
+    color: black;
     padding: 10px 20px;
     font-weight: bold;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    align-self: flex-start;
 }
 
-.consulta-ayuda button:hover {
-    background-color: #e6ac00;
+.consulta-ayuda fieldset button:last-of-type {
+    background-color: #FBC02D;
+    color: black;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-end;
 }
 
 
@@ -714,4 +732,43 @@ template#templateAlbergue input[type="radio"] {
 .sidebar.hidden ~ .main-content,
 #toggle-btn.moved ~ .main-content {
   margin-left: 40px;
+}
+
+
+
+/* Estilo general para todos los details (como los de Información Personal, etc.) */
+form#formularioAlbergue details,
+form#recursoForm details,
+form.consulta-ayuda details,
+form details {
+  background-color: #FAFAFA;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  max-width: 850px;
+  margin: 1.0rem auto;
+}
+
+form#formularioAlbergue details summary,
+form#recursoForm details summary,
+form details summary {
+  background-color: #00897B;
+  color: #FAFAFA;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+}
+
+form#formularioAlbergue details summary:hover,
+form#recursoForm details summary:hover,
+form details summary:hover {
+  background-color: #00796B;
+}
+
+form#formularioAlbergue fieldset,
+form#recursoForm fieldset {
+  border: none;
+  padding-top: 10px ;
 }
