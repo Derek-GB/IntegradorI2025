@@ -509,6 +509,7 @@ template#templateAlbergue input[type="radio"] {
 }
 
 
+
 /* color para radio  */
 .radio-group {
   display: flex;
@@ -576,4 +577,72 @@ template#templateAlbergue input[type="radio"] {
 .tabla-asignacion button {
   padding: 6px 12px;
   font-size: 0.9rem;
+}
+
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: #00897B;
+  color: #fff;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+#toggle-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  color: #00897B;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1001;
+}
+
+.sidebar.hidden {
+  left: -220px; /* Mueve el sidebar completamente fuera de la pantalla */
+}
+
+.sidebar i {
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Cuando el sidebar está oculto */
+.sidebar.hidden #toggle-btn {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  font-size: 24px;
+  background-color: white;
+  color: #00897B;
+  z-index: 1001;
+}
+
+/* Cuando el sidebar está oculto, mover el botón a la izquierda */
+#toggle-btn.moved {
+  left: 0;
+}
+
+/* Contenido principal */
+.main-content {
+  margin-left: 240px;
+  padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Cuando el sidebar está oculto, reducir espacio */
+.sidebar.hidden ~ .main-content,
+#toggle-btn.moved ~ .main-content {
+  margin-left: 40px;
 }
