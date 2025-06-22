@@ -5,15 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Inicio</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
     <!-- Sidebar fijo -->
+     
     <div id="sidebar-container"></div>
     <script>
       fetch('sidebar.html')
         .then(res => res.text())
         .then(html => document.getElementById('sidebar-container').innerHTML = html);
     </script>
+
+
+    <script>
+  fetch('sidebar.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('sidebar-container').innerHTML = html;
+
+      const sidebar = document.getElementById('sidebar');
+      const toggleBtn = document.getElementById('toggle-btn');
+      const headers = document.querySelectorAll('h2, h4');
+      const mainContent = document.querySelector('.main-content');
+
+      toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+
+        // Cambia el ícono del botón
+        toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
+
+        // Ajusta padding del encabezado cuando sidebar está oculto
+        headers.forEach(h => {
+          h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
+        });
+
+        // También mueve el contenido
+        mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
+      });
+    });
+</script>
+
+    
+
+
+
 
     <!-- Contenido principal -->
     <div class="main-content">
@@ -36,6 +73,25 @@
           <button onclick="cambiarAlturaLinea()">Altura de la línea</button>
         </div>
     </div>
+
+    <!-- Ocultar el sidebar -->
+    <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const mainContent = document.querySelector('.main-content');
+
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+          toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
+          mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
+        });
+      });
+  </script>
 
     <!-- Scripts de accesibilidad -->
     <script>
@@ -79,4 +135,3 @@
       }
     </script>
 </body>
-</html>
