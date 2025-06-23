@@ -4,60 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Resumen Parcial</title>
-  <link rel="stylesheet" href="FormAbasteci.css">
+  <link rel="stylesheet" href="./FormAbasteci.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
 <body>
-  <div class="container">
-    <h2>Resumen Parcial</h2>
-
-    <div id="contenidoResumenParcial" class="card">
-      <!-- Aquí se llenará el resumen con JS -->
-    </div>
-
-    <a href="FormAbasteci.html">
-      <button type="button">Volver al Formulario</button>
-    </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul class="nav">
+      <li><a href="./FormAbasteci.html"><span class="material-icons">home</span> Inicio</a></li>
+      <li><a href="#" class="active"><span class="material-icons">check_circle</span> Resumen Parcial</a></li>
+      <li><a href="./resumenTotal.html"><span class="material-icons">assessment</span> Resumen Final</a></li>
+    </ul>
   </div>
 
-  <script>
-    const registros = JSON.parse(localStorage.getItem("datosAlimentos")) || [];
+  <!-- Contenedor general -->
+  <div class="content-area">
+    <!-- Header -->
+    <header class="top-header">
+      <h1>Formulario de Abastecimiento</h1>
+      <a href="./FormAbasteci.html" class="back-button" aria-label="Regresar">
+        <span class="material-icons">arrow_back</span>
+      </a>
+    </header>
 
-    const contenedor = document.getElementById("contenidoResumenParcial");
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <div class="card">
+        <h2>Resumen Parcial de Productos</h2>
+        <table id="tablaResumen">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Unidad</th>
+              <th>Cantidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
 
-    if (registros.length === 0) {
-      contenedor.innerHTML = "<p>No hay datos registrados aún.</p>";
-    } else {
-      const ultimo = registros[registros.length - 1];
-
-      contenedor.innerHTML = `
-        <h3>Fecha: ${ultimo.fecha}</h3>
-
-        <h4>Carnes</h4>
-        <p><strong>Tipo:</strong> ${ultimo.carnes.tipo}</p>
-        <p><strong>Cantidad:</strong> ${ultimo.carnes.cantidad} ${ultimo.carnes.unidad}</p>
-
-        <h4>Proteínas</h4>
-        <p><strong>Tipo:</strong> ${ultimo.proteinas.tipo}</p>
-        <p><strong>Cantidad:</strong> ${ultimo.proteinas.cantidad} ${ultimo.proteinas.unidad}</p>
-
-        <h4>Verduras</h4>
-        <p><strong>Tipo:</strong> ${ultimo.verduras.tipo}</p>
-        <p><strong>Cantidad:</strong> ${ultimo.verduras.cantidad} ${ultimo.verduras.unidad}</p>
-
-        <h4>Olores</h4>
-        <p><strong>Tipo:</strong> ${ultimo.olores.tipo}</p>
-        <p><strong>Cantidad:</strong> ${ultimo.olores.cantidad} ${ultimo.olores.unidad}</p>
-
-        <h4>Abarrotes</h4>
-        <ul>
-          ${ultimo.abarrotes.map(item => `<li>${item.nombre}: ${item.cantidad} ${item.unidad}</li>`).join('')}
-        </ul>
-
-        <h4>Limpieza</h4>
-        <p><strong>Producto:</strong> ${ultimo.limpieza.producto}</p>
-        <p><strong>Cantidad:</strong> ${ultimo.limpieza.cantidad} ${ultimo.limpieza.unidad}</p>
-      `;
-    }
-  </script>
+        <!-- Botón para ver resumen final -->
+        <div class="boton-resumen-final">
+          <a href="./resumenTotal.html">
+          <button type="button">Ver resumen final</button>
+          </a>
+        </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="resumenParcial.js"></script>
 </body>
 </html>
+
+
+
+

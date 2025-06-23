@@ -1,76 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Resumen Total</title>
-  <link rel="stylesheet" href="FormAbasteci.css">
+  <link rel="stylesheet" href="FormAbasteci.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
 <body>
-  <div class="container">
-    <h2>Resumen Total de Abastecimiento</h2>
-    <div id="contenidoResumen">
-      <!-- Aquí se cargan los registros -->
-    </div>
-
-    <a href="FormAbasteci.html">
-      <button type="button">Volver al Formulario</button>
-    </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul class="nav">
+      <li><a href="./FormAbasteci.html"><span class="material-icons">home</span> Inicio</a></li>
+      <li><a href="./resumenParcial.html"><span class="material-icons">check_circle</span> Resumen Parcial</a></li>
+      <li><a href="#" class="active"><span class="material-icons">assessment</span> Resumen Final</a></li>
+    </ul>
   </div>
 
-  <script>
-    const registros = JSON.parse(localStorage.getItem("datosAlimentos")) || [];
-    const contenedor = document.getElementById("contenidoResumen");
+  <!-- Contenedor general -->
+  <div class="content-area">
+    <!-- Header -->
+    <header class="top-header">
+      <h1>Resumen Total de Abastecimiento</h1>
+      <a href="./FormAbasteci.html" class="back-button" aria-label="Volver al formulario">
+        <span class="material-icons">arrow_back</span>
+      </a>
+    </header>
 
-    if (registros.length === 0) {
-      contenedor.innerHTML = "<p>No hay registros disponibles.</p>";
-    } else {
-      registros.forEach((registro, index) => {
-        const div = document.createElement("div");
-        div.classList.add("card");
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <div class="card" style="max-width: 800px; width: 100%;">
+        <div id="resumenFormulario"></div>
 
-        // Sección de carnes
-        const carne = registro.carnes || {};
-        const proteina = registro.proteinas || {};
-        const verdura = registro.verduras || {};
-        const olor = registro.olores || {};
-        const limpieza = registro.limpieza || {};
+        <h2 style="margin-top: 2rem;">Productos Registrados</h2>
+        <table id="tablaResumen">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Unidad</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
 
-        let abarrotesHTML = "";
-        if (registro.abarrotes.length > 0) {
-          abarrotesHTML = "<ul>";
-          registro.abarrotes.forEach(item => {
-            abarrotesHTML += `<li>${item.cantidad} ${item.unidad} de ${item.nombre}</li>`;
-          });
-          abarrotesHTML += "</ul>";
-        } else {
-          abarrotesHTML = "<p>No se seleccionaron abarrotes.</p>";
-        }
+        <div class="boton-resumen-final" style="margin-top: 40px;">
+          <button id="descargarBtn">Descargar Formulario</button>
+        </div>
 
-        div.innerHTML = `
-          <h3>Registro #${index + 1}</h3>
-          <p><strong>Fecha:</strong> ${registro.fecha}</p>
-
-          <h4>Carnes</h4>
-          <p>${carne.cantidad || 0} ${carne.unidad || ''} de ${carne.tipo || 'N/A'}</p>
-
-          <h4>Proteínas</h4>
-          <p>${proteina.cantidad || 0} ${proteina.unidad || ''} de ${proteina.tipo || 'N/A'}</p>
-
-          <h4>Verduras</h4>
-          <p>${verdura.cantidad || 0} ${verdura.unidad || ''} de ${verdura.tipo || 'N/A'}</p>
-
-          <h4>Olores</h4>
-          <p>${olor.cantidad || 0} ${olor.unidad || ''} de ${olor.tipo || 'N/A'}</p>
-
-          <h4>Abarrotes</h4>
-          ${abarrotesHTML}
-
-          <h4>Limpieza</h4>
-          <p>${limpieza.cantidad || 0} ${limpieza.unidad || ''} de ${limpieza.producto || 'N/A'}</p>
-        `;
-        contenedor.appendChild(div);
-      });
-    }
-  </script>
+        <a href="./FormAbasteci.html" style="display: block; margin-top: 20px; text-align: center;">
+          <button type="button" style="width: 200px; margin: 0 auto;">Volver al Formulario</button>
+        </a>
+      </div>
+    </main>
+  </div>
+  <script src="resumenTotal.js"></script>
 </body>
 </html>
+

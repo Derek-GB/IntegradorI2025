@@ -153,12 +153,16 @@ h2 {
 
 /* Tarjetas blancas con sombra */
 .card {
+  max-width: 700px; /* antes 600px o menos */
+  width: 90%;       /* para que se adapte bien en pantallas chicas */
+  margin: 0 auto;   /* centrado horizontal */
   background-color: var(--color-blanco);
   padding: 20px;
   margin-bottom: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
 
 /* Formularios */
 form {
@@ -194,6 +198,7 @@ input:focus, select:focus, textarea:focus {
 button {
   width: 100%;
   padding: 12px;
+  background-color: #f9b700 !important;
   background-color: var(--color-amarillo);
   color: var(--color-blanco);
   border: none;
@@ -343,6 +348,5 @@ details > *:not(summary) {
 .boton-resumen-final a button:hover {
   background-color: var(--color-amarillo-hover);
 }
-
 
 
