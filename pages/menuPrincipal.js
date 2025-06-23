@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Redirigir a la siguiente página
-    window.location.href = "./formulario.html";
+    window.location.href = "./formAbasteci.html";
   });
 });
 
