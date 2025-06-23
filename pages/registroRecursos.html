@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="formulario.css">
+    <link rel="stylesheet" href="pages/index.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Recursos</title>
+</head>
+<body>
+
+  <div id="sidebar-container"></div>
+<script>
+  fetch('sidebar.html')
+    .then(res => res.text())
+    .then(html => document.getElementById('sidebar-container').innerHTML = html);
+</script>
+
+     <div class="container mt-4">
+   <h2>
+ <button
+      onclick="window.location.href='index.html'"
+      type="button"
+      class="btn btn-secondary"
+      style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+      aria-label="Regresar"
+    >
+      <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+        arrow_back
+      </span>
+    </button>
+    Registro de Suministros
+  </h2>
+      <form id="formularioAlbergue">
+
+
+        <!-- Información del Registro de Suministros-->
+        <details open>
+          <summary><strong> Registro de Suministros</strong></summary>
+          <fieldset class="mt-2">
+            <label>Nombre del Producto:</label>
+            <input name="nombre" type="text" class="form-control mb-2"  placeholder="Ingrese el Nombre" />
+            <label>codigo:</label>
+            <label>Descripción del Producto:</label>
+            <input name="descripcionProducto" type="text" class="form-control mb-2"  placeholder="Descripcion del producto" />
+            <label>codigo:</label>
+            <input name="codigo" type="number" class="form-control mb-2" placeholder="Ingrese el codigo del producto" />
+            <label>Cantidad:</label>
+            <input name="cantidad" type="number" class="form-control mb-2" placeholder="Ingrese la cantidad" />
+          </fieldset>
+        </details>
+                      
+        <!-- Botones -->
+        <button type="submit" class="btn btn-primary mt-3">Agregar</button>
+        
+      </form> 
+  </div>
+    
+       
+      </form>
+
+    
+  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
