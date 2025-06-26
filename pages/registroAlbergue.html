@@ -86,6 +86,35 @@
             <option>Cerrado</option>
           </select>
 
+          <label>Tipo de Albergue:</label>
+<select name="tipoAlbergue" class="form-control mb-2" required>
+  <option value="">Seleccione el tipo de albergue</option>
+  <option>Centro Educativo</option>
+  <option>Salón Comunal</option>
+  <option>Iglesia</option>
+  <option>Redondel</option>
+  <option>Gimnasio</option>
+  <option>Casa de Acogida</option>
+  <option>Zona de Refugio Temporal</option>
+</select>
+
+<label>Tipo de Establecimiento:</label>
+<select name="tipoEstablecimiento" class="form-control mb-2">
+  <option value="">Seleccione el tipo de establecimiento</option>
+</select>
+
+<label>Administrador:</label>
+<input name="administrador" type="text" class="form-control mb-2" placeholder="Nombre del administrador" required />
+
+<label>Teléfono:</label>
+<input name="telefono" type="tel" class="form-control mb-2" placeholder="Ej: 8888-8888" pattern="[0-9]{4}-[0-9]{4}" required />
+
+<label>Cantidad de Familias:</label>
+<input name="cantidadFamilias" type="number" class="form-control mb-2" min="0" placeholder="Ej: 35" required />
+
+<label>Área Total (m²):</label>
+<input name="areaTotal" type="number" class="form-control mb-2" min="0" placeholder="Ej: 250" required />
+
         </fieldset>
       </details>
 
