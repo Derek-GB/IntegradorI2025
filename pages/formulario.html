@@ -94,8 +94,12 @@
       <details>
         <summary><strong>Información Personal</strong></summary>
         <fieldset class="mt-2">
-          <label>Nombre Completo:</label>
-          <input name="nombreCompleto" type="text" class="form-control mb-2" />
+          <label>Nombre:</label>
+          <input name="nombre" type="text" class="form-control mb-2" />
+          <label>Apellido 1:</label>
+          <input name="apellido1" type="text" class="form-control mb-2" />
+          <label>Apellido 2:</label>
+          <input name="apellido2" type="text" class="form-control mb-2" />
           <label>Tipo de Identificación:</label>
           <select name="tipoIdentificacion" class="form-select mb-2">
             <option selected>Cédula</option>
@@ -109,7 +113,18 @@
           <label>Nacionalidad:</label>
           <input name="nacionalidad" type="text" class="form-control mb-2" />
           <label>Parentesco:</label>
-          <input name="parentesco" type="text" class="form-control mb-2" />
+          <select name="parentesco" class="form-select mb-2">
+            <option selected>Padre</option>
+            <option>Madre</option>
+            <option>Hijo</option>
+            <option>Hija</option>
+          </select>
+
+          <button type="button" class="btn btn-outline-primary mb-3 btn-agregar-parentesco">+</button>
+
+          <div class="nuevoParentescoContainer mb-2"></div>
+
+
           <label>Fecha de Nacimiento:</label>
           <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
           <label>Edad (Automático):</label>
@@ -128,10 +143,22 @@
             <option selected>Cisgenero</option>
             <option>Otro</option>
           </select>
+
           <label>Teléfono:</label>
-          <input name="telefono" type="tel" class="form-control mb-2" />
+          <input name="telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
+
           <label>Contacto de Emergencia:</label>
-          <input name="telefono" type="tel" class="form-control mb-2" />
+          <input name="contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
+
+          <script>
+          function formatearTelefono(input) {
+            let valor = input.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
+            if (valor.length > 4) {
+              valor = valor.slice(0, 4) + '-' + valor.slice(4, 8);
+            }
+            input.value = valor;
+          }
+          </script>
         </fieldset>
       </details>
 
@@ -188,6 +215,7 @@
       <details>
         <summary><strong>Características Poblacionales</strong></summary>
         <fieldset class="mt-2">
+
           <label>Migrante:</label>
           <div class="radio-group mb-2">
             <label><input type="radio" name="migrante" value="Sí"> Sí</label>
@@ -198,16 +226,26 @@
           <div class="radio-group mb-2">
             <label><input type="radio" name="poblacionIndigena" value="Sí"> Sí</label>
             <label><input type="radio" name="poblacionIndigena" value="No" checked> No</label>
+
+          <div class="checkbox-row">
+            <label for="migrante">Migrante</label>
+            <input type="checkbox" name="migrante" id="migrante">
+          </div>
+          <div class="checkbox-row">
+            <label for="poblacionIndigena">Población Indígena</label>
+            <input type="checkbox" name="poblacionIndigena" id="poblacionIndigena">
+
           </div>
         </fieldset>
       </details>
+
 
 
       <!-- Observaciones -->
 
       <details>
         <summary><strong>Observaciones</strong></summary>
-        <textarea name="Observacion" class="form-control mb-2"></textarea>
+        <textarea name="Observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
 
       </details>
 
@@ -228,6 +266,7 @@
         <h2>Informacion de Integrantes </h2>
         <form id="formularioAlbergue">
 
+<<<<<<< Updated upstream
           <!-- Información Personal -->
           <details open>
             <summary><strong>Información Personal</strong></summary>
@@ -272,6 +311,77 @@
               <input name="telefono" type="tel" class="form-control mb-2" />
             </fieldset>
           </details>
+=======
+    <!-- Información Personal -->
+    <details open>
+      <summary><strong>Información Personal</strong></summary>
+      <fieldset class="mt-2">
+        <label>Nombre:</label>
+        <input name="nombre" type="text" class="form-control mb-2" />
+        <label>Apellido 1:</label>
+        <input name="apellido1" type="text" class="form-control mb-2" />
+        <label>Apellido 2:</label>
+        <input name="apellido2" type="text" class="form-control mb-2" />
+        <label>Tipo de Identificación:</label>
+        <select name="tipoIdentificacion" class="form-select mb-2">
+          <option selected>Cédula</option>
+          <option>DIMEX</option>
+          <option>Permiso laboral</option>
+          <option>Pasaporte</option>
+          <option>No presenta</option>
+        </select>
+        <label>Número de Identificación:</label>
+        <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
+        <label>Nacionalidad:</label>
+        <input name="nacionalidad" type="text" class="form-control mb-2" />
+        <label>Parentesco:</label>
+        <select name="parentesco" class="form-select mb-2">
+          <option selected>Padre</option>
+          <option>Madre</option>
+          <option>Hijo</option>
+          <option>Hija</option>
+        </select>
+
+        <button type="button" class="btn btn-outline-primary mb-3 btn-agregar-parentesco">+</button>
+
+        <div class="nuevoParentescoContainer mb-2"></div>
+          
+        <label>Fecha de Nacimiento:</label>
+        <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
+        <label>Edad (Automático):</label>
+        <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
+        <label>Sexo:</label>
+        <select name="sexo" class="form-select mb-2">
+          <option>Masculino</option>
+          <option>Femenino</option>
+          <option>Otro</option>
+        </select>
+        <label>Género:</label>
+        <select name="genero" class="form-select mb-2">
+          <option>Transexual</option>
+          <option>No binario</option>
+          <option>Genero fluido</option>
+          <option selected>Cisgenero</option>
+          <option>Otro</option>
+        </select>
+        <label>Teléfono:</label>
+          <input name="telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
+
+          <label>Contacto de Emergencia:</label>
+          <input name="contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
+
+          <script>
+          function formatearTelefono(input) {
+            let valor = input.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
+            if (valor.length > 4) {
+              valor = valor.slice(0, 4) + '-' + valor.slice(4, 8);
+            }
+            input.value = valor;
+          }
+          </script>
+      </fieldset>
+    </details>
+
 
           <!-- Condiciones Especiales -->
           <details>
@@ -304,6 +414,7 @@
             </fieldset>
           </details>
 
+<<<<<<< Updated upstream
           <!-- Características Poblacionales -->
           <details>
         <summary><strong>Características Poblacionales</strong></summary>
@@ -321,6 +432,28 @@
           </div>
         </fieldset>
       </details>
+=======
+    <!-- Características Poblacionales -->
+<details>
+  <summary><strong>Características Poblacionales</strong></summary>
+  <fieldset class="mt-2">
+    <div class="checkbox-row">
+      <label for="migrante">Migrante</label>
+      <input type="checkbox" name="migrante" id="migrante">
+    </div>
+    <div class="checkbox-row">
+      <label for="poblacionIndigena">Población Indígena</label>
+      <input type="checkbox" name="poblacionIndigena" id="poblacionIndigena">
+    </div>
+  </fieldset>
+</details>
+
+    <!-- Observaciones -->
+    <details>
+      <summary><strong>Observaciones</strong></summary>
+      <textarea name="Observacion" placeholder="Agrega tu Observacion" class="form-control mb-2"></textarea>
+    </details>
+>>>>>>> Stashed changes
 
           <!-- Observaciones -->
           <details>
@@ -334,10 +467,86 @@
       <!-- fin del tempalte modificado -->
       <div id="contenedorFormularios"></div>
 
+<<<<<<< Updated upstream
       <!-- Botones -->
       <button type="submit" class="btn btn-primary mt-3">Enviar</button>
       <button type="reset" class="btn btn-secondary mt-3">Limpiar</button>
     </form>
+=======
+
+    <!-- Script para agregar el paretesco -->
+    <script>
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("btn-agregar-parentesco")) {
+        const fieldset = e.target.closest("fieldset");
+        const container = fieldset.querySelector(".nuevoParentescoContainer");
+      
+        // Evita duplicar input
+        if (container.querySelector(".nuevoParentescoInput")) return;
+      
+        const label = document.createElement("label");
+        label.textContent = "Nuevo Parentesco:";
+      
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "form-control mt-1 nuevoParentescoInput";
+        input.placeholder = "Ej: Tío, Prima, Abuelo";
+      
+        input.addEventListener("change", () => agregarNuevoParentesco(input));
+        input.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            agregarNuevoParentesco(input);
+          }
+        });
+      
+        container.appendChild(label);
+        container.appendChild(input);
+        input.focus();
+      }
+    });
+    
+    function agregarNuevoParentesco(input) {
+      const nuevoValor = input.value.trim();
+      if (nuevoValor !== "") {
+        const fieldset = input.closest("fieldset");
+        const select = fieldset.querySelector("select[name='parentesco']");
+      
+        const existe = Array.from(select.options).some(
+          (option) => option.text.toLowerCase() === nuevoValor.toLowerCase()
+        );
+        if (!existe) {
+          const nuevaOpcion = document.createElement("option");
+          nuevaOpcion.text = nuevoValor;
+          nuevaOpcion.selected = true;
+          select.add(nuevaOpcion);
+        } else {
+          select.value = nuevoValor;
+        }
+      }
+    
+      input.parentNode.innerHTML = ""; // limpia el campo
+    }
+    </script>
+
+
+    <!-- Botones -->
+    <div class="d-flex justify-content-between mt-3">
+     <!-- Botón Guardar con confirmación -->
+    <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
+
+    <!-- Botón Limpiar con efecto hover rojo -->
+    <button type="reset" class="btn btn-outline-secondary btn-limpiar">Limpiar formulario</button>
+    </div>
+
+    <script>
+      function confirmarGuardado() {
+      return confirm("¿Deseas guardar la información?");
+      }
+    </script>
+
+
+>>>>>>> Stashed changes
 
     <hr class="my-4" />
     <div class="mt-4">

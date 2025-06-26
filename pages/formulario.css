@@ -736,6 +736,7 @@ template#templateAlbergue input[type="radio"] {
 
 
 
+
 /* Estilo general para todos los details (como los de Información Personal, etc.) */
 form#formularioAlbergue details,
 form#recursoForm details,
@@ -772,3 +773,30 @@ form#recursoForm fieldset {
   border: none;
   padding-top: 10px ;
 }
+
+.checkbox-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  max-width: 230px; /* Ajusta según tu diseño */
+}
+.checkbox-row label {
+  margin: 0;
+}
+
+
+
+.btn-limpiar {
+    background-color: #FBC02D;
+    color: white;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin-left: 600px;
+}
+
+.btn-limpiar:hover {
+  color: white;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
