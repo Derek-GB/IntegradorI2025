@@ -120,7 +120,7 @@
             <option>Hija</option>
           </select>
 
-          <button type="button" class="btn btn-outline-primary mb-3 btn-agregar-parentesco">+</button>
+          <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
 
           <div class="nuevoParentescoContainer mb-2"></div>
 
@@ -215,18 +215,6 @@
       <details>
         <summary><strong>Características Poblacionales</strong></summary>
         <fieldset class="mt-2">
-
-          <label>Migrante:</label>
-          <div class="radio-group mb-2">
-            <label><input type="radio" name="migrante" value="Sí"> Sí</label>
-            <label><input type="radio" name="migrante" value="No" checked> No</label>
-          </div>
-
-          <label>Población Indígena:</label>
-          <div class="radio-group mb-2">
-            <label><input type="radio" name="poblacionIndigena" value="Sí"> Sí</label>
-            <label><input type="radio" name="poblacionIndigena" value="No" checked> No</label>
-
           <div class="checkbox-row">
             <label for="migrante">Migrante</label>
             <input type="checkbox" name="migrante" id="migrante">
@@ -267,51 +255,7 @@
         <form id="formularioAlbergue">
 
 
-          <!-- Información Personal -->
-          <details open>
-            <summary><strong>Información Personal</strong></summary>
-            <fieldset class="mt-2">
-              <label>Nombre Completo:</label>
-              <input name="nombreCompleto" type="text" class="form-control mb-2" />
-              <label>Tipo de Identificación:</label>
-              <select name="tipoIdentificacion" class="form-select mb-2">
-                <option selected>Cédula</option>
-                <option>DIMEX</option>
-                <option>Permiso laboral</option>
-                <option>Pasaporte</option>
-                <option>No presenta</option>
-              </select>
-              <label>Número de Identificación:</label>
-              <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
-              <label>Nacionalidad:</label>
-              <input name="nacionalidad" type="text" class="form-control mb-2" />
-              <label>Parentesco:</label>
-              <input name="parentesco" type="text" class="form-control mb-2" />
-              <label>Fecha de Nacimiento:</label>
-              <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
-              <label>Edad (Automático):</label>
-              <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
-              <label>Sexo:</label>
-              <select name="sexo" class="form-select mb-2">
-                <option>Masculino</option>
-                <option>Femenino</option>
-                <option>Otro</option>
-              </select>
-              <label>Género:</label>
-              <select name="genero" class="form-select mb-2">
-                <option>Transexual</option>
-                <option>No binario</option>
-                <option>Genero fluido</option>
-                <option selected>Cisgenero</option>
-                <option>Otro</option>
-              </select>
-              <label>Teléfono:</label>
-              <input name="telefono" type="tel" class="form-control mb-2" />
-              <label>Contacto de Emergencia:</label>
-              <input name="telefono" type="tel" class="form-control mb-2" />
-            </fieldset>
-          </details>
-=======
+
     <!-- Información Personal -->
     <details open>
       <summary><strong>Información Personal</strong></summary>
@@ -342,13 +286,13 @@
           <option>Hija</option>
         </select>
 
-        <button type="button" class="btn btn-outline-primary mb-3 btn-agregar-parentesco">+</button>
+        <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
 
         <div class="nuevoParentescoContainer mb-2"></div>
           
         <label>Fecha de Nacimiento:</label>
-        <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
-        <label>Edad (Automático):</label>
+        <input name="fechaNacimiento" type="date" id="fechaNacimientoInt" class="form-control mb-2" />
+        <label>Edad:</label>
         <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
         <label>Sexo:</label>
         <select name="sexo" class="form-select mb-2">
@@ -413,25 +357,6 @@
               <button type="" class="btn btn-primary mt-3">+</button>
             </fieldset>
           </details>
-
-          <!-- Características Poblacionales -->
-          <details>
-        <summary><strong>Características Poblacionales</strong></summary>
-        <fieldset class="mt-2">
-          <label>Migrante:</label>
-          <div class="radio-group mb-2">
-            <label><input type="radio" name="migrante" value="Sí"> Sí</label>
-            <label><input type="radio" name="migrante" value="No" checked> No</label>
-          </div>
-
-          <label>Población Indígena:</label>
-          <div class="radio-group mb-2">
-            <label><input type="radio" name="poblacionIndigena" value="Sí"> Sí</label>
-            <label><input type="radio" name="poblacionIndigena" value="No" checked> No</label>
-          </div>
-        </fieldset>
-      </details>
-
     <!-- Características Poblacionales -->
 <details>
   <summary><strong>Características Poblacionales</strong></summary>
@@ -453,11 +378,6 @@
       <textarea name="Observacion" placeholder="Agrega tu Observacion" class="form-control mb-2"></textarea>
     </details>
 
-          <!-- Observaciones -->
-          <details>
-            <summary><strong>Observaciones</strong></summary>
-            <textarea name="Observacion" class="form-control mb-2"></textarea>
-          </details>
 
         </form>
       </template>
@@ -467,8 +387,13 @@
 
 
       <!-- Botones -->
-      <button type="submit" class="btn btn-primary mt-3">Enviar</button>
-      <button type="reset" class="btn btn-secondary mt-3">Limpiar</button>
+     <div class="d-flex justify-content-between mt-3">
+     <!-- Botón Guardar con confirmación -->
+    <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
+
+    <!-- Botón Limpiar con efecto hover rojo -->
+    <button type="reset" class="btn btn-outline-secondary btn-limpiar">Limpiar formulario</button>
+    </div>
     </form>
 
     <!-- Script para agregar el paretesco -->
@@ -525,16 +450,6 @@
       input.parentNode.innerHTML = ""; // limpia el campo
     }
     </script>
-
-
-    <!-- Botones -->
-    <div class="d-flex justify-content-between mt-3">
-     <!-- Botón Guardar con confirmación -->
-    <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
-
-    <!-- Botón Limpiar con efecto hover rojo -->
-    <button type="reset" class="btn btn-outline-secondary btn-limpiar">Limpiar formulario</button>
-    </div>
 
     <script>
       function confirmarGuardado() {
