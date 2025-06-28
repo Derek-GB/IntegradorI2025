@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Formulario Abarrotes</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="FormAbasteci.css" />
+  <link rel="stylesheet" href="./FormAbasteci.css" />
   <link rel="stylesheet" href="./menu.css" />
 </head>
 <body>
@@ -38,138 +38,97 @@
     <main class="main-content">
       <form id="formularioAbarrotes">
 
-        <!-- CARNES -->
-        <details open>
-          <summary><strong>Carnes</strong></summary>
-          <div class="form-group">
-            <label for="tipoCarne">Tipo de carne:</label>
-            <select id="tipoCarne" name="tipoCarne" required>
-              <option value="">Seleccione</option>
-              <option value="Pollo">Pollo</option>
-              <option value="Cerdo">Cerdo</option>
-              <option value="Res">Res</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="unidad">Unidad de medida:</label>
-            <select id="unidad" name="unidad" required>
-              <option value="">Seleccione</option>
-              <option value="kg">kg</option>
-              <option value="g">g</option>
-              <option value="lb">lb</option>
-              <option value="unidades">unidades</option>
-              <option value="litros">L</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" step="1" required />
-          </div>
-          <button type="button" id="btnAgregarCarne">Agregar</button>
-          <div class="card">
-            <h3>Resumen</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Tipo de carne</th>
-                  <th>Unidad</th>
-                  <th>Cantidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tablaResumen"></tbody>
-            </table>
-          </div>
-        </details>
-
-        <!-- PROTEÍNAS -->
-        <details>
-          <summary><strong>Proteínas</strong></summary>
-          <div class="form-group">
-            <label for="tipoProteina">Producto:</label>
-            <select id="tipoProteina" name="tipoProteina" required>
-              <option value="">Seleccione</option>
-              <option value="Huevos (Cartón 30 huevos)">Huevos (Cartón 30 huevos)</option>
-              <option value="Mortadela">Mortadela</option>
-              <option value="Salchichón">Salchichón</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="unidadProteina">Unidad de medida:</label>
-            <select id="unidadProteina" name="unidadProteina" required>
-              <option value="">Seleccione</option>
-              <option value="Cartón por 30 unidades">Cartón por 30 unidades</option>
-              <option value="Kilogramo">Kg</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="cantidadProteina">Cantidad:</label>
-            <input type="number" id="cantidadProteina" name="cantidadProteina" min="1" step="1" required />
-          </div>
-          <button type="button" id="btnAgregarProteina">Agregar</button>
-          <div class="card">
-            <h3>Resumen</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Producto</th>
-                  <th>Unidad</th>
-                  <th>Cantidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tablaProteina"></tbody>
-            </table>
-          </div>
-        </details>
-<!-- VERDURAS -->
+  <!-- CARNES -->
 <details>
-  <summary><strong>Verduras</strong></summary>
+  <summary><strong>Carnes</strong></summary>
 
-  <p><strong>Verdura 1</strong></p>
-  <select id="tipoVerdura1" name="tipoVerdura1" required>
-    <option value="" disabled selected>Seleccione</option>
-    <option>Yuca</option>
-    <option>Papa</option>
-    <option>Camote</option>
-    <option>Chayote</option>
-  </select>
-  <label for="cantidadVerdura1">Cantidad:</label>
-  <input type="number" id="cantidadVerdura1" name="cantidadVerdura1" min="1" step="1" required />
-  <label for="unidadVerdura1">Unidad de medida:</label>
-  <select id="unidadVerdura1" name="unidadVerdura1" required>
-    <option value="" disabled selected>Seleccione</option>
-    <option value="kg">kg</option>
-    <option value="unidad">unidad</option>
-  </select>
+  <div class="form-group">
+    <label for="personasCarnes">Cantidad de personas:</label>
+    <input type="number" id="personasCarnes" min="1" step="1" />
+    <p>* Se calculan automáticamente 120 gramos por persona. *</p>
+  </div>
 
-  <br />
+  <div class="form-group">
+    <label for="tipoCarne">Tipo de carne:</label>
+    <select id="tipoCarne" name="tipoCarne" required>
+      <option value="">Seleccione</option>
+      <option value="Pollo">Pollo</option>
+      <option value="Cerdo">Cerdo</option>
+      <option value="Res">Res</option>
+    </select>
+  </div>
 
-  <p><strong>Verdura 2</strong></p>
-  <select id="tipoVerdura2" name="tipoVerdura2" required>
-    <option value="" disabled selected>Seleccione</option>
-    <option>Yuca</option>
-    <option>Papa</option>
-    <option>Camote</option>
-    <option>Chayote</option>
-  </select>
-  <label for="cantidadVerdura2">Cantidad:</label>
-  <input type="number" id="cantidadVerdura2" name="cantidadVerdura2" min="1" step="1" required />
-  <label for="unidadVerdura2">Unidad de medida:</label>
-  <select id="unidadVerdura2" name="unidadVerdura2" required>
-    <option value="" disabled selected>Seleccione</option>
-    <option value="kg">kg</option>
-    <option value="unidad">unidad</option>
-  </select>
-
-  <button type="button" id="btnAgregarVerdura">Agregar</button>
+  <button type="button" id="btnAgregarCarne">Agregar</button>
 
   <div class="card">
     <h3>Resumen</h3>
+    <table cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Tipo de carne</th>
+          <th>Unidad</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaResumen"></tbody>
+    </table>
+  </div>
+</details>
+
+<details>
+  <summary><strong>Proteínas</strong></summary>
+
+  <div class="form-group">
+    <label for="tipoProteina">Proteína:</label>
+    <select id="tipoProteina">
+      <option value="">Seleccione</option>
+      <option value="Huevos">Huevos</option>
+      <option value="Mortadela">Mortadela</option>
+      <option value="Salchichón">Salchichón</option>
+    </select>
+  </div>
+
+  <button type="button" id="btnAgregarProteina">Agregar</button>
+
+  <div class="card">
+    <h3>Resumen Proteínas</h3>
     <table>
       <thead>
         <tr>
-          <th>Verdura</th>
+          <th>Producto</th>
+          <th>Unidad</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaProteina"></tbody>
+    </table>
+  </div>
+</details>
+
+
+<!-- VERDURAS -->  
+<details>
+  <summary><strong>Verduras</strong></summary>
+  <div class="form-group">
+    <label for="tipoVerdura">Verdura:</label>
+    <select id="tipoVerdura">
+      <option value="">Seleccione</option>
+      <option value="Yuca">Yuca</option>
+      <option value="Papa">Papa</option>
+      <option value="Camote">Camote</option>
+      <option value="Chayote">Chayote</option>
+    </select>
+  </div>
+  <button type="button" id="btnAgregarVerdura">Agregar</button>
+
+  <div class="card">
+    <h3>Resumen Verduras</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
           <th>Unidad</th>
           <th>Cantidad</th>
           <th>Acciones</th>
@@ -180,174 +139,516 @@
   </div>
 </details>
 
+
+
 <!-- OLORES -->
 <details>
-  <summary><strong>Olores y otros</strong></summary>
-  <label for="tipoOlor">Tipo de olor:</label>
-  <select id="tipoOlor" name="tipoOlor" required>
-    <option value="" disabled selected>Seleccione</option>
-    <option>Platano</option>
-    <option>Cebolla</option>
-    <option>Chile Dulce</option>
-    <option>Tomate</option>
-    <option>Pepino</option>
-    <option>Repollo</option>
-    <option>Ajo</option>
-    <option>Culantro rollo</option>
-    <option>Apio</option>
-    <option>Salsa Lizano</option>
-    <option>Vinagre</option>
-    <option>Oregano</option>
-    <option>Pimienta</option>
-    <option>Comino</option>
-    <option>Salsa de Tomate</option>
-    <option>Mayonesa</option>
-    <option>Sal</option>
-    <option>Mantequilla</option>
-    <option>Achiote</option>
-    <option>Consome</option>
-  </select>
-  <label for="cantidadOlor">Cantidad:</label>
-  <input type="number" id="cantidadOlor" name="cantidadOlor" min="1" step="1" required />
-  <label for="unidadOlor">Unidad de medida:</label>
-  <select id="unidadOlor" name="unidadOlor" required>
-    <option value="" disabled selected>Seleccione</option>
-    <option>Kg</option>
-    <option>L</option>
-    <option>unidad</option>
-    <option>rollo</option>
-    <option>caja</option>
-  </select>
+          <summary>Olores y otros</summary>
+          <div id="productosOloresDisponibles" class="cuadro-grid">
+            <div class="producto" data-product-name="Plátano" data-unit-type="Unidad">
+              <label>
+                <input type="checkbox">
+                <span>Plátano</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Cebolla" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Cebolla</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Chile Dulce" data-unit-type="Unidad">
+              <label>
+                <input type="checkbox">
+                <span>Chile Dulce</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Tomate" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Tomate</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Pepino" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Pepino</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Repollo" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Repollo</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Ajo" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Ajo</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Culantro rollo" data-unit-type="Rollo">
+              <label>
+                <input type="checkbox">
+                <span>Culantro rollo</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Apio" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Apio</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Salsa Lizano" data-unit-type="Litro">
+              <label>
+                <input type="checkbox">
+                <span>Salsa Lizano</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Vinagre" data-unit-type="Litro">
+              <label>
+                <input type="checkbox">
+                <span>Vinagre</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Oregano" data-unit-type="Rollo">
+              <label>
+                <input type="checkbox">
+                <span>Oregano</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Pimienta" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Pimienta</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Comino" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Comino</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Salsa de Tomate" data-unit-type="Litro">
+              <label>
+                <input type="checkbox">
+                <span>Salsa de Tomate</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Mayonesa" data-unit-type="Litro">
+              <label>
+                <input type="checkbox">
+                <span>Mayonesa</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Sal" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Sal</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Mantequilla" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Mantequilla</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Achiote" data-unit-type="Caja">
+              <label>
+                <input type="checkbox">
+                <span>Achiote</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+            <div class="producto" data-product-name="Consome" data-unit-type="Kilogramo">
+              <label>
+                <input type="checkbox">
+                <span>Consome</span>
+              </label>
+              <input type="number" class="cantidad" placeholder="Cantidad">
+            </div>
+          </div>
+          <button type="button" id="btnAgregarOlor">Agregar</button>
+          <div class="resultado">
+            <h3>Olores y otros seleccionados:</h3>
+            <table id="tablaResumenOlores">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Unidad</th>
+                  <th>Cantidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </details>
 
-  <button type="button" id="btnAgregarOlor">Agregar</button>
-
-  <div class="card">
-    <h3>Resumen</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Unidad</th>
-          <th>Cantidad</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaOlor"></tbody>
-    </table>
-  </div>
-</details>
 <!-- ABARROTES -->
-<details>
-  <summary><strong>Abarrotes</strong></summary>
-  <div class="card">
-    <div class="form-group">
-      <label for="tipoAbarrote">Tipo de abarrote:</label>
-      <select id="tipoAbarrote" required>
-        <option value="">Seleccione</option>
-        <option>Arroz</option>
-        <option>Frijoles</option>
-        <option>Azúcar</option>
-        <option>Aceite de soya</option>
-        <option>Café</option>
-        <option>Espagueti</option>
-        <option>Atún en trozos</option>
-        <option>Avena en polvo</option>
-        <option>Refresco</option>
-        <option>Leche en polvo</option>
-        <option>Agua dulce en polvo</option>
-        <option>Pan cuadrado</option>
-        <option>Tortillas</option>
-        <option>Pasta de tomate</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="unidadAbarrote">Unidad de medida:</label>
-      <select id="unidadAbarrote" required>
-        <option value="">Seleccione</option>
-        <option>Kg</option>
-        <option>L</option>
-        <option>Paquete</option>
-        <option>Rebanada</option>
-        <option>Unidad</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="cantidadAbarrote">Cantidad:</label>
-      <input type="number" id="cantidadAbarrote" min="1" step="1" required />
-    </div>
-    <button type="button" id="btnAgregarAbarrote">Agregar</button>
-  </div>
-  <div class="card">
-    <h3>Resumen</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Abarrote</th>
-          <th>Unidad</th>
-          <th>Cantidad</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaAbarroteResumen"></tbody>
-    </table>
-  </div>
-</details>
+  <details>
+          <summary><strong>Abarrotes</strong></summary>
+          <div id="seccionAbarrotes" class="cuadro-grid">
+            <div class="producto" data-product-name="Arroz 80% grano entero" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Arroz 80% grano entero
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Frijoles" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Frijoles
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Azúcar" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Azúcar
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Aceite de soya" data-unit-type="litros">
+              <label>
+                <input type="checkbox"> Aceite de soya
+              </label>
+              <input type="number" class="cantidad" placeholder="litros" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Café" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Café
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Espagueti" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Espagueti
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Atún en trozos" data-unit-type="latas">
+              <label>
+                <input type="checkbox"> Atún en trozos
+              </label>
+              <input type="number" class="cantidad" placeholder="latas" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Avena en polvo" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Avena en polvo
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Refresco" data-unit-type="paquetes">
+              <label>
+                <input type="checkbox"> Refresco
+              </label>
+              <input type="number" class="cantidad" placeholder="paquetes" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Leche en polvo" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Leche en polvo
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Agua dulce en polvo" data-unit-type="kg">
+              <label>
+                <input type="checkbox"> Agua dulce en polvo
+              </label>
+              <input type="number" class="cantidad" placeholder="kg" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Pan Cuadrado" data-unit-type="paquetes">
+              <label>
+                <input type="checkbox"> Pan Cuadrado
+              </label>
+              <input type="number" class="cantidad" placeholder="paquetes" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Tortillas" data-unit-type="paquetes">
+              <label>
+                <input type="checkbox"> Tortillas
+              </label>
+              <input type="number" class="cantidad" placeholder="paquetes" min="1" style="display: none;">
+            </div>
+
+            <div class="producto" data-product-name="Pasta de tomate" data-unit-type="unidades">
+              <label>
+                <input type="checkbox"> Pasta de tomate
+              </label>
+              <input type="number" class="cantidad" placeholder="unidades" min="1" style="display: none;">
+            </div>
+          </div>
+
+          <button type="button" id="btnAgregarAbarrotes">Agregar</button>
+          <div class="resultado">
+            <h3>Abarrotes</h3>
+            <table id="tablaResumenAbarrotes">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Unidad</th>
+                  <th>Cantidad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </details>
 
 <!-- LIMPIEZA -->
-<details>
-  <summary><strong>Limpieza</strong></summary>
-  <div class="form-group">
-    <label for="productoLimpiezaNuevo">Producto de limpieza:</label>
-    <select id="productoLimpiezaNuevo" required>
-      <option value="">Seleccione</option>
-      <option>Bolsas para basura Grande</option>
-      <option>Bolsas para basura medianas</option>
-      <option>Papel Higiénico</option>
-      <option>Pasta dental</option>
-      <option>Jabón en polvo</option>
-      <option>Cloro</option>
-      <option>Jabón de baño</option>
-      <option>Guantes de Cocina (Hule)</option>
-      <option>Jabón lavamanos</option>
-      <option>Jabón Lavaplatos</option>
-      <option>Desinfectante</option>
-      <option>Esponja lava platos</option>
-      <option>Fósforos</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="unidadLimpiezaNuevo">Unidad de medida:</label>
-    <select id="unidadLimpiezaNuevo" required>
-      <option value="">Seleccione</option>
-      <option>Paquete de al menos 10 unidades</option>
-      <option>Rollo</option>
-      <option>Unidad</option>
-      <option>Kg</option>
-      <option>L</option>
-      <option>Par</option>
-      <option>Caja</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="cantidadLimpiezaNuevo">Cantidad:</label>
-    <input type="number" id="cantidadLimpiezaNuevo" min="1" step="1" required />
-  </div>
-  <button type="button" id="btnAgregarLimpieza">Agregar</button>
-  <div class="card">
-    <h3>Resumen</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Unidad</th>
-          <th>Cantidad</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaLimpieza"></tbody>
-    </table>
-  </div>
-</details>
+        <details>
+            <summary><strong>Limpieza</strong></summary>
+            <div id="productosLimpiezaDisponibles" class="grid-productos">
+              <div class="producto producto-limpieza-item" data-product-name="Bolsas para basura Grande"
+                data-unit-type="paquete de al menos 10 unidades">
+                <label>
+                  <input type="checkbox"> Bolsas para basura Grande
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="paquete" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Bolsas para basura medianas"
+                data-unit-type="paquete de al menos 10 unidades">
+                <label>
+                  <input type="checkbox"> Bolsas para basura medianas
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="paquete" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Papel Higiénico" data-unit-type="rollo">
+                <label>
+                  <input type="checkbox"> Papel Higiénico
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="rollo" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Pasta dental" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Pasta dental
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Jabón en polvo"
+                data-unit-type="Kilogramo">
+                <label>
+                  <input type="checkbox"> Jabón en polvo
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="kg" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Cloro" data-unit-type="Litro">
+                <label>
+                  <input type="checkbox"> Cloro
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="litro" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Jabón de baño" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Jabón de baño
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Guantes de Cocina" data-unit-type="Par">
+                <label>
+                  <input type="checkbox"> Guantes de Cocina
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="par" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Jabón lavamanos" data-unit-type="Litro">
+                <label>
+                  <input type="checkbox"> Jabón lavamanos
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="litro" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Jabón Lavaplatos" data-unit-type="Caja">
+                <label>
+                  <input type="checkbox"> Jabón Lavaplatos
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="caja" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Desinfectante" data-unit-type="Litro">
+                <label>
+                  <input type="checkbox"> Desinfectante
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="litro" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Esponja lava platos"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Esponja lava platos
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Fosforos" data-unit-type="Caja">
+                <label>
+                  <input type="checkbox"> Fosforos
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="caja" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Desodorante unisex"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Desodorante unisex
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Champu" data-unit-type="Litro">
+                <label>
+                  <input type="checkbox"> Champu
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="litro" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Escoba" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Escoba
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Trapeador piso" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Trapeador piso
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Limpiones" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Limpiones
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Trapos o mechas" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Trapos o mechas
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Toallas de papel" data-unit-type="Rollo">
+                <label>
+                  <input type="checkbox"> Toallas de papel
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="rollo" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Bomba desatorar servicios"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Bomba desatorar servicios
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Toalla sanitaria"
+                data-unit-type="Paquete de al menos 10 unidades">
+                <label>
+                  <input type="checkbox"> Toalla sanitaria
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="paquete" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Pañales niño M unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Pañales niño M unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Pañales niño L unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Pañales niño L unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Pañales niño XL unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Pañales niño XL unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Pañales niño XXL unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Pañales niño XXL unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Recarga de Gas de 25 lb"
+                data-unit-type="Recarga">
+                <label>
+                  <input type="checkbox"> Recarga de Gas de 25 lb
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="recarga" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Cepillo dental" data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Cepillo dental
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Platos Desechables unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Platos Desechables unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Vaso Desechable unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Vaso Desechable unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+              <div class="producto producto-limpieza-item" data-product-name="Cuchara Desechables unidades"
+                data-unit-type="Unidad">
+                <label>
+                  <input type="checkbox"> Cuchara Desechables unidades
+                </label>
+                <input type="number" class="cantidad-limpieza" placeholder="unidad" min="1" style="display: none;">
+              </div>
+            </div>
+            <button type="button" id="btnAgregarLimpieza">Agregar</button>
+            <div class="resultado">
+              <h3>Resumen</h3>
+              <table id="tablaResumenLimpieza">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Unidad</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </details>
+   
   <a href="./resumenParcial.html">
     <button type="button">Ver Resumen Parcial</button>
   </a>
