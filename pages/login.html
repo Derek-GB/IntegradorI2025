@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="formulario.css" />
-  <link rel="stylesheet" href="login.css">
 </head>
-<body>
-  <div class="login-container">
-    <h2>Iniciar Sesión</h2>
-    <div id="error" class="error"></div>
-    <form id="loginForm">
-  <input type="text" id="usuario" placeholder="Usuario o correo" />
-  <input type="password" id="contrasena" placeholder="Contraseña" />
-  <button type="submit">Ingresar</button>
-  <a href="#" class="forgot">¿Nuevo usuario? Crear cuenta</a>
-  <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
-</form>
 
-  </div>
+<body>
+  <h2>Iniciar Sesión</h2>
+
+  <form id="loginForm" class="login">
+    <div id="error" class="error"></div>
+
+    <label for="usuario">Usuario o correo</label>
+    <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario o correo" required>
+
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary">Ingresar</button>
+    </div>
+  </form>
 
   <script>
-    const form = document.getElementById("loginForm");
-    const errorDiv = document.getElementById("error");
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Evita el envío normal del formulario
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const usuario = document.getElementById("usuario").value.trim();
-      const contrasena = document.getElementById("contrasena").value.trim();
+      // validación del usuario
+      const usuario = document.getElementById('usuario').value;
+      const contrasena = document.getElementById('contrasena').value;
 
-      if (usuario === "" || contrasena === "") {
-        errorDiv.textContent = "Por favor, complete todos los campos.";
+      // Ejemplo básico de validación (debes reemplazarlo con tu lógica real)
+      if (usuario && contrasena) {
+        // Redirección a index.html después de login exitoso
+        window.location.href = 'index.html';
       } else {
-        errorDiv.textContent = "";
-        window.location.href = "index.html";
+        document.getElementById('error').textContent = 'Por favor complete todos los campos';
       }
     });
   </script>
 </body>
+
 </html>
