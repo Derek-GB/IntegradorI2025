@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta Albergues</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="formulario.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Albergues</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="formulario.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
+
 <body>
 
-    <div id="sidebar-container"></div>
-<script>
-  fetch('sidebar.html')
-    .then(res => res.text())
-    .then(html => document.getElementById('sidebar-container').innerHTML = html);
-</script>
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+  </script>
 
-<!-- Cargar Sidebar y activar botón -->
+  <!-- Cargar Sidebar y activar botón -->
   <script>
     fetch('sidebar.html')
       .then(res => res.text())
@@ -46,15 +48,11 @@
 
 
 
-    <div class="container text-center">
-        <h2>
-      <button
-        onclick="window.location.href='index.html'"
-        type="button"
-        class="btn btn-secondary"
+  <div class="container text-center">
+    <h2>
+      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary"
         style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
-        aria-label="Regresar"
-      >
+        aria-label="Regresar">
         <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
           arrow_back
         </span>
@@ -62,123 +60,58 @@
       Consulta de Albergues
     </h2>
     <p>Busca fácilmente el estado de los albergues habilitados alrededor del pais</p>
-        
-    </div>
 
-    <div class="container1 text-center">
+  </div>
+
+  <div class="container1 text-center">
 
     <form class="search-bar" action="#" method="get">
-        <select id="busquedaProvincia" class="form-select mb-2" ></select>
-        <select id="busquedaCanton" class="form-select mb-2" disabled></select>
-        <select id="busquedaDistrito" class="form-select mb-2" disabled></select>
-        <input type="text" id="busquedaId" class="form-control mb-2" placeholder="ID de albergue">
-        <input type="text" id="busquedaNombre" class="form-control mb-2" placeholder="Nombre de albergue">
-        <button type="submit" class="btn btn-primary">Buscar</button>
+      <select id="busquedaProvincia" class="form-select mb-2"></select>
+      <select id="busquedaCanton" class="form-select mb-2" disabled></select>
+      <select id="busquedaDistrito" class="form-select mb-2" disabled></select>
+      <input type="text" id="busquedaId" class="form-control mb-2" placeholder="ID de albergue">
+      <input type="text" id="busquedaNombre" class="form-control mb-2" placeholder="Nombre de albergue">
+      <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 
-    </div>
+  </div>
 
-    <!-- Resultado de búsqueda de ejemplo -->
-<div id="albergueResultado" class="albergue-resultado espaciado-texto">
-  <h2>Resultado</h2>
-  <ul>
-    <li><strong>ID:</strong> <span id="idAlbergue"></span></li>
-    <li><strong>Nombre del Albergue:</strong> <span id="nombreAlbergue"></span></li>
-    <li><strong>Región:</strong> <span id="region"></span></li>
-    <li><strong>Provincia:</strong> <span id="provincia"></span></li>
-    <li><strong>Cantón:</strong> <span id="canton"></span></li>
-    <li><strong>Distrito:</strong> <span id="distrito"></span></li>
-    <li><strong>Dirección Exacta:</strong> <span id="direccion"></span></li>
-    <li><strong>Tipo de Establecimiento:</strong> <span id="tipoEstablecimiento"></span></li>
-    <li><strong>Tipo de Albergue:</strong> <span id="tipoAlbergue"></span></li>
-    <li><strong>Condición del Albergue:</strong> <span id="condicionAlbergue"></span></li>
-    <li><strong>Administrador:</strong> <span id="administrador"></span></li>
-    <li><strong>Teléfono:</strong> <span id="telefono"></span></li>
-    <li><strong>Capacidad Personas:</strong> <span id="capacidadPersonas"></span></li>
-    <li><strong>Capacidad Colectivas:</strong> <span id="capacidadColectivas"></span></li>
-    <li><strong>Cantidad de Familias:</strong> <span id="cantidadFamilias"></span></li>
-    <li><strong>Ocupación:</strong> <span id="ocupacion"></span></li>
-    <li><strong>Infraestructura:</strong> <span id="infraestructura"></span></li>
-    <li><strong>Municipalidad:</strong> <span id="municipalidad"></span></li>
-    <li><strong>Color:</strong> <span id="color"></span></li>
-  </ul>
-</div>
+  <!-- Resultado de búsqueda de ejemplo -->
+  <div id="albergueResultado" class="albergue-resultado espaciado-texto">
+    <h2>Resultado</h2>
+    <ul>
+      <li><strong>ID:</strong> <span id="idAlbergue"></span></li>
+      <li><strong>Nombre del Albergue:</strong> <span id="nombreAlbergue"></span></li>
+      <li><strong>Región:</strong> <span id="region"></span></li>
+      <li><strong>Provincia:</strong> <span id="provincia"></span></li>
+      <li><strong>Cantón:</strong> <span id="canton"></span></li>
+      <li><strong>Distrito:</strong> <span id="distrito"></span></li>
+      <li><strong>Dirección Exacta:</strong> <span id="direccion"></span></li>
+      <li><strong>Tipo de Establecimiento:</strong> <span id="tipoEstablecimiento"></span></li>
+      <li><strong>Tipo de Albergue:</strong> <span id="tipoAlbergue"></span></li>
+      <li><strong>Condición del Albergue:</strong> <span id="condicionAlbergue"></span></li>
+      <li><strong>Administrador:</strong> <span id="administrador"></span></li>
+      <li><strong>Teléfono:</strong> <span id="telefono"></span></li>
+      <li><strong>Capacidad Personas:</strong> <span id="capacidadPersonas"></span></li>
+      <li><strong>Capacidad Colectivas:</strong> <span id="capacidadColectivas"></span></li>
+      <li><strong>Cantidad de Familias:</strong> <span id="cantidadFamilias"></span></li>
+      <li><strong>Ocupación:</strong> <span id="ocupacion"></span></li>
+      <li><strong>Infraestructura:</strong> <span id="infraestructura"></span></li>
+      <li><strong>Municipalidad:</strong> <span id="municipalidad"></span></li>
+      <li><strong>Color:</strong> <span id="color"></span></li>
+    </ul>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="ubicaciones.js"></script>
 
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  inicializarUbiSelects('busquedaProvincia', 'busquedaCanton', 'busquedaDistrito');
-});
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarUbiSelects('busquedaProvincia', 'busquedaCanton', 'busquedaDistrito');
+    });
 
 
-</script>
-
-<!-- esto sirve para cargar los datos desde la api -->
-
-<script>async function cargarDatosAlbergue(id) {
-  const url = `https://apiintegrador-production-8ef8.up.railway.app/api/albergues/${id}`;
-
-  try {
-    const response = await fetch(url);
-
-    if (!response.ok) throw new Error("Error en la respuesta de la API");
-
-    const data = await response.json();
-
-    // Mostrar datos en los elementos del DOM
-    document.getElementById("idAlbergue").textContent = data.id || '';
-    document.getElementById("nombreAlbergue").textContent = data.nombre || '';
-    document.getElementById("region").textContent = data.region || '';
-    document.getElementById("provincia").textContent = data.provincia || '';
-    document.getElementById("canton").textContent = data.canton || '';
-    document.getElementById("distrito").textContent = data.distrito || '';
-    document.getElementById("direccion").textContent = data.direccionExacta || '';
-    document.getElementById("tipoEstablecimiento").textContent = data.tipoEstablecimiento || '';
-    document.getElementById("tipoAlbergue").textContent = data.tipoAlbergue || '';
-    document.getElementById("condicionAlbergue").textContent = data.condicionAlbergue || '';
-    document.getElementById("administrador").textContent = data.administrador || '';
-    document.getElementById("telefono").textContent = data.telefono || '';
-    document.getElementById("capacidadPersonas").textContent = data.capacidadPersonas || '';
-    document.getElementById("capacidadColectivas").textContent = data.capacidadColectivas || '';
-    document.getElementById("cantidadFamilias").textContent = data.cantidadFamilias || '';
-    document.getElementById("ocupacion").textContent = data.ocupacion || '';
-    document.getElementById("infraestructura").textContent = data.infraestructura || '';
-    document.getElementById("municipalidad").textContent = data.municipalidad?.nombre || '';
-    document.getElementById("color").textContent = data.color || '';
-
-  } catch (error) {
-    console.error("Error al cargar datos del albergue:", error);
-    alert("No se pudo obtener la información del albergue.");
-  }
-}</script>
-
-<script>
-document.querySelector('.search-bar').addEventListener('submit', function (e) {
-  e.preventDefault(); // Evita recargar la página
-
-  const id = document.getElementById('busquedaId').value.trim();
-
-  if (id) {
-    cargarDatosAlbergue(id);
-  } else {
-    alert("Por favor ingresa un ID de albergue para buscar.");
-  }
-});
-</script>
-
-<script>
-document.querySelector('.search-bar').addEventListener('submit', function (e) {
-  e.preventDefault(); // Evita recargar la página
-
-  const id = document.getElementById('busquedaId').value.trim();
-
-  if (id) {
-    cargarDatosAlbergue(id);
-  } else {
-    alert("Por favor ingresa un ID de albergue para buscar.");
-  }
-});
-</script>
+  </script>
+<script src="consultarAlbergues.js"></script>
 </body>
+
 </html>
