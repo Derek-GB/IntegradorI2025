@@ -1,607 +1,492 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registro de Albergue</title>
   <link rel="stylesheet" href="./formulario.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.umd.min.js"></script>
   <style>
-    #signature-pad {
-      border: 1px solid #ccc;
-      width: 100%;
-      height: 200px;
-    }
+    .paso { display: none; padding: 15px; border: 1px solid #ddd; margin-bottom: 10px; }
+    .paso.activo { display: block; }
+    .botones-nav { margin-top: 20px; }
+    .botones-nav button { margin-right: 10px; }
+    #signature-pad { border: 1px solid #ccc; width: 100%; height: 200px; }
   </style>
 </head>
-<nav>
-  <a href="./index.html"></a>
-  <a href="./formulario.html"></a>
-</nav>
-
 <body>
-
   <div id="sidebar-container"></div>
-  <script>
-    fetch('sidebar.html')
-      .then(res => res.text())
-      .then(html => document.getElementById('sidebar-container').innerHTML = html);
-  </script>
-
-<!-- Cargar Sidebar y activar botón -->
   <script>
     fetch('sidebar.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('sidebar-container').innerHTML = html;
-
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggle-btn');
         const headers = document.querySelectorAll('h2, h4');
         const mainContent = document.querySelector('.main-content');
-
+        if (!sidebar || !toggleBtn || !mainContent) {
+          console.error('One or more elements not found:', { sidebar, toggleBtn, mainContent });
+          return;
+        }
         toggleBtn.addEventListener('click', () => {
           sidebar.classList.toggle('hidden');
           toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
-
           headers.forEach(h => {
             h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
           });
-
           mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
         });
-      });
+      })
+      .catch(error => console.error('Error fetching sidebar.html:', error));
   </script>
 
-
-
-
-  <div class="container mt-4">
+  <div class="container mt-4 main-content">
     <h2>
-      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary"
-        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
-        aria-label="Regresar">
-        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
-          arrow_back
-        </span>
+      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary" style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;" aria-label="Regresar">
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">arrow_back</span>
       </button>
       Registro de Datos - Albergue
     </h2>
 
     <form id="formularioAlbergue">
+      <!-- Paso 1: Información del Albergue -->
+      <div class="paso activo">
+        <details open>
+          <summary><strong>Información del Albergue</strong></summary>
+          <fieldset class="mt-2">
+            <label>Nombre del Albergue:</label>
+            <input name="nombreAlbergue" type="text" class="form-control mb-2" required />
+            <label>Código Familia:</label>
+            <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="YYYY-Prov-Canton-N°Familia"  />
+          </fieldset>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+        </div>
+      </div>
 
+      <!-- Paso 2: Información del Principal -->
+      <div class="paso">
+        <h3>Información del Principal</h3>
+        <details open>
+          <summary><strong>Información Personal</strong></summary>
+          <fieldset class="mt-2">
+            <label>Nombre:</label><input name="integrante0-nombre" type="text" class="form-control mb-2" required />
+            <label>Apellido 1:</label><input name="integrante0-apellido1" type="text" class="form-control mb-2" required />
+            <label>Apellido 2:</label><input name="integrante0-apellido2" type="text" class="form-control mb-2" />
+            <label>Tipo de Identificación:</label>
+            <select name="integrante0-tipoIdentificacion" class="form-select mb-2" required>
+              <option selected>Cédula</option><option>DIMEX</option><option>Permiso laboral</option><option>Pasaporte</option><option>No presenta</option>
+            </select>
+            <label>Número de Identificación:</label><input name="integrante0-numeroIdentificacion" type="text" class="form-control mb-2" required />
+            <label>Nacionalidad:</label><input name="integrante0-nacionalidad" type="text" class="form-control mb-2" required />
+            <label>Parentesco:</label>
+            <select name="integrante0-parentesco" class="form-select mb-2" required>
+              <option selected>Padre</option><option>Madre</option><option>Hijo</option><option>Hija</option>
+            </select>
+            <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
+            <div class="nuevoParentescoContainer mb-2"></div>
+            <label>Fecha de Nacimiento:</label><input name="integrante0-fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt" required />
+            <label>Edad:</label><input name="integrante0-edad" type="text" readonly class="form-control mb-2 edadInt" />
+            <label>Sexo:</label><select name="integrante0-sexo" class="form-select mb-2" required><option>Masculino</option><option>Femenino</option><option>Otro</option></select>
+            <label>Género:</label><select name="integrante0-genero" class="form-select mb-2" required><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option selected>Cisgenero</option><option>Otro</option></select>
+            <label>Teléfono:</label><input name="integrante0-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" required />
+            <label>Contacto de Emergencia:</label><input name="integrante0-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" required />
+          </fieldset>
+        </details>
+        <details>
+          <summary><strong>Condiciones Especiales</strong></summary>
+          <fieldset class="mt-2">
+            <label>Discapacidad:</label><select name="integrante0-discapacidad" class="form-select mb-2" required><option>Sí</option><option selected>No</option></select>
+            <label>Tipo de Discapacidad:</label><select name="integrante0-tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
+            <label>Condición de Salud Especial:</label><select name="integrante0-condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
+          </fieldset>
+        </details>
+        <details>
+          <summary><strong>Características Poblacionales</strong></summary>
+          <fieldset class="mt-2">
+            <div class="checkbox-row"><label for="integrante0-migrante">Migrante</label><input type="checkbox" name="integrante0-migrante" id="integrante0-migrante"></div>
+            <div class="checkbox-row"><label for="integrante0-poblacionIndigena">Población Indígena</label><input type="checkbox" name="integrante0-poblacionIndigena" id="integrante0-poblacionIndigena"></div>
+          </fieldset>
+        </details>
+        <details>
+          <summary><strong>Observaciones</strong></summary>
+          <textarea name="integrante0-observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+        </div>
+      </div>
 
-      <!-- Información del Albergue -->
-      <details open>
-        <summary><strong>Información del Albergue</strong></summary>
-        <fieldset class="mt-2">
-          <label>Nombre del Albergue:</label>
-          <input name="nombreAlbergue" type="text" class="form-control mb-2" />
-          <label>Código Familia:</label>
-          <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="YYYY-Prov-Canton-N°Familia" />
-        </fieldset>
-      </details>
+      <!-- Paso 3: Integrantes Adicionales (Dynamic) -->
+      <div id="integrantes-container"></div>
 
-      <!-- Información Personal -->
-      <details>
-        <summary><strong>Información Personal</strong></summary>
-        <fieldset class="mt-2">
-          <label>Nombre:</label>
-          <input name="nombre" type="text" class="form-control mb-2" />
-          <label>Apellido 1:</label>
-          <input name="apellido1" type="text" class="form-control mb-2" />
-          <label>Apellido 2:</label>
-          <input name="apellido2" type="text" class="form-control mb-2" />
-          <label>Tipo de Identificación:</label>
-          <select name="tipoIdentificacion" class="form-select mb-2">
-            <option selected>Cédula</option>
-            <option>DIMEX</option>
-            <option>Permiso laboral</option>
-            <option>Pasaporte</option>
-            <option>No presenta</option>
-          </select>
-          <label>Número de Identificación:</label>
-          <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
-          <label>Nacionalidad:</label>
-          <input name="nacionalidad" type="text" class="form-control mb-2" />
-          <label>Parentesco:</label>
-          <select name="parentesco" class="form-select mb-2">
-            <option selected>Padre</option>
-            <option>Madre</option>
-            <option>Hijo</option>
-            <option>Hija</option>
-          </select>
+      <!-- Paso 4: Ubicación -->
+      <div class="paso">
+        <details open>
+          <summary><strong>Ubicación</strong></summary>
+          <fieldset class="mt-2">
+            <label>Provincia:</label><select name="provincia" id="provincia" class="form-select mb-2" required></select>
+            <label>Cantón:</label><select name="canton" id="canton" class="form-select mb-2" disabled required></select>
+            <label>Distrito:</label><select name="distrito" id="distrito" class="form-select mb-2" disabled required></select>
+            <label>Dirección:</label><textarea name="direccion" class="form-control mb-2" required></textarea>
+          </fieldset>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+        </div>
+      </div>
 
-          <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
+      <!-- Paso 5: Condiciones Especiales -->
+      <div class="paso">
+        <details open>
+          <summary><strong>Condiciones Especiales</strong></summary>
+          <fieldset class="mt-2">
+            <label>Discapacidad:</label><select name="discapacidad" class="form-select mb-2" required><option>Sí</option><option selected>No</option></select>
+            <label>Tipo de Discapacidad:</label><select name="tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
+            <label>Condición de Salud Especial:</label><select name="condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
+            <button type="button" class="btn btn-primary mt-3 btn-agregar-condicion">+</button>
+          </fieldset>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+        </div>
+      </div>
 
-          <div class="nuevoParentescoContainer mb-2"></div>
+      <!-- Paso 6: Características Poblacionales -->
+      <div class="paso">
+        <details open>
+          <summary><strong>Características Poblacionales</strong></summary>
+          <fieldset class="mt-2">
+            <div class="checkbox-row"><label for="migrante">Migrante</label><input type="checkbox" name="migrante" id="migrante"></div>
+            <div class="checkbox-row"><label for="poblacionIndigena">Población Indígena</label><input type="checkbox" name="poblacionIndigena" id="poblacionIndigena"></div>
+          </fieldset>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+        </div>
+      </div>
 
+      <!-- Paso 7: Observaciones -->
+      <div class="paso">
+        <details open>
+          <summary><strong>Observaciones</strong></summary>
+          <textarea name="Observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+        </div>
+      </div>
 
-          <label>Fecha de Nacimiento:</label>
-          <input name="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control mb-2" />
-          <label>Edad:</label>
-          <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
-          <label>Sexo:</label>
-          <select name="sexo" class="form-select mb-2">
-            <option>Masculino</option>
-            <option>Femenino</option>
-            <option>Otro</option>
-          </select>
-          <label>Género:</label>
-          <select name="genero" class="form-select mb-2">
-            <option>Transexual</option>
-            <option>No binario</option>
-            <option>Genero fluido</option>
-            <option selected>Cisgenero</option>
-            <option>Otro</option>
-          </select>
-
-          <label>Teléfono:</label>
-          <input name="telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
-
-          <label>Contacto de Emergencia:</label>
-          <input name="contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
-
-          <script>
-          function formatearTelefono(input) {
-            let valor = input.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
-            if (valor.length > 4) {
-              valor = valor.slice(0, 4) + '-' + valor.slice(4, 8);
-            }
-            input.value = valor;
-          }
-          </script>
-        </fieldset>
-      </details>
-
-      <!-- Ubicación -->
-      <details>
-        <summary><strong>Ubicación</strong></summary>
-        <fieldset class="mt-2">
-          <label>Provincia:</label>
-          <select name="provincia" id="provincia" class="form-select mb-2"></select>
-          <label>Cantón:</label>
-          <select name="canton" id="canton" class="form-select mb-2" disabled></select>
-          <label>Distrito:</label>
-          <select name="distrito" id="distrito" class="form-select mb-2" disabled></select>
-          <label>Dirección:</label>
-          <textarea name="direccion" class="form-control mb-2"></textarea>
-        </fieldset>
-      </details>
-
-
-
-
-      <!-- Condiciones Especiales -->
-      <details>
-        <summary><strong>Condiciones Especiales</strong></summary>
-        <fieldset class="mt-2">
-          <label>Discapacidad:</label>
-          <select name="discapacidad" class="form-select mb-2">
-            <option>Sí</option>
-            <option selected>No</option>
-          </select>
-
-          <label>Tipo de Discapacidad:</label>
-          <select name="discapacidad" class="form-select mb-2">
-            <option>Fisica</option>
-            <option>Sensorial</option>
-            <option>Intelectual</option>
-            <option>Mental o Psicologica</option>
-            <option>Múltiple</option>
-          </select>
-
-          <label>Condición de Salud Especial:</label>
-          <select name="discapacidad" class="form-select mb-2">
-            <option>Visual</option>
-            <option>Sindrome</option>
-            <option>Esquizofrenia</option>
-            <option>Auditiva</option>
-            <option>Trans-Bipolar</option>
-          </select>
-          <button type="" class="btn btn-primary mt-3">+</button>
-        </fieldset>
-      </details>
-
-      <!-- Características Poblacionales -->
-      <details>
-        <summary><strong>Características Poblacionales</strong></summary>
-        <fieldset class="mt-2">
-          <div class="checkbox-row">
-            <label for="migrante">Migrante</label>
-            <input type="checkbox" name="migrante" id="migrante">
-          </div>
-          <div class="checkbox-row">
-            <label for="poblacionIndigena">Población Indígena</label>
-            <input type="checkbox" name="poblacionIndigena" id="poblacionIndigena">
-
-          </div>
-        </fieldset>
-      </details>
-
-
-
-      <!-- Observaciones -->
-
-      <details>
-        <summary><strong>Observaciones</strong></summary>
-        <textarea name="Observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
-
-      </details>
-
-      <!-- Firma Digital -->
-      <details>
-        <summary><strong>Firma Digital</strong></summary>
-        <fieldset class="mt-2">
-          <label>Firma:</label>
-          <canvas id="signature-pad" width="600" height="200"></canvas>
-          <button type="button" onclick="limpiarFirma()" class="mt-2 btn btn-link text-primary">Limpiar firma</button>
-        </fieldset>
-      </details>
-
-
-
-      <!-- Template para duplicar el nuevo form modificado  -->
-      <template id="templateFormulario">
-        <h2>Informacion de Integrantes </h2>
-        <form id="formularioAlbergue">
-
-
-
-    <!-- Información Personal -->
-    <details open>
-      <summary><strong>Información Personal</strong></summary>
-      <fieldset class="mt-2">
-        <label>Nombre:</label>
-        <input name="nombre" type="text" class="form-control mb-2" />
-        <label>Apellido 1:</label>
-        <input name="apellido1" type="text" class="form-control mb-2" />
-        <label>Apellido 2:</label>
-        <input name="apellido2" type="text" class="form-control mb-2" />
-        <label>Tipo de Identificación:</label>
-        <select name="tipoIdentificacion" class="form-select mb-2">
-          <option selected>Cédula</option>
-          <option>DIMEX</option>
-          <option>Permiso laboral</option>
-          <option>Pasaporte</option>
-          <option>No presenta</option>
-        </select>
-        <label>Número de Identificación:</label>
-        <input name="numeroIdentificacion" type="text" class="form-control mb-2" />
-        <label>Nacionalidad:</label>
-        <input name="nacionalidad" type="text" class="form-control mb-2" />
-        <label>Parentesco:</label>
-        <select name="parentesco" class="form-select mb-2">
-          <option selected>Padre</option>
-          <option>Madre</option>
-          <option>Hijo</option>
-          <option>Hija</option>
-        </select>
-
-        <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
-
-        <div class="nuevoParentescoContainer mb-2"></div>
-          
-        <label>Fecha de Nacimiento:</label>
-        <input name="fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt " />
-        <label>Edad:</label>
-        <input name="edad" type="text" readonly class="form-control mb-2 edadInt" />
-        <label>Sexo:</label>
-        <select name="sexo" class="form-select mb-2">
-          <option>Masculino</option>
-          <option>Femenino</option>
-          <option>Otro</option>
-        </select>
-        <label>Género:</label>
-        <select name="genero" class="form-select mb-2">
-          <option>Transexual</option>
-          <option>No binario</option>
-          <option>Genero fluido</option>
-          <option selected>Cisgenero</option>
-          <option>Otro</option>
-        </select>
-        <label>Teléfono:</label>
-          <input name="telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
-
-          <label>Contacto de Emergencia:</label>
-          <input name="contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"/>
-
-          <script>
-          function formatearTelefono(input) {
-            let valor = input.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
-            if (valor.length > 4) {
-              valor = valor.slice(0, 4) + '-' + valor.slice(4, 8);
-            }
-            input.value = valor;
-          }
-          </script>
-      </fieldset>
-    </details>
-
-
-          <!-- Condiciones Especiales -->
-          <details>
-            <summary><strong>Condiciones Especiales</strong></summary>
-            <fieldset class="mt-2">
-              <label>Discapacidad:</label>
-              <select name="discapacidad" class="form-select mb-2">
-                <option>Sí</option>
-                <option selected>No</option>
-              </select>
-
-              <label>Tipo de Discapacidad:</label>
-              <select name="discapacidad" class="form-select mb-2">
-                <option>Fisica</option>
-                <option>Sensorial</option>
-                <option>Intelectual</option>
-                <option>Mental o Psicologica</option>
-                <option>Múltiple</option>
-              </select>
-
-              <label>Condición de Salud Especial:</label>
-              <select name="discapacidad" class="form-select mb-2">
-                <option>Visual</option>
-                <option>Sindrome</option>
-                <option>Esquizofrenia</option>
-                <option>Auditiva</option>
-                <option>Trans-Bipolar</option>
-              </select>
-              <button type="" class="btn btn-primary mt-3">+</button>
-            </fieldset>
-          </details>
-    <!-- Características Poblacionales -->
-<details>
-  <summary><strong>Características Poblacionales</strong></summary>
-  <fieldset class="mt-2">
-    <div class="checkbox-row">
-      <label for="migrante">Migrante</label>
-      <input type="checkbox" name="migrante" id="migrante">
-    </div>
-    <div class="checkbox-row">
-      <label for="poblacionIndigena">Población Indígena</label>
-      <input type="checkbox" name="poblacionIndigena" id="poblacionIndigena">
-    </div>
-  </fieldset>
-</details>
-
-    <!-- Observaciones -->
-    <details>
-      <summary><strong>Observaciones</strong></summary>
-      <textarea name="Observacion" placeholder="Agrega tu Observacion" class="form-control mb-2"></textarea>
-    </details>
-
-
-        </form>
-      </template>
-
-      <!-- fin del tempalte modificado -->
-      <div id="contenedorFormularios"></div>
-
-
-      <!-- Botones -->
-     <div class="d-flex justify-content-between mt-3">
-     <!-- Botón Guardar con confirmación -->
-    <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
-
-    <!-- Botón Limpiar con efecto hover rojo -->
-    <button type="reset" class="btn btn-outline-secondary btn-limpiar">Limpiar formulario</button>
-    </div>
+      <!-- Paso 8: Firma Digital -->
+      <div class="paso">
+        <details open>
+          <summary><strong>Firma Digital</strong></summary>
+          <fieldset class="mt-2">
+            <label>Firma:</label><canvas id="signature-pad" width="600" height="200"></canvas>
+            <button type="button" onclick="limpiarFirma()" class="mt-2 btn btn-link text-primary">Limpiar firma</button>
+          </fieldset>
+        </details>
+        <div class="botones-nav">
+          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
+          <button type="reset" class="btn btn-outline-secondary btn-limpiar">Limpiar formulario</button>
+        </div>
+      </div>
     </form>
-
-    <!-- Script para agregar el paretesco -->
-    <script>
-    document.addEventListener("click", function (e) {
-      if (e.target.classList.contains("btn-agregar-parentesco")) {
-        const fieldset = e.target.closest("fieldset");
-        const container = fieldset.querySelector(".nuevoParentescoContainer");
-      
-        // Evita duplicar input
-        if (container.querySelector(".nuevoParentescoInput")) return;
-      
-        const label = document.createElement("label");
-        label.textContent = "Nuevo Parentesco:";
-      
-        const input = document.createElement("input");
-        input.type = "text";
-        input.className = "form-control mt-1 nuevoParentescoInput";
-        input.placeholder = "Ej: Tío, Prima, Abuelo";
-      
-        input.addEventListener("change", () => agregarNuevoParentesco(input));
-        input.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            agregarNuevoParentesco(input);
-          }
-        });
-      
-        container.appendChild(label);
-        container.appendChild(input);
-        input.focus();
-      }
-    });
-    
-    function agregarNuevoParentesco(input) {
-      const nuevoValor = input.value.trim();
-      if (nuevoValor !== "") {
-        const fieldset = input.closest("fieldset");
-        const select = fieldset.querySelector("select[name='parentesco']");
-      
-        const existe = Array.from(select.options).some(
-          (option) => option.text.toLowerCase() === nuevoValor.toLowerCase()
-        );
-        if (!existe) {
-          const nuevaOpcion = document.createElement("option");
-          nuevaOpcion.text = nuevoValor;
-          nuevaOpcion.selected = true;
-          select.add(nuevaOpcion);
-        } else {
-          select.value = nuevoValor;
-        }
-      }
-    
-      input.parentNode.innerHTML = ""; // limpia el campo
-    }
-    </script>
-
-    <script>
-      function confirmarGuardado() {
-      return confirm("¿Deseas guardar la información?");
-      }
-    </script>
-
-
-
- 
-  
-    <div class="mt-4">
-     <br>
-     <br>
-      <h2>&copy;</h2>
-    </div>
   </div>
-
-  </div>
-
-
-  <!-- Esto es para crear mas formularios -->
-  <script>
-    const cantidad = localStorage.getItem("cantidadIntegrantes");
-    const contenedor = document.getElementById("contenedorFormularios");
-    const template = document.getElementById("templateFormulario");
-
-    for (let i = 1; i <= cantidad; i++) {
-      const clon = template.content.cloneNode(true);
-      contenedor.appendChild(clon);
-    }
-  </script>
-
-
-
-  <!-- Fin del script de clonado de fomularios -->
-
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="ubicaciones.js"></script>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       inicializarUbiSelects('provincia', 'canton', 'distrito');
+
+      // Initialize Signature Pad
+      const canvas = document.getElementById('signature-pad');
+      const signaturePad = new SignaturePad(canvas);
+
+      // Pagination logic
+      let pasos = document.querySelectorAll('.paso');
+      let pasoActual = 0;
+
+      function mostrarPaso(index) {
+        pasos.forEach((paso, i) => {
+          paso.classList.toggle('activo', i === index);
+        });
+      }
+
+      function updateNavigation() {
+        pasos = document.querySelectorAll('.paso'); // Update pasos after dynamic addition
+        document.querySelectorAll('.siguiente').forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (pasoActual < pasos.length - 1) {
+              if (validateStep(pasoActual)) {
+                pasoActual++;
+                mostrarPaso(pasoActual);
+              }
+            }
+          });
+        });
+        document.querySelectorAll('.anterior').forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (pasoActual > 0) {
+              pasoActual--;
+              mostrarPaso(pasoActual);
+            }
+          });
+        });
+      }
+
+      // Basic validation for required fields
+      function validateStep(index) {
+        const currentPaso = pasos[index];
+        const requiredInputs = currentPaso.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+        requiredInputs.forEach(input => {
+          if (!input.value.trim()) {
+            isValid = false;
+            input.classList.add('is-invalid');
+            input.focus();
+          } else {
+            input.classList.remove('is-invalid');
+          }
+        });
+        if (!isValid) {
+          alert('Por favor, complete todos los campos obligatorios antes de continuar.');
+        }
+        return isValid;
+      }
+
+      // Generate dynamic integrante sections
+      const container = document.getElementById('integrantes-container');
+      const cantidad = parseInt(localStorage.getItem('cantidadIntegrantes')) || 0;
+
+      if (cantidad <= 0) {
+        container.innerHTML = '<div class="paso"><p>Por favor, ingrese la cantidad de integrantes adicionales en la página anterior.</p><div class="botones-nav"><button type="button" class="btn btn-secondary anterior">Anterior</button><button type="button" class="btn btn-primary siguiente">Siguiente</button></div></div>';
+        updateNavigation();
+        mostrarPaso(pasoActual);
+        return;
+      }
+
+      for (let i = 1; i <= cantidad; i++) {
+        const section = document.createElement('div');
+        section.className = 'paso';
+        section.innerHTML = `
+          <h3>Información de Integrante ${i + 1}</h3>
+          <details open><summary><strong>Información Personal</strong></summary><fieldset class="mt-2">
+            <label>Nombre:</label><input name="integrante${i}-nombre" type="text" class="form-control mb-2" required />
+            <label>Apellido 1:</label><input name="integrante${i}-apellido1" type="text" class="form-control mb-2" required />
+            <label>Apellido 2:</label><input name="integrante${i}-apellido2" type="text" class="form-control mb-2" />
+            <label>Tipo de Identificación:</label><select name="integrante${i}-tipoIdentificacion" class="form-select mb-2" required>
+              <option selected>Cédula</option><option>DIMEX</option><option>Permiso laboral</option><option>Pasaporte</option><option>No presenta</option>
+            </select>
+            <label>Número de Identificación:</label><input name="integrante${i}-numeroIdentificacion" type="text" class="form-control mb-2" required />
+            <label>Nacionalidad:</label><input name="integrante${i}-nacionalidad" type="text" class="form-control mb-2" required />
+            <label>Parentesco:</label><select name="integrante${i}-parentesco" class="form-select mb-2" required>
+              <option>Padre</option><option>Madre</option><option>Hijo</option><option>Hija</option>
+            </select>
+            <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
+            <div class="nuevoParentescoContainer mb-2"></div>
+            <label>Fecha de Nacimiento:</label><input name="integrante${i}-fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt" required />
+            <label>Edad:</label><input name="integrante${i}-edad" type="text" readonly class="form-control mb-2 edadInt" />
+            <label>Sexo:</label><select name="integrante${i}-sexo" class="form-select mb-2" required><option>Masculino</option><option>Femenino</option><option>Otro</option></select>
+            <label>Género:</label><select name="integrante${i}-genero" class="form-select mb-2" required><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option>Cisgenero</option><option>Otro</option></select>
+            <label>Teléfono:</label><input name="integrante${i}-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" required />
+            <label>Contacto de Emergencia:</label><input name="integrante${i}-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" required />
+          </fieldset></details>
+          <details><summary><strong>Condiciones Especiales</strong></summary><fieldset class="mt-2">
+            <label>Discapacidad:</label><select name="integrante${i}-discapacidad" class="form-select mb-2" required><option>Sí</option><option selected>No</option></select>
+            <label>Tipo de Discapacidad:</label><select name="integrante${i}-tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
+            <label>Condición de Salud Especial:</label><select name="integrante${i}-condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
+          </fieldset></details>
+          <details><summary><strong>Características Poblacionales</strong></summary><fieldset class="mt-2">
+            <div class="checkbox-row"><label for="integrante${i}-migrante">Migrante</label><input type="checkbox" name="integrante${i}-migrante" id="integrante${i}-migrante"></div>
+            <div class="checkbox-row"><label for="integrante${i}-poblacionIndigena">Población Indígena</label><input type="checkbox" name="integrante${i}-poblacionIndigena" id="integrante${i}-poblacionIndigena"></div>
+          </fieldset></details>
+          <details><summary><strong>Observaciones</strong></summary><textarea name="integrante${i}-observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea></details>
+          <div class="botones-nav">
+            <button type="button" class="btn btn-secondary anterior">Anterior</button>
+            <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+          </div>
+        `;
+        container.appendChild(section);
+      }
+
+      // Update navigation after adding dynamic sections
+      updateNavigation();
+      mostrarPaso(pasoActual);
+
+      // Age calculation
+      document.querySelectorAll('.fechaNacimientoInt').forEach(input => {
+        input.addEventListener('change', function() {
+          const edadInput = this.parentElement.querySelector('.edadInt');
+          if (edadInput) {
+            const edad = calcularEdad(new Date(this.value));
+            edadInput.value = isNaN(edad) ? '' : edad;
+          }
+        });
+      });
+
+      function calcularEdad(fecha) {
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - fecha.getFullYear();
+        const mes = hoy.getMonth() - fecha.getMonth();
+        if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) edad--;
+        return edad;
+      }
+
+      // Parentesco addition
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-agregar-parentesco')) {
+          const fieldset = e.target.closest('fieldset');
+          const container = fieldset.querySelector('.nuevoParentescoContainer');
+          if (container.querySelector('.nuevoParentescoInput')) return;
+          const label = document.createElement('label');
+          label.textContent = 'Nuevo Parentesco:';
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.className = 'form-control mt-1 nuevoParentescoInput';
+          input.placeholder = 'Ej: Tío, Prima, Abuelo';
+          input.addEventListener('change', () => agregarNuevoParentesco(input));
+          input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarNuevoParentesco(input); } });
+          container.appendChild(label);
+          container.appendChild(input);
+          input.focus();
+        }
+      });
+
+      function agregarNuevoParentesco(input) {
+        const nuevoValor = input.value.trim();
+        if (nuevoValor !== '') {
+          const fieldset = input.closest('fieldset');
+          const select = fieldset.querySelector('select[name$="-parentesco"]');
+          const existe = Array.from(select.options).some(option => option.text.toLowerCase() === nuevoValor.toLowerCase());
+          if (!existe) {
+            const nuevaOpcion = document.createElement('option');
+            nuevaOpcion.text = nuevoValor;
+            nuevaOpcion.selected = true;
+            select.add(nuevaOpcion);
+          } else {
+            select.value = nuevoValor;
+          }
+        }
+        input.parentNode.innerHTML = '';
+      }
+
+      // Condición especial addition
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-agregar-condicion')) {
+          const fieldset = e.target.closest('fieldset');
+          const container = fieldset.querySelector('.nuevoCondicionContainer') || document.createElement('div');
+          container.className = 'nuevoCondicionContainer mb-2';
+          if (!fieldset.contains(container)) fieldset.appendChild(container);
+          if (container.querySelector('.nuevoCondicionInput')) return;
+          const label = document.createElement('label');
+          label.textContent = 'Nueva Condición de Salud:';
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.className = 'form-control mt-1 nuevoCondicionInput';
+          input.placeholder = 'Ej: Diabetes, Asma';
+          input.addEventListener('change', () => agregarNuevaCondicion(input));
+          input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarNuevaCondicion(input); } });
+          container.appendChild(label);
+          container.appendChild(input);
+          input.focus();
+        }
+      });
+
+      function agregarNuevaCondicion(input) {
+        const nuevoValor = input.value.trim();
+        if (nuevoValor !== '') {
+          const fieldset = input.closest('fieldset');
+          const select = fieldset.querySelector('select[name$="-condicionSalud"]');
+          const existe = Array.from(select.options).some(option => option.text.toLowerCase() === nuevoValor.toLowerCase());
+          if (!existe) {
+            const nuevaOpcion = document.createElement('option');
+            nuevaOpcion.text = nuevoValor;
+            nuevaOpcion.selected = true;
+            select.add(nuevaOpcion);
+          } else {
+            select.value = nuevoValor;
+          }
+        }
+        input.parentNode.innerHTML = '';
+      }
+
+      function confirmarGuardado() {
+        if (!validateStep(pasoActual)) return false;
+        return confirm('¿Deseas guardar la información?');
+      }
+
+      function limpiarFirma() {
+        signaturePad.clear();
+      }
+
+      // Form submission handling
+      document.getElementById('formularioAlbergue').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (confirmarGuardado()) {
+          const formData = new FormData(e.target);
+          const data = {};
+          formData.forEach((value, key) => {
+            data[key] = value;
+          });
+          console.log('Datos del formulario:', data);
+          // Add logic to save data (e.g., send to server via axios)
+          alert('Formulario guardado exitosamente.');
+        }
+      });
     });
 
-
+    function formatearTelefono(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 4) {
+        value = value.slice(0, 4) + '-' + value.slice(4, 8);
+      }
+      input.value = value;
+    }
   </script>
 
+  <button id="accesibilidad-toggle" aria-label="Configuración"><span class="material-icons">settings</span></button>
+  <div id="accesibilidad-panel">
+    <button onclick="toggleContraste()">Contraste oscuro</button>
+    <button onclick="resaltarEnlaces()">Resaltar enlaces</button>
+    <button onclick="cambiarTamanoFuente('aumentar')">Agrandar texto</button>
+    <button onclick="cambiarTamanoFuente('disminuir')">Reducir texto</button>
+    <button onclick="document.body.classList.toggle('espaciado-texto')">Espaciado de texto</button>
+    <button onclick="document.body.classList.toggle('cursor-grande')">Activar Cursor</button>
+    <button onclick="alinearTexto()">Texto alineado</button>
+    <button onclick="document.body.classList.toggle('saturacion')">Activar Saturación</button>
+    <button onclick="cambiarAlturaLinea()">Altura de la línea</button>
+  </div>
+  <script>
+    document.getElementById('accesibilidad-toggle').addEventListener('click', () => {
+      document.getElementById('accesibilidad-panel').classList.toggle('active');
+    });
 
-
+    function toggleContraste() { document.body.classList.toggle('contraste'); }
+    function resaltarEnlaces() { document.body.classList.toggle('resaltado'); }
+    let fontSize = 1;
+    function cambiarTamanoFuente(accion) {
+      if (accion === 'aumentar') fontSize += 0.1;
+      if (accion === 'disminuir') fontSize = Math.max(0.8, fontSize - 0.1);
+      document.body.style.fontSize = fontSize + 'em';
+    }
+    function alinearTexto() { document.body.classList.toggle('texto-centrado'); }
+    function cambiarAlturaLinea() { document.body.classList.toggle('alto-linea'); }
+  </script>
 </body>
-
-<button id="accesibilidad-toggle" aria-label="Configuración">
-  <span class="material-icons">settings</span>
-</button>
-<div id="accesibilidad-panel">
-  <button onclick="toggleContraste()">Contraste oscuro</button>
-  <button onclick="resaltarEnlaces()">Resaltar enlaces</button>
-  <button onclick="cambiarTamanoFuente('aumentar')">Agrandar texto</button>
-  <button onclick="cambiarTamanoFuente('disminuir')">Reducir texto</button>
-  <button onclick="document.body.classList.toggle('espaciado-texto')">Espaciado de texto</button>
-  <button onclick="document.body.classList.toggle('cursor-grande')">Activar Cursor</button>
-  <button onclick="alinearTexto()">Texto alineado</button>
-  <button onclick="document.body.classList.toggle('saturacion')">Activar Saturación</button>
-  <button onclick="cambiarAlturaLinea()">Altura de la línea</button>
-</div>
-
-<script>
-  document.getElementById('accesibilidad-toggle').addEventListener('click', () => {
-    document.getElementById('accesibilidad-panel').classList.toggle('active');
-  });
-
-  function toggleContraste() {
-    document.body.classList.toggle('contraste');
-  }
-
-  function resaltarEnlaces() {
-    document.body.classList.toggle('resaltado');
-  }
-
-  let fontSize = 1;
-  function cambiarTamanoFuente(accion) {
-    if (accion === 'aumentar') fontSize += 0.1;
-    if (accion === 'disminuir') fontSize = Math.max(1, fontSize - 0.1);
-    document.body.style.fontSize = fontSize + 'em';
-  }
-
-  function cambiarEspaciadoTexto() {
-    document.body.classList.toggle('espaciado-activo');
-  }
-
-
-
-  function cambiarCursor() {
-    document.body.classList.toggle('cursor-grande');
-  }
-
-  function alinearTexto() {
-    document.body.classList.toggle('texto-centrado');
-  }
-
-  function cambiarAlturaLinea() {
-    document.body.classList.toggle('alto-linea');
-  }
-
-  function cambiarSaturacion() {
-    document.body.classList.toggle('saturado');
-  }
-
-</script>
-
-
-<!-- Script para calcular edad en form principal y templates -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Para el formulario principal
-  const fechaPrincipal = document.getElementById("fechaNacimiento");
-  if (fechaPrincipal) {
-    fechaPrincipal.addEventListener("change", function () {
-      const edad = calcularEdad(new Date(this.value));
-      document.getElementById("edad").value = isNaN(edad) ? '' : edad;
-    });
-  }
-
-  // Para todos los campos con clase fechaNacimientoInt
-  document.querySelectorAll(".fechaNacimientoInt").forEach(function (inputFecha) {
-    inputFecha.addEventListener("change", function () {
-      const edad = calcularEdad(new Date(this.value));
-      // Buscar el input de edad más cercano dentro del mismo contenedor padre
-      const parent = this.parentElement;
-      const campoEdad = parent.querySelector(".edadInt");
-      if (campoEdad) {
-        campoEdad.value = isNaN(edad) ? '' : edad;
-      }
-    });
-  });
-});
-
-// Función auxiliar
-function calcularEdad(fecha) {
-  const hoy = new Date();
-  let edad = hoy.getFullYear() - fecha.getFullYear();
-  const mes = hoy.getMonth() - fecha.getMonth();
-  if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
-    edad--;
-  }
-  return edad;
-}
-
-</script>
-
 </html>

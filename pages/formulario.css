@@ -799,4 +799,12 @@ form#recursoForm fieldset {
   background-color: #dc3545;
   border-color: #dc3545;
 }
-
+.paso-form {
+  transition: all 0.3s ease;
+}
+.hidden { display: none; }
+.integrante-section { display: none; }
+.integrante-section.active { display: block; }
+.principal-section { display: block; }
+.principal-section.hidden { display: none; }
+.main-content { transition: margin-left 0.3s; }

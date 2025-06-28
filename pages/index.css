@@ -459,3 +459,9 @@ h2, h4 {
   margin-left: 40px;
 }
 
+.hidden { display: none; }
+.integrante-section { display: none; }
+.integrante-section.active { display: block; }
+.principal-section { display: block; }
+.principal-section.hidden { display: none; }
+.main-content { transition: margin-left 0.3s; }

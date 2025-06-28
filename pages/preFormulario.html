@@ -4,51 +4,40 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <link rel="stylesheet" href="formulario.css">
   <link rel="stylesheet" href="pages/index.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <title>Evento o Emergencia</title>
 </head>
 <body>
-    <!-- Sidebar fijo -->
-    <div id="sidebar-container"></div>
-    <script>
-      fetch('sidebar.html')
-        .then(res => res.text())
-        .then(html => document.getElementById('sidebar-container').innerHTML = html);
-    </script>
-
-    <!-- Cargar Sidebar y activar botón -->
+  <div id="sidebar-container"></div>
   <script>
     fetch('sidebar.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('sidebar-container').innerHTML = html;
-
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggle-btn');
         const headers = document.querySelectorAll('h2, h4');
         const mainContent = document.querySelector('.main-content');
-
+        if (!sidebar || !toggleBtn || !mainContent) {
+          console.error('One or more elements not found:', { sidebar, toggleBtn, mainContent });
+          return;
+        }
         toggleBtn.addEventListener('click', () => {
           sidebar.classList.toggle('hidden');
           toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
-
           headers.forEach(h => {
             h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
           });
-
           mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
         });
-      });
+      })
+      .catch(error => console.error('Error fetching sidebar.html:', error));
   </script>
 
-
-
-  <div class="container">
+  <div class="container main-content">
     <h2>
       <button
         onclick="window.location.href='index.html'"
@@ -77,12 +66,12 @@
             <option value="deslizamiento">Deslizamiento</option>
           </select>
 
-          <label for="integrantes">Cantidad de Integrantes en la Familia:</label>
+          <label for="integrantes">Cantidad de Integrantes Adicionales:</label>
           <input name="integrantes" type="number" id="integrantes" class="form-control mb-2" placeholder="Ingrese la cantidad" />
         </fieldset>
       </details>
 
-      <button type="button" class="btn btn-primary mt-3 pre" onclick="guardarCantidadYContinuar()"   >  Continuar</button>
+      <button type="button" class="btn btn-primary mt-3 pre" onclick="guardarCantidadYContinuar()">Continuar</button>
     </form>
   </div>
 
@@ -93,12 +82,9 @@
         alert("Por favor, ingrese una cantidad válida de integrantes.");
         return;
       }
-      localStorage.setItem("cantidadIntegrantes", cantidad -1);
+      localStorage.setItem("cantidadIntegrantes", cantidad); // Number of additional integrants
       window.location.href = "formulario.html";
     }
   </script>
-
-
-
 </body>
 </html>
