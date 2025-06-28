@@ -79,26 +79,30 @@
     </div>
 
     <!-- Resultado de búsqueda de ejemplo -->
-    <div class="albergue-resultado espaciado-texto">
-        <h2>Resultado</h2>
-        <ul>
-            <li><strong>ID:</strong> 209</li>
-        </ul>
-        <ul>
-            <li><strong>Nombre del Albergue:</strong> Gimnasio Municipal Manuel Corella Madrigal</li>
-
-            <li><strong>Coordenadas X:</strong> -85,09</li>
-            <li><strong>Coordenadas Y:</strong>  10,43</li>
-            <li><strong>Región:</strong> Chorotega</li>
-            <li><strong>Provincia:</strong> Guanacaste</li>
-            <li><strong>Cantón:</strong> Cañas</li>
-            <li><strong>Distrito:</strong> Cañas</li>
-            <li><strong>Dirección Exacta:</strong> 	Cañas Centro</li>
-            <li><strong>Capacidad:</strong> 52 personas</li>
-            <li><strong>Ocupación:</strong> 0 personas</li>
-        </ul>
-    </div>
-
+<div id="albergueResultado" class="albergue-resultado espaciado-texto">
+  <h2>Resultado</h2>
+  <ul>
+    <li><strong>ID:</strong> <span id="idAlbergue"></span></li>
+    <li><strong>Nombre del Albergue:</strong> <span id="nombreAlbergue"></span></li>
+    <li><strong>Región:</strong> <span id="region"></span></li>
+    <li><strong>Provincia:</strong> <span id="provincia"></span></li>
+    <li><strong>Cantón:</strong> <span id="canton"></span></li>
+    <li><strong>Distrito:</strong> <span id="distrito"></span></li>
+    <li><strong>Dirección Exacta:</strong> <span id="direccion"></span></li>
+    <li><strong>Tipo de Establecimiento:</strong> <span id="tipoEstablecimiento"></span></li>
+    <li><strong>Tipo de Albergue:</strong> <span id="tipoAlbergue"></span></li>
+    <li><strong>Condición del Albergue:</strong> <span id="condicionAlbergue"></span></li>
+    <li><strong>Administrador:</strong> <span id="administrador"></span></li>
+    <li><strong>Teléfono:</strong> <span id="telefono"></span></li>
+    <li><strong>Capacidad Personas:</strong> <span id="capacidadPersonas"></span></li>
+    <li><strong>Capacidad Colectivas:</strong> <span id="capacidadColectivas"></span></li>
+    <li><strong>Cantidad de Familias:</strong> <span id="cantidadFamilias"></span></li>
+    <li><strong>Ocupación:</strong> <span id="ocupacion"></span></li>
+    <li><strong>Infraestructura:</strong> <span id="infraestructura"></span></li>
+    <li><strong>Municipalidad:</strong> <span id="municipalidad"></span></li>
+    <li><strong>Color:</strong> <span id="color"></span></li>
+  </ul>
+</div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="ubicaciones.js"></script>
 
@@ -108,6 +112,73 @@
 });
 
 
+</script>
+
+<!-- esto sirve para cargar los datos desde la api -->
+
+<script>async function cargarDatosAlbergue(id) {
+  const url = `https://apiintegrador-production-8ef8.up.railway.app/api/albergues/${id}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) throw new Error("Error en la respuesta de la API");
+
+    const data = await response.json();
+
+    // Mostrar datos en los elementos del DOM
+    document.getElementById("idAlbergue").textContent = data.id || '';
+    document.getElementById("nombreAlbergue").textContent = data.nombre || '';
+    document.getElementById("region").textContent = data.region || '';
+    document.getElementById("provincia").textContent = data.provincia || '';
+    document.getElementById("canton").textContent = data.canton || '';
+    document.getElementById("distrito").textContent = data.distrito || '';
+    document.getElementById("direccion").textContent = data.direccionExacta || '';
+    document.getElementById("tipoEstablecimiento").textContent = data.tipoEstablecimiento || '';
+    document.getElementById("tipoAlbergue").textContent = data.tipoAlbergue || '';
+    document.getElementById("condicionAlbergue").textContent = data.condicionAlbergue || '';
+    document.getElementById("administrador").textContent = data.administrador || '';
+    document.getElementById("telefono").textContent = data.telefono || '';
+    document.getElementById("capacidadPersonas").textContent = data.capacidadPersonas || '';
+    document.getElementById("capacidadColectivas").textContent = data.capacidadColectivas || '';
+    document.getElementById("cantidadFamilias").textContent = data.cantidadFamilias || '';
+    document.getElementById("ocupacion").textContent = data.ocupacion || '';
+    document.getElementById("infraestructura").textContent = data.infraestructura || '';
+    document.getElementById("municipalidad").textContent = data.municipalidad?.nombre || '';
+    document.getElementById("color").textContent = data.color || '';
+
+  } catch (error) {
+    console.error("Error al cargar datos del albergue:", error);
+    alert("No se pudo obtener la información del albergue.");
+  }
+}</script>
+
+<script>
+document.querySelector('.search-bar').addEventListener('submit', function (e) {
+  e.preventDefault(); // Evita recargar la página
+
+  const id = document.getElementById('busquedaId').value.trim();
+
+  if (id) {
+    cargarDatosAlbergue(id);
+  } else {
+    alert("Por favor ingresa un ID de albergue para buscar.");
+  }
+});
+</script>
+
+<script>
+document.querySelector('.search-bar').addEventListener('submit', function (e) {
+  e.preventDefault(); // Evita recargar la página
+
+  const id = document.getElementById('busquedaId').value.trim();
+
+  if (id) {
+    cargarDatosAlbergue(id);
+  } else {
+    alert("Por favor ingresa un ID de albergue para buscar.");
+  }
+});
 </script>
 </body>
 </html>

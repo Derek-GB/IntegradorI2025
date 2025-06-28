@@ -291,9 +291,9 @@
         <div class="nuevoParentescoContainer mb-2"></div>
           
         <label>Fecha de Nacimiento:</label>
-        <input name="fechaNacimiento" type="date" id="fechaNacimientoInt" class="form-control mb-2" />
+        <input name="fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt " />
         <label>Edad:</label>
-        <input name="edad" type="text" id="edad" readonly class="form-control mb-2" />
+        <input name="edad" type="text" readonly class="form-control mb-2 edadInt" />
         <label>Sexo:</label>
         <select name="sexo" class="form-select mb-2">
           <option>Masculino</option>
@@ -459,16 +459,12 @@
 
 
 
-
-    <hr class="my-4" />
+ 
+  
     <div class="mt-4">
-      <h2>Exportar Información</h2>
-      <select id="usuariosSelect" class="form-select mb-2"></select>
-      <div class="btn-group">
-        <button class="btn btn-danger" onclick="exportarUsuario('pdf')">Exportar a PDF</button>
-        <button class="btn btn-success" onclick="exportarUsuario('excel')">Exportar a Excel</button>
-        <button class="btn btn-primary" onclick="exportarUsuario('word')">Exportar a Word</button>
-      </div>
+     <br>
+     <br>
+      <h2>&copy;</h2>
     </div>
   </div>
 
@@ -508,330 +504,6 @@
 
 
 </body>
-
-
-
-<script>
-  function exportarRegistroDoc(datos, codigo) {
-    if (!datos) {
-      alert('Datos no encontrados.');
-      return;
-    }
-
-    const etiquetas = {
-      nombreAlbergue: "Nombre del Albergue",
-      codigoFamilia: "Código Familia",
-      nombreCompleto: "Nombre Completo",
-      tipoIdentificacion: "Tipo de Identificación",
-      numeroIdentificacion: "Número de Identificación",
-      nacionalidad: "Nacionalidad",
-      parentesco: "Parentesco",
-      fechaNacimiento: "Fecha de Nacimiento",
-      edad: "Edad",
-      sexo: "Sexo",
-      telefono: "Teléfono",
-      provincia: "Provincia",
-      canton: "Cantón",
-      distrito: "Distrito",
-      direccion: "Dirección",
-      espumas: "Espumas",
-      cobijas: "Cobijas",
-      racion: "Ración de Diario",
-      pichingas: "Pichingas",
-      catres: "Catres",
-      otros: "Otros",
-      discapacidad: "Discapacidad",
-      tipoDiscapacidad: "Tipo de Discapacidad",
-      condicionSalud: "Condición de Salud Especial",
-      migrante: "Migrante",
-      poblacionIndigena: "Población Indígena"
-    };
-
-    function capitalizar(str) {
-      return str
-        .replace(/([A-Z])/g, ' $1')
-        .replace(/^./, s => s.toUpperCase())
-        .trim();
-    }
-
-    const html = `
-    <div class="titulo-container">
-      <h1>REPÚBLICA DE COSTA RICA</h1>
-      <h2>MUNICIPALIDAD DE CAÑAS</h2>
-      <h3>Registro de Albergue</h3>
-    </div>
-    <hr />
-    ${Object.entries(datos).map(([clave, valor]) => {
-      if (clave !== 'firmaDigital') {
-        const etiqueta = etiquetas[clave] || capitalizar(clave);
-        return `<p><strong>${etiqueta}:</strong> ${valor}</p>`;
-      }
-      return '';
-    }).join('')}
-    ${datos.firmaDigital ? `
-      <div class="firma-container">
-        <p><strong>Firma:</strong></p>
-        <img src="${datos.firmaDigital}" />
-      </div>` : ''
-      }
-  `;
-
-    const blob = new Blob(['\ufeff', html], {
-      type: 'application/msword',
-    });
-
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${codigo}_registro.doc`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
-
-  // Calcular edad automáticamente
-  document.getElementById("fechaNacimiento").addEventListener("change", function () {
-    const fecha = new Date(this.value);
-    const hoy = new Date();
-    let edad = hoy.getFullYear() - fecha.getFullYear();
-    const mes = hoy.getMonth() - fecha.getMonth();
-    if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
-      edad--;
-    }
-    document.getElementById("edad").value = isNaN(edad) ? '' : edad;
-  });
-
-
-
-  // Firma digital
-  const canvas = document.getElementById("signature-pad");
-  const signaturePad = new SignaturePad(canvas);
-
-  function limpiarFirma() {
-    signaturePad.clear();
-  }
-
-  function obtenerUsuariosGuardados() {
-    return JSON.parse(localStorage.getItem("registrosAlbergue")) || {};
-  }
-
-  function guardarDatos() {
-    const form = document.getElementById('formularioAlbergue');
-    const datos = {};
-    const numeroIdentificacion = form.numeroIdentificacion.value.trim();
-    if (!numeroIdentificacion) return alert("Debe ingresar un Número de Identificación.");
-
-    form.querySelectorAll('input, select, textarea').forEach((input, index) => {
-      let key = input.name || input.id;
-      if (!key) key = `${input.tagName.toLowerCase()}-${index}`;
-      datos[key] = (input.type === 'radio' || input.type === 'checkbox') ? input.checked : input.value;
-    });
-
-    datos.firmaDigital = !signaturePad.isEmpty() ? signaturePad.toDataURL() : null;
-
-    const registros = obtenerUsuariosGuardados();
-    registros[numeroIdentificacion] = datos;
-    localStorage.setItem("registrosAlbergue", JSON.stringify(registros));
-    actualizarSelectUsuarios();
-    alert("Datos guardados correctamente.");
-  }
-
-  function cargarDatos(numeroIdentificacion = null) {
-    const registros = obtenerUsuariosGuardados();
-    if (!numeroIdentificacion) {
-      numeroIdentificacion = document.getElementById("usuariosSelect").value;
-    }
-    if (!numeroIdentificacion || !registros[numeroIdentificacion]) return;
-
-    const datos = registros[numeroIdentificacion];
-    const form = document.getElementById('formularioAlbergue');
-
-    form.querySelectorAll('input, select, textarea').forEach((input, index) => {
-      let key = input.name || input.id;
-      if (!key) key = `${input.tagName.toLowerCase()}-${index}`;
-      if (datos.hasOwnProperty(key)) {
-        if (input.type === 'checkbox' || input.type === 'radio') {
-          input.checked = datos[key];
-        } else {
-          input.value = datos[key];
-          if (input.id === 'fechaNacimiento') input.dispatchEvent(new Event('change'));
-        }
-      }
-    });
-
-    if (datos.firmaDigital) {
-      const img = new Image();
-      img.src = datos.firmaDigital;
-      img.onload = () => {
-        signaturePad.clear();
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-      };
-    } else {
-      signaturePad.clear();
-    }
-  }
-
-  function actualizarSelectUsuarios() {
-    const registros = obtenerUsuariosGuardados();
-    const select = document.getElementById("usuariosSelect");
-    select.innerHTML = "<option value=''>Seleccione un usuario</option>";
-    for (const key in registros) {
-      const option = document.createElement("option");
-      option.value = key;
-      option.textContent = key;
-      select.appendChild(option);
-    }
-  }
-
-  function capitalizarCadaPalabra(texto) {
-    if (!texto) return "";
-    return texto
-      .toString()
-      .toLowerCase()
-      .split(' ')
-      .filter(w => w.trim() !== '')
-      .map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1))
-      .join(' ');
-  }
-
-  async function exportarUsuario(formato) {
-    const codigo = document.getElementById("usuariosSelect").value;
-    const registros = obtenerUsuariosGuardados();
-    const datos = registros[codigo];
-    if (!codigo || !datos) return alert("Seleccione un usuario para exportar.");
-
-    if (formato === "pdf") {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-
-      // Encabezado formal
-      doc.setFontSize(16);
-      doc.setFont("helvetica", "bold");
-      doc.text("REPÚBLICA DE COSTA RICA", 105, 15, null, null, "center");
-      doc.text("MUNICIPALIDAD DE CAÑAS", 105, 23, null, null, "center");
-      doc.text("Registro de Albergue", 105, 31, null, null, "center");
-
-      // Línea separadora
-      doc.setLineWidth(0.5);
-      doc.line(15, 35, 195, 35);
-
-      // Ajustes de texto para el contenido
-      doc.setFontSize(12);
-      doc.setFont("helvetica", "normal");
-
-      let y = 45;
-
-      // Mostrar datos con nombres capitalizados y separados por espacios
-      for (const [k, v] of Object.entries(datos)) {
-        if (k === "firmaDigital") continue;
-
-        const etiquetas = {
-          nombreAlbergue: "Nombre del Albergue",
-          codigoFamilia: "Código Familia",
-          nombreCompleto: "Nombre Completo",
-          tipoIdentificacion: "Tipo de Identificación",
-          numeroIdentificacion: "Número de Identificación",
-          nacionalidad: "Nacionalidad",
-          parentesco: "Parentesco",
-          fechaNacimiento: "Fecha de Nacimiento",
-          edad: "Edad",
-          sexo: "Sexo",
-          telefono: "Teléfono",
-          provincia: "Provincia",
-          canton: "Cantón",
-          distrito: "Distrito",
-          direccion: "Dirección",
-          espumas: "Espumas",
-          cobijas: "Cobijas",
-          racion: "Ración de Diario",
-          pichingas: "Pichingas",
-          catres: "Catres",
-          otros: "Otros",
-          discapacidad: "Discapacidad",
-          tipoDiscapacidad: "Tipo de Discapacidad",
-          condicionSalud: "Condición de Salud Especial",
-          migrante: "Migrante",
-          poblacionIndigena: "Población Indígena"
-        };
-
-        const etiqueta = etiquetas[k] || capitalizarCadaPalabra(k.replace(/([A-Z])/g, ' $1').trim());
-        const valor = typeof v === "string" ? capitalizarCadaPalabra(v) : v;
-
-        // Si el texto es muy largo, hacerlo multilinea en PDF
-        const texto = `${etiqueta}: ${valor}`;
-        const splitText = doc.splitTextToSize(texto, 180);
-        doc.text(splitText, 15, y);
-        y += splitText.length * 7;
-
-        // Salto de página si es necesario
-        if (y > 270) {
-          doc.addPage();
-          y = 20;
-        }
-      }
-
-      if (datos.firmaDigital) {
-        const img = new Image();
-        img.src = datos.firmaDigital;
-        img.onload = () => {
-          if (y + 50 > 280) {
-            doc.addPage();
-            y = 20;
-          }
-          doc.text("Firma:", 15, y);
-          doc.addImage(img, 'PNG', 15, y + 5, 100, 40);
-          doc.save(`${codigo}.pdf`);
-        };
-      } else {
-        doc.save(`${codigo}.pdf`);
-      }
-    }
-    if (formato === "excel") {
-      // Función para convertir camelCase o snake_case a "Título Separado"
-      function formatearTitulo(campo) {
-        // Primero reemplaza mayúsculas por espacio + mayúscula (camelCase)
-        let result = campo.replace(/([A-Z])/g, ' $1');
-        // Luego, separa por guiones bajos o espacios si existen
-        result = result.replace(/[_\-]+/g, ' ');
-        // Poner la primera letra de cada palabra en mayúscula
-        result = result.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-        return result.trim();
-      }
-
-      // Crear un arreglo con los datos transformados con títulos amigables
-      const datosFormateados = {};
-      Object.keys(datos).forEach(key => {
-        datosFormateados[formatearTitulo(key)] = datos[key];
-      });
-
-      const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.json_to_sheet([datosFormateados]);
-      XLSX.utils.book_append_sheet(wb, ws, "Datos");
-
-      const numeroIdentificacion = datos.numeroIdentificacion || "exportacion";
-      XLSX.writeFile(wb, `${numeroIdentificacion}.xlsx`);
-    }
-
-    if (formato === "word") {
-      exportarRegistroDoc(datos, codigo);
-    }
-  }
-
-  document.getElementById("usuariosSelect").addEventListener("change", function () {
-    cargarDatos(this.value);
-  });
-
-  window.addEventListener("load", () => {
-    actualizarSelectUsuarios();
-  });
-
-  document.getElementById("formularioAlbergue").addEventListener("submit", function (e) {
-    e.preventDefault(); // Evita que se recargue la página
-    guardarDatos();
-  });
-</script>
-
-
 
 <button id="accesibilidad-toggle" aria-label="Configuración">
   <span class="material-icons">settings</span>
@@ -892,8 +564,43 @@
 
 </script>
 
-<script>
 
+<!-- Script para calcular edad en form principal y templates -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Para el formulario principal
+  const fechaPrincipal = document.getElementById("fechaNacimiento");
+  if (fechaPrincipal) {
+    fechaPrincipal.addEventListener("change", function () {
+      const edad = calcularEdad(new Date(this.value));
+      document.getElementById("edad").value = isNaN(edad) ? '' : edad;
+    });
+  }
+
+  // Para todos los campos con clase fechaNacimientoInt
+  document.querySelectorAll(".fechaNacimientoInt").forEach(function (inputFecha) {
+    inputFecha.addEventListener("change", function () {
+      const edad = calcularEdad(new Date(this.value));
+      // Buscar el input de edad más cercano dentro del mismo contenedor padre
+      const parent = this.parentElement;
+      const campoEdad = parent.querySelector(".edadInt");
+      if (campoEdad) {
+        campoEdad.value = isNaN(edad) ? '' : edad;
+      }
+    });
+  });
+});
+
+// Función auxiliar
+function calcularEdad(fecha) {
+  const hoy = new Date();
+  let edad = hoy.getFullYear() - fecha.getFullYear();
+  const mes = hoy.getMonth() - fecha.getMonth();
+  if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) {
+    edad--;
+  }
+  return edad;
+}
 
 </script>
 
