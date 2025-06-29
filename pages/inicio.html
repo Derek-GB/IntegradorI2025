@@ -12,15 +12,15 @@
     <!-- Sidebar fijo -->
      
     <div id="sidebar-container"></div>
-    <script>
-      fetch('sidebar.html')
+    <!-- <script>
+      fetch('/pages/sidebar.html')
         .then(res => res.text())
         .then(html => document.getElementById('sidebar-container').innerHTML = html);
-    </script>
+    </script> -->
 
 
     <script>
-  fetch('sidebar.html')
+  fetch('/pages/sidebar.html')
     .then(res => res.text())
     .then(html => {
       document.getElementById('sidebar-container').innerHTML = html;
