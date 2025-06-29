@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="formulario.css" />
+  <link rel="stylesheet" href="pages/index.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <title>Registro de Usuario</title>
+</head>
+
+<body>
+
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+  </script>
+
+  <div class="container mt-4">
+    <h2>
+      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary"
+        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar">
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+          arrow_back
+        </span>
+      </button>
+      Registro de Usuario
+    </h2>
+
+    <form id="formularioAlbergue">
+      <details open>
+        <summary><strong>Información del Usuario</strong></summary>
+        <fieldset class="mt-2">
+
+          <label>Nombre Completo:</label>
+          <input name="nombre" type="text" class="form-control mb-2" placeholder="Ingrese nombre completo" required />
+
+          <label>Correo Electrónico:</label>
+          <input name="correo" type="email" class="form-control mb-2" placeholder="example@correo.com" required />
+
+          <label>Contraseña:</label>
+          <input name="contrasena" type="password" class="form-control mb-2" placeholder="Ingrese su contraseña"
+            required />
+
+          <label>Número de Teléfono:</label>
+          <input name="numero" type="tel" class="form-control mb-2" placeholder="Ej: 8888-8888"
+            pattern="[0-9]{4}-[0-9]{4}" required />
+
+          <label>Rol:</label>
+          <select name="rol" class="form-control mb-2" required>
+            <option value="">Seleccione un rol</option>
+            <option value="admin">Administrador</option>
+            <option value="editor">Editor</option>
+            <option value="viewer">Visualizador</option>
+          </select>
+
+          <label>Estado:</label>
+          <select name="activo" class="form-control mb-2" required>
+            <option value="">Seleccione un estado</option>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+
+          <label>Municipalidad:</label>
+          <select id="municipalidad" name="municipalidad" class="form-control mb-2" required>
+            <option value="">Seleccione municipalidad</option>
+          </select>
+
+          <label>Identificacion:</label>
+          <input name="Identificacion" type="text" class="form-control mb-2" placeholder="Ingrese su identificacion"
+            required />
+
+        </fieldset>
+      </details>
+      <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.getElementById("formularioAlbergue");
+    const municipalidadSelect = document.getElementById("municipalidad");
+
+    async function cargarMunicipalidades() {
+    try {
+      const response = await fetch('https://apiintegrador-production-8ef8.up.railway.app/api/municipalidad/all');
+      if (!response.ok) throw new Error('Error al obtener municipalidades');
+
+      const data = await response.json();
+      console.log("Respuesta cruda:", data);
+
+      let municipalidades = [];
+
+      if (Array.isArray(data)) {
+        municipalidades = data;
+      } else if (data && Array.isArray(data.municipalidades)) {
+        municipalidades = data.municipalidades;
+      } else if (data && Array.isArray(data.data)) {
+        municipalidades = data.data;
+      } else {
+        municipalidades = [];
+      }
+
+      if (!Array.isArray(municipalidades) || municipalidades.length === 0) {
+        municipalidadSelect.innerHTML = '<option value="">No hay municipalidades disponibles</option>';
+        return;
+      }
+
+      municipalidadSelect.innerHTML = '<option value="">Seleccione municipalidad</option>';
+      municipalidades.forEach(muni => {
+        const option = document.createElement('option');
+        option.value = muni.id || muni.ID || '';  // admite variantes
+        option.textContent = muni.nombre || muni.Nombre || 'Sin nombre';
+        municipalidadSelect.appendChild(option);
+      });
+
+    } catch (error) {
+      console.error('Error al cargar municipalidades:', error);
+      municipalidadSelect.innerHTML = '<option value="">Error al cargar municipalidades</option>';
+    }
+  }
+
+  window.onload = cargarMunicipalidades;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nombreUsuario = form.nombre.value.trim();
+      const correo = form.correo.value.trim();
+      const contrasenaHash = form.contrasena.value.trim();
+      const rol = form.rol.value.trim();
+      const activo = form.activo.value.trim() === 'activo';
+      const idMunicipalidad = parseInt(form.municipalidad.value);
+      const identificacion = form.Identificacion.value.trim();
+
+      if (!nombreUsuario || !correo || !contrasenaHash || !rol || isNaN(idMunicipalidad) || !identificacion) {
+        alert("Por favor complete todos los campos.");
+        return;
+      }
+
+      const data = {
+        nombreUsuario,
+        correo,
+        contrasenaHash,
+        rol,
+        activo,
+        idMunicipalidad,
+        identificacion
+      };
+
+      console.log("Datos a enviar:", data);
+
+      axios.post("https://apiintegrador-production-8ef8.up.railway.app/api/usuarios", data)
+        .then(response => {
+          alert("Usuario registrado correctamente.");
+          form.reset();
+          window.location.href = "index.html"; 
+        })
+        .catch(error => {
+          console.error("Error al registrar usuario:", error);
+          if (error.response) {
+            console.error("Respuesta del servidor:", error.response.data);
+            alert("Error del servidor: " + JSON.stringify(error.response.data));
+          } else {
+            alert("Error al conectar con el servidor.");
+          }
+        });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

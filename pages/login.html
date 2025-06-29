@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="formulario.css" />
+</head>
+
+<body>
+  <h2>Iniciar Sesión</h2>
+
+  <form id="loginForm" class="login">
+    <div id="error" class="error"></div>
+
+    <label for="usuario">Usuario o correo</label>
+    <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario o correo" required>
+
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary">Ingresar</button>
+    </div>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Evita el envío normal del formulario
+
+      // validación del usuario
+      const usuario = document.getElementById('usuario').value;
+      const contrasena = document.getElementById('contrasena').value;
+
+      // Ejemplo básico de validación (debes reemplazarlo con tu lógica real)
+      if (usuario && contrasena) {
+        // Redirección a index.html después de login exitoso
+        window.location.href = 'index.html';
+      } else {
+        document.getElementById('error').textContent = 'Por favor complete todos los campos';
+      }
+    });
+  </script>
+</body>
+
+</html>
