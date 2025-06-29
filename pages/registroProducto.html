@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="formulario.css" />
   <link rel="stylesheet" href="pages/index.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <title>Registrar Producto</title>
 </head>
 <body>
@@ -37,40 +38,75 @@
     <form id="formularioAlbergue">
       <details open>
         <summary><strong>Formulario de Registro</strong></summary>
-        <fieldset class="mt-2">
+        
+  <fieldset class="mt-2">
 
-          <label>Categoría:</label>
-          <select name="categoria" class="form-control mb-2" required>
-            <option value="">Seleccione una opción</option>
-            <option value="Carne">Carne</option>
-            <option value="Proteina">Proteína</option>
-            <option value="Verdura">Verdura</option>
-            <option value="Reperte">Reperte</option>
-            <option value="Olores">Olores</option>
-            <option value="Abarrotes">Abarrotes</option>
-            <option value="Limpieza">Limpieza</option>
-          </select>
+    <label>Código de Producto:</label>
+    <input name="codigo" type="text" class="form-control mb-2" placeholder="Ingrese el código del producto" required />
 
-          <label>Nombre del Producto:</label>
-          <input name="producto" type="text" class="form-control mb-2" placeholder="Ingrese el nombre del producto" required />
+    <label>Descripción:</label>
+    <input name="descripcion" type="text" class="form-control mb-2" placeholder="Ingrese una descripción del producto" required />
 
-          <label>Unidad:</label>
-          <select name="unidad" class="form-control mb-2" required>
-            <option value="">Seleccione una unidad</option>
-            <option value="Mililitros">Mililitros</option>
-            <option value="Gramos">Gramos</option>
-            <option value="Unidades">Unidades</option>
-          </select>
+    <label>Categoría:</label>
+    <select name="categoria" class="form-control mb-2" required>
+      <option value="">Seleccione una opción</option>
+      <option value="Carne">Carne</option>
+      <option value="Proteina">Proteína</option>
+      <option value="Verdura">Verdura</option>
+      <option value="Reperte">Reperte</option>
+      <option value="Olores">Olores</option>
+      <option value="Abarrotes">Abarrotes</option>
+      <option value="Limpieza">Limpieza</option>
+      <option value="Mobiliario">Mobiliario</option>
+    </select>
 
-          <label>Cantidad:</label>
-          <input name="cantidad" type="number" class="form-control mb-2" placeholder="Ingrese la cantidad" min="0" required />
+    <label>Nombre del Producto:</label>
+    <input name="producto" type="text" class="form-control mb-2" placeholder="Ingrese el nombre del producto" required />
 
-        </fieldset>
-      </details>
+    <label>Unidad:</label>
+    <select name="unidad" class="form-control mb-2" required>
+      <option value="">Seleccione una unidad</option>
+      <option value="Mililitros">Mililitros</option>
+      <option value="Gramos">Gramos</option>
+      <option value="Unidades">Unidades</option>
+    </select>
 
+    <label>Cantidad:</label>
+    <input name="cantidad" type="number" class="form-control mb-2" placeholder="Ingrese la cantidad" min="0" required />
+
+  </fieldset>
+  
+</details>
       <button type="submit" class="btn btn-primary mt-3">Agregar</button>
     </form>
   </div>
+<script>
+
+  document.getElementById("formularioAlbergue").addEventListener("submit", function (e) {
+    e.preventDefault(); 
+
+    const form = e.target;
+
+    const data = {
+      codigoProducto: form.codigo.value,
+      nombre: form.producto.value,
+      descripcion: form.descripcion.value,
+      cantidad: parseInt(form.cantidad.value),
+      categoria: form.categoria.value,
+      unidadMedida: form.unidad.value
+    };
+
+    axios.post("https://apiintegrador-production-8ef8.up.railway.app/api/Productos", data)
+      .then(response => {
+        alert("Producto registrado correctamente");
+        form.reset(); 
+      })
+      .catch(error => {
+        console.error("Error al registrar producto:", error);
+        alert("Hubo un error al registrar el producto. Intente de nuevo.");
+      });
+  });
+</script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
