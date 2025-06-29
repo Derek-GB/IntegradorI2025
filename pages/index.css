@@ -35,6 +35,94 @@ h2, h4 {
 }
 
 
+.containerIndex {
+  background: linear-gradient(135deg, #00897B 0%, #004D40 100%);
+  color: #f4f8f7;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 40px 30px 30px 30px;
+  margin: 40px auto 30px auto;
+  max-width: 900px;
+
+  min-height: 420px;
+  height: 520px;
+  position: relative;
+  top: 20px;
+  left: 20%;
+  
+  text-align: center;
+}
+
+.containerIndex .bienvenida h1 {
+  color: #FBC02D;
+  font-size: 2.2em;
+  margin-bottom: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.containerIndex .intro {
+  font-size: 1.15em;
+  margin-bottom: 22px;
+  color: #e0f7fa;
+}
+
+.containerIndex .ventajas {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.containerIndex .ventajas li {
+  background: rgba(255,255,255,0.10);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 14px 22px;
+  font-size: 1.08em;
+  color: #ffe082;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+  border: 1px solid rgba(255,255,255,0.13);
+}
+
+.containerIndex .ventajas i {
+  font-size: 1.3em;
+  color: #FBC02D;
+}
+
+.containerIndex .progreso {
+  margin-top: 18px;
+}
+
+.containerIndex .badge {
+  background: #FBC02D;
+  color: #212121;
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+
+@media (max-width: 700px) {
+  .containerIndex {
+    padding: 18px 6px 18px 6px;
+    min-height: 320px;
+  }
+  .containerIndex .ventajas {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 .containerCONSULTA {
     max-width: 100%;
     margin: 0px auto;
