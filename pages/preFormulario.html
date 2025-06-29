@@ -82,7 +82,7 @@
         alert("Por favor, ingrese una cantidad válida de integrantes.");
         return;
       }
-      localStorage.setItem("cantidadIntegrantes", cantidad); // Number of additional integrants
+      localStorage.setItem("cantidadIntegrantes", cantidad -1); // Number of additional integrants
       window.location.href = "formulario.html";
     }
   </script>

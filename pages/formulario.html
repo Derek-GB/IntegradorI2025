@@ -55,142 +55,63 @@
     </h2>
 
     <form id="formularioAlbergue">
-      <!-- Paso 1: Información del Albergue -->
+      <!-- Paso 1: Información de Integrante 1 -->
       <div class="paso activo">
-        <details open>
-          <summary><strong>Información del Albergue</strong></summary>
-          <fieldset class="mt-2">
-            <label>Nombre del Albergue:</label>
-            <input name="nombreAlbergue" type="text" class="form-control mb-2"  />
-            <label>Código Familia:</label>
-            <input name="codigoFamilia" type="text" class="form-control mb-2" placeholder="YYYY-Prov-Canton-N°Familia"  />
-          </fieldset>
-        </details>
-        <div class="botones-nav">
-          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
-        </div>
-      </div>
-
-      <!-- Paso 2: Información del Principal -->
-      <div class="paso">
-        <h3>Información del Principal</h3>
+        <h3>Información de Integrante 1</h3>
         <details open>
           <summary><strong>Información Personal</strong></summary>
           <fieldset class="mt-2">
-            <label>Nombre:</label><input name="integrante0-nombre" type="text" class="form-control mb-2" required />
-            <label>Apellido 1:</label><input name="integrante0-apellido1" type="text" class="form-control mb-2" required />
-            <label>Apellido 2:</label><input name="integrante0-apellido2" type="text" class="form-control mb-2" />
+            <label>Nombre:</label><input name="integrante1-nombre" type="text" class="form-control mb-2" />
+            <label>Apellido 1:</label><input name="integrante1-apellido1" type="text" class="form-control mb-2" />
+            <label>Apellido 2:</label><input name="integrante1-apellido2" type="text" class="form-control mb-2" />
             <label>Tipo de Identificación:</label>
-            <select name="integrante0-tipoIdentificacion" class="form-select mb-2" >
+            <select name="integrante1-tipoIdentificacion" class="form-select mb-2">
               <option selected>Cédula</option><option>DIMEX</option><option>Permiso laboral</option><option>Pasaporte</option><option>No presenta</option>
             </select>
-            <label>Número de Identificación:</label><input name="integrante0-numeroIdentificacion" type="text" class="form-control mb-2" required />
-            <label>Nacionalidad:</label><input name="integrante0-nacionalidad" type="text" class="form-control mb-2"  />
+            <label>Número de Identificación:</label><input name="integrante1-numeroIdentificacion" type="text" class="form-control mb-2" />
+            <label>Nacionalidad:</label><input name="integrante1-nacionalidad" type="text" class="form-control mb-2" />
             <label>Parentesco:</label>
-            <select name="integrante0-parentesco" class="form-select mb-2" >
+            <select name="integrante1-parentesco" class="form-select mb-2">
               <option selected>Padre</option><option>Madre</option><option>Hijo</option><option>Hija</option>
             </select>
             <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
             <div class="nuevoParentescoContainer mb-2"></div>
-            <label>Fecha de Nacimiento:</label><input name="integrante0-fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt"  />
-            <label>Edad:</label><input name="integrante0-edad" type="text" readonly class="form-control mb-2 edadInt" />
-            <label>Sexo:</label><select name="integrante0-sexo" class="form-select mb-2" ><option>Masculino</option><option>Femenino</option><option>Otro</option></select>
-            <label>Género:</label><select name="integrante0-genero" class="form-select mb-2" ><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option selected>Cisgenero</option><option>Otro</option></select>
-            <label>Teléfono:</label><input name="integrante0-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"  />
-            <label>Contacto de Emergencia:</label><input name="integrante0-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"  />
+            <label>Fecha de Nacimiento:</label><input name="integrante1-fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt" />
+            <label>Edad:</label><input name="integrante1-edad" type="text" readonly class="form-control mb-2 edadInt" />
+            <label>Sexo:</label><select name="integrante1-sexo" class="form-select mb-2"><option>Masculino</option><option>Femenino</option><option>Otro</option></select>
+            <label>Género:</label><select name="integrante1-genero" class="form-select mb-2"><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option selected>Cisgenero</option><option>Otro</option></select>
+            <label>Teléfono:</label><input name="integrante1-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
+            <label>Contacto de Emergencia:</label><input name="integrante1-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
           </fieldset>
         </details>
         <details>
           <summary><strong>Condiciones Especiales</strong></summary>
           <fieldset class="mt-2">
-            <label>Discapacidad:</label><select name="integrante0-discapacidad" class="form-select mb-2" ><option>Sí</option><option selected>No</option></select>
-            <label>Tipo de Discapacidad:</label><select name="integrante0-tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
-            <label>Condición de Salud Especial:</label><select name="integrante0-condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
+            <label>Discapacidad:</label><select name="integrante1-discapacidad" class="form-select mb-2"><option>Sí</option><option selected>No</option></select>
+            <label>Tipo de Discapacidad:</label><select name="integrante1-tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
+            <label>Condición de Salud Especial:</label><select name="integrante1-condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
           </fieldset>
         </details>
         <details>
           <summary><strong>Características Poblacionales</strong></summary>
           <fieldset class="mt-2">
-            <div class="checkbox-row"><label for="integrante0-migrante">Migrante</label><input type="checkbox" name="integrante0-migrante" id="integrante0-migrante"></div>
-            <div class="checkbox-row"><label for="integrante0-poblacionIndigena">Población Indígena</label><input type="checkbox" name="integrante0-poblacionIndigena" id="integrante0-poblacionIndigena"></div>
+            <div class="checkbox-row"><label for="integrante1-migrante">Migrante</label><input type="checkbox" name="integrante1-migrante" id="integrante1-migrante"></div>
+            <div class="checkbox-row"><label for="integrante1-poblacionIndigena">Población Indígena</label><input type="checkbox" name="integrante1-poblacionIndigena" id="integrante1-poblacionIndigena"></div>
           </fieldset>
         </details>
         <details>
           <summary><strong>Observaciones</strong></summary>
-          <textarea name="integrante0-observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
+          <textarea name="integrante1-observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
         </details>
-        <div class="botones-nav">
-          <button type="button" class="btn btn-secondary anterior">Anterior</button>
-          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
-        </div>
-      </div>
-
-      <!-- Paso 3: Integrantes Adicionales (Dynamic) -->
-      <div id="integrantes-container"></div>
-
-      <!-- Paso 4: Ubicación -->
-      <div class="paso">
         <details open>
           <summary><strong>Ubicación</strong></summary>
           <fieldset class="mt-2">
-            <label>Provincia:</label><select name="provincia" id="provincia" class="form-select mb-2" ></select>
-            <label>Cantón:</label><select name="canton" id="canton" class="form-select mb-2" disabled ></select>
-            <label>Distrito:</label><select name="distrito" id="distrito" class="form-select mb-2" ></select>
-            <label>Dirección:</label><textarea name="direccion" class="form-control mb-2" ></textarea>
+            <label>Provincia:</label><select name="provincia" id="provincia" class="form-select mb-2"></select>
+            <label>Cantón:</label><select name="canton" id="canton" class="form-select mb-2" disabled></select>
+            <label>Distrito:</label><select name="distrito" id="distrito" class="form-select mb-2"></select>
+            <label>Dirección:</label><textarea name="direccion" class="form-control mb-2"></textarea>
           </fieldset>
         </details>
-        <div class="botones-nav">
-          <button type="button" class="btn btn-secondary anterior">Anterior</button>
-          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
-        </div>
-      </div>
-
-      <!-- Paso 5: Condiciones Especiales -->
-      <div class="paso">
-        <details open>
-          <summary><strong>Condiciones Especiales</strong></summary>
-          <fieldset class="mt-2">
-            <label>Discapacidad:</label><select name="discapacidad" class="form-select mb-2" ><option>Sí</option><option selected>No</option></select>
-            <label>Tipo de Discapacidad:</label><select name="tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
-            <label>Condición de Salud Especial:</label><select name="condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
-            <button type="button" class="btn btn-primary mt-3 btn-agregar-condicion">+</button>
-          </fieldset>
-        </details>
-        <div class="botones-nav">
-          <button type="button" class="btn btn-secondary anterior">Anterior</button>
-          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
-        </div>
-      </div>
-
-      <!-- Paso 6: Características Poblacionales -->
-      <div class="paso">
-        <details open>
-          <summary><strong>Características Poblacionales</strong></summary>
-          <fieldset class="mt-2">
-            <div class="checkbox-row"><label for="migrante">Migrante</label><input type="checkbox" name="migrante" id="migrante"></div>
-            <div class="checkbox-row"><label for="poblacionIndigena">Población Indígena</label><input type="checkbox" name="poblacionIndigena" id="poblacionIndigena"></div>
-          </fieldset>
-        </details>
-        <div class="botones-nav">
-          <button type="button" class="btn btn-secondary anterior">Anterior</button>
-          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
-        </div>
-      </div>
-
-      <!-- Paso 7: Observaciones -->
-      <div class="paso">
-        <details open>
-          <summary><strong>Observaciones</strong></summary>
-          <textarea name="Observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea>
-        </details>
-        <div class="botones-nav">
-          <button type="button" class="btn btn-secondary anterior">Anterior</button>
-          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
-        </div>
-      </div>
-
-      <!-- Paso 8: Firma Digital -->
-      <div class="paso">
         <details open>
           <summary><strong>Firma Digital</strong></summary>
           <fieldset class="mt-2">
@@ -199,18 +120,101 @@
           </fieldset>
         </details>
         <div class="botones-nav">
-          <button type="button" class="btn btn-secondary anterior">Anterior</button>
+          <button type="button" class="btn btn-primary siguiente">Siguiente</button>
           <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
           <button type="reset" class="btn btn-outline-secondary btn-limpiar">Limpiar formulario</button>
         </div>
       </div>
+
+      <!-- Paso 2+: Integrantes Adicionales (Dynamic) -->
+      <div id="integrantes-container"></div>
     </form>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="ubicaciones.js"></script>
   <script>
+    // Implementación de inicializarUbiSelects
+    function inicializarUbiSelects(provinciaId, cantonId, distritoId) {
+      const provincias = [
+        { id: '1', nombre: 'San José' },
+        { id: '2', nombre: 'Alajuela' },
+        { id: '3', nombre: 'Cartago' }
+      ];
+      const cantones = {
+        '1': [
+          { id: '1-1', nombre: 'San José' },
+          { id: '1-2', nombre: 'Escazú' }
+        ],
+        '2': [
+          { id: '2-1', nombre: 'Alajuela' },
+          { id: '2-2', nombre: 'San Ramón' }
+        ],
+        '3': [
+          { id: '3-1', nombre: 'Cartago' },
+          { id: '3-2', nombre: 'Paraíso' }
+        ]
+      };
+      const distritos = {
+        '1-1': ['Carmen', 'Merced'],
+        '1-2': ['Escazú', 'San Antonio'],
+        '2-1': ['Alajuela', 'Carrizal'],
+        '2-2': ['San Ramón', 'Peñas Blancas'],
+        '3-1': ['Oriental', 'Occidental'],
+        '3-2': ['Paraíso', 'Orosi']
+      };
+
+      const provinciaSelect = document.getElementById(provinciaId);
+      const cantonSelect = document.getElementById(cantonId);
+      const distritoSelect = document.getElementById(distritoId);
+
+      // Poblar provincias
+      provincias.forEach(prov => {
+        const option = document.createElement('option');
+        option.value = prov.id;
+        option.textContent = prov.nombre;
+        provinciaSelect.appendChild(option);
+      });
+
+      // Habilitar/deshabilitar y poblar cantones según provincia seleccionada
+      provinciaSelect.addEventListener('change', () => {
+        cantonSelect.innerHTML = '<option value="">Seleccione un cantón</option>';
+        distritoSelect.innerHTML = '<option value="">Seleccione un distrito</option>';
+        cantonSelect.disabled = false;
+        distritoSelect.disabled = true;
+
+        const selectedProvincia = provinciaSelect.value;
+        if (selectedProvincia && cantones[selectedProvincia]) {
+          cantones[selectedProvincia].forEach(canton => {
+            const option = document.createElement('option');
+            option.value = canton.id;
+            option.textContent = canton.nombre;
+            cantonSelect.appendChild(option);
+          });
+        } else {
+          cantonSelect.disabled = true;
+        }
+      });
+
+      // Poblar distritos según cantón seleccionado
+      cantonSelect.addEventListener('change', () => {
+        distritoSelect.innerHTML = '<option value="">Seleccione un distrito</option>';
+        distritoSelect.disabled = false;
+
+        const selectedCanton = cantonSelect.value;
+        if (selectedCanton && distritos[selectedCanton]) {
+          distritos[selectedCanton].forEach(distrito => {
+            const option = document.createElement('option');
+            option.value = distrito;
+            option.textContent = distrito;
+            distritoSelect.appendChild(option);
+          });
+        } else {
+          distritoSelect.disabled = true;
+        }
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       inicializarUbiSelects('provincia', 'canton', 'distrito');
 
@@ -233,10 +237,8 @@
         document.querySelectorAll('.siguiente').forEach(btn => {
           btn.addEventListener('click', () => {
             if (pasoActual < pasos.length - 1) {
-              if (validateStep(pasoActual)) {
-                pasoActual++;
-                mostrarPaso(pasoActual);
-              }
+              pasoActual++;
+              mostrarPaso(pasoActual);
             }
           });
         });
@@ -250,79 +252,69 @@
         });
       }
 
-      // Basic validation for required fields
-      function validateStep(index) {
-        const currentPaso = pasos[index];
-        const requiredInputs = currentPaso.querySelectorAll('input[required], select[required], textarea[required]');
-        let isValid = true;
-        requiredInputs.forEach(input => {
-          if (!input.value.trim()) {
-            isValid = false;
-            input.classList.add('is-invalid');
-            input.focus();
-          } else {
-            input.classList.remove('is-invalid');
-          }
-        });
-        if (!isValid) {
-          alert('Por favor, complete todos los campos obligatorios antes de continuar.');
-        }
-        return isValid;
-      }
-
       // Generate dynamic integrante sections
       const container = document.getElementById('integrantes-container');
       const cantidad = parseInt(localStorage.getItem('cantidadIntegrantes')) || 0;
 
-      if (cantidad <= 0) {
-        container.innerHTML = '<div class="paso"><p>Por favor, ingrese la cantidad de integrantes adicionales en la página anterior.</p><div class="botones-nav"><button type="button" class="btn btn-secondary anterior">Anterior</button><button type="button" class="btn btn-primary siguiente">Siguiente</button></div></div>';
-        updateNavigation();
-        mostrarPaso(pasoActual);
-        return;
-      }
+      // Clear any existing content in the container
+      container.innerHTML = '';
 
-      for (let i = 1; i <= cantidad; i++) {
+      if (cantidad <= 0) {
         const section = document.createElement('div');
         section.className = 'paso';
         section.innerHTML = `
-          <h3>Información de Integrante ${i + 1}</h3>
-          <details open><summary><strong>Información Personal</strong></summary><fieldset class="mt-2">
-            <label>Nombre:</label><input name="integrante${i}-nombre" type="text" class="form-control mb-2"  />
-            <label>Apellido 1:</label><input name="integrante${i}-apellido1" type="text" class="form-control mb-2"  />
-            <label>Apellido 2:</label><input name="integrante${i}-apellido2" type="text" class="form-control mb-2" />
-            <label>Tipo de Identificación:</label><select name="integrante${i}-tipoIdentificacion" class="form-select mb-2" >
-              <option selected>Cédula</option><option>DIMEX</option><option>Permiso laboral</option><option>Pasaporte</option><option>No presenta</option>
-            </select>
-            <label>Número de Identificación:</label><input name="integrante${i}-numeroIdentificacion" type="text" class="form-control mb-2" required />
-            <label>Nacionalidad:</label><input name="integrante${i}-nacionalidad" type="text" class="form-control mb-2" />
-            <label>Parentesco:</label><select name="integrante${i}-parentesco" class="form-select mb-2" required>
-              <option>Padre</option><option>Madre</option><option>Hijo</option><option>Hija</option>
-            </select>
-            <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
-            <div class="nuevoParentescoContainer mb-2"></div>
-            <label>Fecha de Nacimiento:</label><input name="integrante${i}-fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt"  />
-            <label>Edad:</label><input name="integrante${i}-edad" type="text" readonly class="form-control mb-2 edadInt" />
-            <label>Sexo:</label><select name="integrante${i}-sexo" class="form-select mb-2" required><option>Masculino</option><option>Femenino</option><option>Otro</option></select>
-            <label>Género:</label><select name="integrante${i}-genero" class="form-select mb-2" required><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option>Cisgenero</option><option>Otro</option></select>
-            <label>Teléfono:</label><input name="integrante${i}-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"  />
-            <label>Contacto de Emergencia:</label><input name="integrante${i}-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9"  />
-          </fieldset></details>
-          <details><summary><strong>Condiciones Especiales</strong></summary><fieldset class="mt-2">
-            <label>Discapacidad:</label><select name="integrante${i}-discapacidad" class="form-select mb-2" required><option>Sí</option><option selected>No</option></select>
-            <label>Tipo de Discapacidad:</label><select name="integrante${i}-tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
-            <label>Condición de Salud Especial:</label><select name="integrante${i}-condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
-          </fieldset></details>
-          <details><summary><strong>Características Poblacionales</strong></summary><fieldset class="mt-2">
-            <div class="checkbox-row"><label for="integrante${i}-migrante">Migrante</label><input type="checkbox" name="integrante${i}-migrante" id="integrante${i}-migrante"></div>
-            <div class="checkbox-row"><label for="integrante${i}-poblacionIndigena">Población Indígena</label><input type="checkbox" name="integrante${i}-poblacionIndigena" id="integrante${i}-poblacionIndigena"></div>
-          </fieldset></details>
-          <details><summary><strong>Observaciones</strong></summary><textarea name="integrante${i}-observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea></details>
+          <p>No se han especificado integrantes adicionales.</p>
           <div class="botones-nav">
             <button type="button" class="btn btn-secondary anterior">Anterior</button>
-            <button type="button" class="btn btn-primary siguiente">Siguiente</button>
+            <button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>
           </div>
         `;
         container.appendChild(section);
+      } else {
+        for (let i = 1; i <= cantidad; i++) {
+          const integranteNum = i + 1; // Start additional integrantes from 2
+          const section = document.createElement('div');
+          section.className = 'paso';
+          section.innerHTML = `
+            <h3>Información de Integrante ${integranteNum}</h3>
+            <details open><summary><strong>Información Personal</strong></summary><fieldset class="mt-2">
+              <label>Nombre:</label><input name="integrante${integranteNum}-nombre" type="text" class="form-control mb-2" />
+              <label>Apellido 1:</label><input name="integrante${integranteNum}-apellido1" type="text" class="form-control mb-2" />
+              <label>Apellido 2:</label><input name="integrante${integranteNum}-apellido2" type="text" class="form-control mb-2" />
+              <label>Tipo de Identificación:</label><select name="integrante${integranteNum}-tipoIdentificacion" class="form-select mb-2">
+                <option selected>Cédula</option><option>DIMEX</option><option>Permiso laboral</option><option>Pasaporte</option><option>No presenta</option>
+              </select>
+              <label>Número de Identificación:</label><input name="integrante${integranteNum}-numeroIdentificacion" type="text" class="form-control mb-2" />
+              <label>Nacionalidad:</label><input name="integrante${integranteNum}-nacionalidad" type="text" class="form-control mb-2" />
+              <label>Parentesco:</label><select name="integrante${integranteNum}-parentesco" class="form-select mb-2">
+                <option>Padre</option><option>Madre</option><option>Hijo</option><option>Hija</option>
+              </select>
+              <button type="button" class="btn btn-primary mt-3 btn-agregar-parentesco">+</button>
+              <div class="nuevoParentescoContainer mb-2"></div>
+              <label>Fecha de Nacimiento:</label><input name="integrante${integranteNum}-fechaNacimiento" type="date" class="form-control mb-2 fechaNacimientoInt" />
+              <label>Edad:</label><input name="integrante${integranteNum}-edad" type="text" readonly class="form-control mb-2 edadInt" />
+              <label>Sexo:</label><select name="integrante${integranteNum}-sexo" class="form-select mb-2"><option>Masculino</option><option>Femenino</option><option>Otro</option></select>
+              <label>Género:</label><select name="integrante${integranteNum}-genero" class="form-select mb-2"><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option>Cisgenero</option><option>Otro</option></select>
+              <label>Teléfono:</label><input name="integrante${integranteNum}-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
+              <label>Contacto de Emergencia:</label><input name="integrante${integranteNum}-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
+            </fieldset></details>
+            <details><summary><strong>Condiciones Especiales</strong></summary><fieldset class="mt-2">
+              <label>Discapacidad:</label><select name="integrante${integranteNum}-discapacidad" class="form-select mb-2"><option>Sí</option><option selected>No</option></select>
+              <label>Tipo de Discapacidad:</label><select name="integrante${integranteNum}-tipoDiscapacidad" class="form-select mb-2"><option>Fisica</option><option>Sensorial</option><option>Intelectual</option><option>Mental o Psicologica</option><option>Múltiple</option></select>
+              <label>Condición de Salud Especial:</label><select name="integrante${integranteNum}-condicionSalud" class="form-select mb-2"><option>Visual</option><option>Sindrome</option><option>Esquizofrenia</option><option>Auditiva</option><option>Trans-Bipolar</option></select>
+            </fieldset></details>
+            <details><summary><strong>Características Poblacionales</strong></summary><fieldset class="mt-2">
+              <div class="checkbox-row"><label for="integrante${integranteNum}-migrante">Migrante</label><input type="checkbox" name="integrante${integranteNum}-migrante" id="integrante${integranteNum}-migrante"></div>
+              <div class="checkbox-row"><label for="integrante${integranteNum}-poblacionIndigena">Población Indígena</label><input type="checkbox" name="integrante${integranteNum}-poblacionIndigena" id="integrante${integranteNum}-poblacionIndigena"></div>
+            </fieldset></details>
+            <details><summary><strong>Observaciones</strong></summary><textarea name="integrante${integranteNum}-observacion" placeholder="Agrega tu observacion" class="form-control mb-2"></textarea></details>
+            <div class="botones-nav">
+              <button type="button" class="btn btn-secondary anterior">Anterior</button>
+              ${i === cantidad ? '<button type="submit" class="btn btn-primary" onclick="return confirmarGuardado()">Guardar</button>' : '<button type="button" class="btn btn-primary siguiente">Siguiente</button>'}
+            </div>
+          `;
+          container.appendChild(section);
+        }
       }
 
       // Update navigation after adding dynamic sections
@@ -401,7 +393,7 @@
           input.className = 'form-control mt-1 nuevoCondicionInput';
           input.placeholder = 'Ej: Diabetes, Asma';
           input.addEventListener('change', () => agregarNuevaCondicion(input));
-          input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarNuevaCondicion(input); } });
+          input.addeliminating('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarNuevaCondicion(input); } });
           container.appendChild(label);
           container.appendChild(input);
           input.focus();
@@ -427,7 +419,6 @@
       }
 
       function confirmarGuardado() {
-        if (!validateStep(pasoActual)) return false;
         return confirm('¿Deseas guardar la información?');
       }
 
@@ -490,3 +481,27 @@
   </script>
 </body>
 </html>
+  <style>
+    #accesibilidad-panel {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: white;
+      padding: 10px;
+      border: 1px solid #ccc;
+      display: none;
+    }
+    #accesibilidad-panel.active {
+      display: block;
+    }
+    #accesibilidad-toggle {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
