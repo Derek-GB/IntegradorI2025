@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  btnEnviar.addEventListener("click", () => {
+  btnEnviar.addEventListener("click", async () => {
     const datosGuardados = localStorage.getItem("datosFormulario");
 
     // Validar que esté guardado
@@ -47,29 +47,40 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    function conseguirIdAlbergue(nombreAlbergue) {
-      axios.get(apiintegrador-production-8ef8.up.railway.app/api/albergues/consulta/nombre/${encodeURIComponent(nombreAlbergue)})
-      .then(response => {
-        if (response.data && response.data.length > 0) {
-          return response.data[0].idAlbergue; // Asumiendo que el idAlbergue es el primer elemento
-        } else {
-          throw new Error("Albergue no encontrado");
-        }
-      })
-      .catch(error => {
-        console.error("Error al conseguir el ID del albergue:", error);
-        alert("Error al conseguir el ID del albergue. Por favor, verifica el nombre.");
-      });
+    /*
+    // Lógica de API comentada temporalmente
+    const nombreAlbergue = formulario.albergue.value.trim();
+    let idAlbergue = null;
+
+    try {
+      const response = await axios.get(`https://apiintegrador-production-8ef8.up.railway.app/api/albergues/consulta/nombre/${encodeURIComponent(nombreAlbergue)}`);
+      if (response.data && response.data.length > 0) {
+        idAlbergue = response.data[0].idAlbergue;
+      } else {
+        alert("Albergue no encontrado.");
+        return;
+      }
+    } catch (error) {
+      console.error("Error al conseguir el ID del albergue:", error);
+      alert("Error al conseguir el ID del albergue. Por favor, verifica el nombre.");
+      return;
     }
 
-    axios.post("apiintegrador-production-8ef8.up.railway.app/api/pedidoConsumibles", {
-      fechaCreacion: formulario.fecha.value.trim(),
-      tipoComida: formulario.comida.value,
-      cantidadPersonas: formulario.personas.value.trim(),
-      idAlbergue: conseguirIdAlbergue(formulario.albergue.value.trim()), 
-    })
+    try {
+      await axios.post("https://apiintegrador-production-8ef8.up.railway.app/api/pedidoConsumibles", {
+        fechaCreacion: formulario.fecha.value.trim(),
+        tipoComida: formulario.comida.value,
+        cantidadPersonas: formulario.personas.value.trim(),
+        idAlbergue: idAlbergue,
+      });
+    } catch (error) {
+      console.error("Error al enviar datos:", error);
+      alert("Ocurrió un error al enviar los datos.");
+      return;
+    }
+    */
 
-    // Redirigir a la siguiente página
-    window.location.href = "./formAbasteci.html";
+    window.location.href = "/pages/grupo1/formAbasteci.html";
   });
 });
+

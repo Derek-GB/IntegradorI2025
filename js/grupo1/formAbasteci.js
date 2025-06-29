@@ -482,10 +482,11 @@ function crearFila(datos, tablaId) {
  * Actualiza el localStorage para las tablas que se rellenan con botón "Agregar".
  * @param {string} tablaId
  */
-function actualizarLocalStorage(tablaId) {
-    const tabla = document.getElementById(tablaId)?.querySelector('tbody') || document.getElementById(tablaId);
-    if (!tabla) return;
-    const filas = tabla.querySelectorAll('tr');
+function actualizarLocalStorageManual(tablaId) {
+    const tablaBody = document.getElementById(tablaId)?.querySelector('tbody') || document.getElementById(tablaId);
+    if (!tablaBody) return;
+
+    const filas = tablaBody.querySelectorAll('tr');
     const productos = [];
     filas.forEach(fila => {
         const celdas = fila.querySelectorAll('td');
@@ -498,19 +499,42 @@ function actualizarLocalStorage(tablaId) {
         }
     });
 
-    const claves = {
+    // Mapeo de IDs de tabla a claves de localStorage para las secciones manuales
+    const claveLocalStorage = {
         'tablaResumen': 'carnes',
         'tablaProteina': 'proteinas',
-        'tablaResumenAbarrotes': 'abarrotesSeleccionados',
-        'tablaResumenLimpieza': 'limpiezaSeleccionados',
-        'tablaResumenOlores': 'oloresSeleccionados',
-        'tablaVerdura': 'verduras'
-    };
+        'tablaVerdura': 'verduras',
+    }[tablaId]; // ¡Aquí ya NO se incluyen las claves de checkbox!
 
-    if (claves[tablaId]) {
-        localStorage.setItem(claves[tablaId], JSON.stringify(productos));
+    if (claveLocalStorage) {
+        localStorage.setItem(claveLocalStorage, JSON.stringify(productos));
+        console.log(`LocalStorage '${claveLocalStorage}' actualizado:`, productos);
+    } else {
+        console.warn(`No se encontró clave de LocalStorage para tablaId: ${tablaId}`);
     }
 }
+function guardarProductoEnLocalStorageCheckbox(key, name, quantity, unit) {
+    let currentSelected = JSON.parse(localStorage.getItem(key)) || [];
+    const newProduct = {
+        nombre: name,
+        cantidad: quantity,
+        unidad: unit
+    };
+    const existingIndex = currentSelected.findIndex(item => item.nombre === name);
+    if (existingIndex > -1) {
+        currentSelected[existingIndex] = newProduct;
+    } else {
+        currentSelected.push(newProduct);
+    }
+    localStorage.setItem(key, JSON.stringify(currentSelected));
+}
+
+function eliminarProductoDeLocalStorageCheckbox(key, name) {
+    let currentSelected = JSON.parse(localStorage.getItem(key)) || [];
+    currentSelected = currentSelected.filter(item => item.nombre !== name);
+    localStorage.setItem(key, JSON.stringify(currentSelected));
+}
+
 
 /**
  * Agrega un producto (para Carnes y Proteinas, asumiendo tu estructura original)
@@ -1038,9 +1062,9 @@ function actualizarLocalStorage(tablaId) {
     'tablaResumen': 'carnes',
     'tablaProteina': 'proteinas',
     'tablaVerdura': 'verduras',
-    'tablaOlor': 'olores',
-    'tablaAbarroteResumen': 'abarrotes',
-    'tablaLimpieza': 'limpieza'
+    'tablaResumenOlores': 'olores',
+    'tablaResumenAbarrotes': 'abarrotes',
+    'tablaResumenLimpieza': 'limpieza'
   };
   if (claves[tablaId]) {
     localStorage.setItem(claves[tablaId], JSON.stringify(productos));
@@ -1061,7 +1085,7 @@ document.getElementById('btnAgregarOlor').addEventListener('click', () => {
   agregarProducto('tipoOlor', 'unidadOlor', 'cantidadOlor', 'tablaOlor', 'olores');
 });
 
-document.getElementById('btnAgregarAbarrote').addEventListener('click', () => {
+document.getElementById('btnAgregarAbarrotes').addEventListener('click', () => {
   agregarProducto('tipoAbarrote', 'unidadAbarrote', 'cantidadAbarrote', 'tablaAbarroteResumen', 'abarrotes');
 });
 
@@ -1109,9 +1133,9 @@ window.addEventListener('load', () => {
     { tabla: 'tablaResumen', clave: 'carnes' },
     { tabla: 'tablaProteina', clave: 'proteinas' },
     { tabla: 'tablaVerdura', clave: 'verduras' },
-    { tabla: 'tablaOlor', clave: 'olores' },
-    { tabla: 'tablaAbarroteResumen', clave: 'abarrotes' },
-    { tabla: 'tablaLimpieza', clave: 'limpieza' }
+    { tabla: 'tablaResumenOlores', clave: 'olores' },
+    { tabla: 'tablaResumenAbarrotes', clave: 'abarrotes' },
+    { tabla: 'tablaResumenLimpieza', clave: 'limpieza' }
   ];
 
   claves.forEach(({ tabla, clave }) => {

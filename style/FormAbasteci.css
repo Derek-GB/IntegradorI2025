@@ -356,7 +356,7 @@ details > *:not(summary) {
   z-index: 999;
 }
 
-.modal-content {
+.modal-contenido {
   background-color: #FAFAFA;
   padding: 20px;
   border-radius: 8px;
