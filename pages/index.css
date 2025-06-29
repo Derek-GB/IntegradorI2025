@@ -2,8 +2,12 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     background-color: #FAFAFA;
     color: #212121;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
     margin: 0;
     padding: 0;
+    
 }
 
 h2, h4 {
@@ -20,6 +24,7 @@ h2, h4 {
 .container {
     max-width: 100%;
     margin: 0px auto;
+    margin-left: 0px;
     margin-bottom: 20px;
     padding: 20px;
     text-align: center;
@@ -29,6 +34,18 @@ h2, h4 {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+
+.containerCONSULTA {
+    max-width: 100%;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #FAFAFA;
+    color: #FAFAFA;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
 
 .container1 {
     max-width: 100%;
@@ -318,6 +335,7 @@ h2, h4 {
 .main-content {
     margin-left: 240px;
     padding: 30px;
+    transition: margin-left 0.3s ease;
 }
 
 .form-ayuda-revision {
@@ -387,11 +405,6 @@ h2, h4 {
     background-color: #e0ac27;
 }
 
-
-
-
-
-
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -404,20 +417,31 @@ h2, h4 {
   padding-top: 60px;
   transition: left 0.3s ease;
   z-index: 1000;
+  border-right: rgb(0, 110, 101) 2px solid;
 }
 
 #toggle-btn {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: white;
+  background-color: fff;
   color: #00897B;
   border: none;
-  padding: 6px 10px;
+  padding: 8px 10px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 20px;
-  z-index: 1001;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);  
+  z-index: 2001;
+  cursor: pointer;
+}
+
+#toggle-btn:hover {
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00897B;
+  background-color: #bbbaba;
 }
 
 .sidebar.hidden {
@@ -446,13 +470,6 @@ h2, h4 {
   left: 0;
 }
 
-/* Contenido principal */
-.main-content {
-  margin-left: 240px;
-  padding: 30px;
-  transition: margin-left 0.3s ease;
-}
-
 /* Cuando el sidebar está oculto, reducir espacio */
 .sidebar.hidden ~ .main-content,
 #toggle-btn.moved ~ .main-content {
@@ -465,3 +482,66 @@ h2, h4 {
 .principal-section { display: block; }
 .principal-section.hidden { display: none; }
 .main-content { transition: margin-left 0.3s; }
+
+/* Botón hamburguesa para mostrar el sidebar cuando está oculto */
+#hamburger-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2001;
+  background: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: none;
+  cursor: pointer;
+}
+ 
+
+#hamburger-btn:hover {
+  border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #00897B;
+  background-color: #bbbaba;
+}
+
+#hamburger-btn span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: #333;
+  margin: 4px 0;
+}
+
+#hamburger-btn span:nth-child(1) { width: 24px; }
+#hamburger-btn span:nth-child(2) { width: 20px; margin-left: 4px; }
+#hamburger-btn span:nth-child(3) { width: 16px; margin-left: 8px; }
+
+/* Mostrar el botón hamburguesa solo cuando el sidebar está oculto */
+.sidebar.hidden ~ #hamburger-btn {
+  display: block !important;
+}
+
+footer {
+  width: 100%;
+  background: rgb(0, 119, 107) ;
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 1.05em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+  z-index: 100;
+}
+
+@media (max-width: 600px) {
+  footer {
+    font-size: 0.95em;
+    padding: 14px 0 10px 0;
+  }
+}

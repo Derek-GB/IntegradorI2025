@@ -1,11 +1,12 @@
 body {
     font-family: 'Segoe UI', sans-serif !important;
-    background-color: var(--gris-claro);
+    background-color:#FAFAFA;
     color: #212529;
-    font-size: 18px;
     line-height: 1.6;
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -20,6 +21,7 @@ h2, h4 {
     margin-top: 0px;
 }
 
+
 hr {
     border: 1px solid #00897B;
 }
@@ -32,6 +34,14 @@ form#formularioAlbergue {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     max-width: 850px;
     margin: auto;
+}
+
+form#formularioAlbergue h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #00897B;
+    padding: 25px;
+    border: #00897B solid 2px;
 }
 
 /* Etiquetas */
@@ -507,6 +517,7 @@ template#templateAlbergue input[type="radio"] {
 .main-content {
     margin-left: 240px;
     padding: 30px;
+    transition: margin-left 0.3s ease;
 }
 
 
@@ -679,6 +690,7 @@ template#templateAlbergue input[type="radio"] {
   padding-top: 60px;
   transition: left 0.3s ease;
   z-index: 1000;
+  border-right: rgb(0, 110, 101) 2px solid;
 }
 
 #toggle-btn {
@@ -808,3 +820,71 @@ form#recursoForm fieldset {
 .principal-section { display: block; }
 .principal-section.hidden { display: none; }
 .main-content { transition: margin-left 0.3s; }
+
+.container {
+    max-width: 100%;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #FAFAFA;
+    color: #FAFAFA;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* Botón hamburguesa para mostrar el sidebar cuando está oculto */
+#hamburger-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2001;
+  background: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: none;
+  cursor: pointer;
+}
+
+#hamburger-btn span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: #333;
+  margin: 4px 0;
+}
+
+#hamburger-btn span:nth-child(1) { width: 24px; }
+#hamburger-btn span:nth-child(2) { width: 20px; margin-left: 4px; }
+#hamburger-btn span:nth-child(3) { width: 16px; margin-left: 8px; }
+
+/* Mostrar el botón hamburguesa solo cuando el sidebar está oculto */
+.sidebar.hidden ~ #hamburger-btn {
+  display: block !important;
+}
+
+footer {
+  width: 100%;
+  background: rgb(0, 119, 107) ;
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 1.05em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+  z-index: 100;
+}
+
+@media (max-width: 600px) {
+  footer {
+    font-size: 0.95em;
+    padding: 14px 0 10px 0;
+  }
+}
