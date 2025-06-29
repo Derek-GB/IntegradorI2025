@@ -1,137 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Inicio</title>
-    <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="../style/formulario.css" />
 </head>
+
 <body>
-    <!-- Sidebar fijo -->
-     
-    <div id="sidebar-container"></div>
-    <script>
-      fetch('sidebar.html')
-        .then(res => res.text())
-        .then(html => document.getElementById('sidebar-container').innerHTML = html);
-    </script>
+  <h2>Iniciar Sesión</h2>
 
+  <form id="loginForm" class="login">
+    <div id="error" class="error"></div>
 
-    <script>
-  fetch('sidebar.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('sidebar-container').innerHTML = html;
+    <label for="usuario">Usuario o correo</label>
+    <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario o correo" required>
 
-      const sidebar = document.getElementById('sidebar');
-      const toggleBtn = document.getElementById('toggle-btn');
-      const headers = document.querySelectorAll('h2, h4');
-      const mainContent = document.querySelector('.main-content');
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
 
-      toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('hidden');
-
-        // Cambia el ícono del botón
-        toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
-
-        // Ajusta padding del encabezado cuando sidebar está oculto
-        headers.forEach(h => {
-          h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
-        });
-
-        // También mueve el contenido
-        mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
-      });
-    });
-</script>
-
-    
-
-
-
-
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <div class="container text-center">
-            <h1>Bienvenido al Sistema de Gestión de Albergues</h1>
-            <p>Gestiona fácilmente el registro de personas en el albergue y la entrega de suministros.</p>
-        </div>
-
-        <!-- Botón y panel de accesibilidad -->
-        <button id="accesibilidad-toggle">⚙️</button>
-        <div id="accesibilidad-panel">
-          <button onclick="toggleContraste()">Contraste oscuro</button>
-          <button onclick="resaltarEnlaces()">Resaltar enlaces</button>
-          <button onclick="cambiarTamanoFuente('aumentar')">Agrandar texto</button>
-          <button onclick="cambiarTamanoFuente('disminuir')">Reducir texto</button>
-          <button onclick="document.body.classList.toggle('espaciado-texto')">Espaciado de texto</button>
-          <button onclick="document.body.classList.toggle('cursor-grande')">Activar Cursor</button>
-          <button onclick="alinearTexto()">Texto alineado</button>
-          <button onclick="document.body.classList.toggle('saturacion')">Activar Saturación</button>
-          <button onclick="cambiarAlturaLinea()">Altura de la línea</button>
-        </div>
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary">Ingresar</button>
     </div>
+  </form>
 
-    <!-- Ocultar el sidebar -->
-    <script>
-    fetch('sidebar.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('sidebar-container').innerHTML = html;
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Evita el envío normal del formulario
 
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggle-btn');
-        const mainContent = document.querySelector('.main-content');
+      // validación del usuario
+      const usuario = document.getElementById('usuario').value;
+      const contrasena = document.getElementById('contrasena').value;
 
-        toggleBtn.addEventListener('click', () => {
-          sidebar.classList.toggle('hidden');
-          toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
-          mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
-        });
-      });
+      // Ejemplo básico de validación (debes reemplazarlo con tu lógica real)
+      if (usuario && contrasena) {
+        // Redirección a index.html después de login exitoso
+        window.location.href = 'inicio.html';
+      } else {
+        document.getElementById('error').textContent = 'Por favor complete todos los campos';
+      }
+    });
   </script>
-
-    <!-- Scripts de accesibilidad -->
-    <script>
-      document.getElementById('accesibilidad-toggle').addEventListener('click', () => {
-        document.getElementById('accesibilidad-panel').classList.toggle('active');
-      });
-
-      function toggleContraste() {
-        document.body.classList.toggle('contraste');
-      }
-
-      function resaltarEnlaces() {
-        document.body.classList.toggle('resaltado');
-      }
-
-      let fontSize = 1;
-      function cambiarTamanoFuente(accion) {
-        if (accion === 'aumentar') fontSize += 0.1;
-        if (accion === 'disminuir') fontSize = Math.max(1, fontSize - 0.1);
-        document.body.style.fontSize = fontSize + 'em';
-      }
-
-      function cambiarEspaciadoTexto() {
-        document.body.classList.toggle('espaciado-activo');
-      }
-
-      function cambiarCursor() {
-        document.body.classList.toggle('cursor-grande');
-      }
-
-      function alinearTexto() {
-        document.body.classList.toggle('texto-centrado');
-      }
-
-      function cambiarAlturaLinea() {
-        document.body.classList.toggle('alto-linea');
-      }
-
-      function cambiarSaturacion() {
-        document.body.classList.toggle('saturado');
-      }
-    </script>
 </body>
+
+</html>

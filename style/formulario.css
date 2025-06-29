@@ -520,3 +520,392 @@ template#templateAlbergue input[type="radio"] {
     margin-left: 240px;
     padding: 30px;
 }
+
+/* color para radio  */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 5px;
+}
+
+.radio-group label {
+  background-color: #f0f0f0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid transparent;
+}
+
+.radio-group input[type="radio"] {
+  accent-color: #007bff;
+  margin-right: 6px;
+}
+
+.radio-group input[type="radio"]:checked + label,
+.radio-group label:hover {
+  background-color: #dbeeff;
+  border-color: #007bff;
+}
+
+
+/* estilo para tablas */
+.tabla-asignacion {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px; /* separa las filas */
+  background-color: #ffffff;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.tabla-asignacion th,
+.tabla-asignacion td {
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.tabla-asignacion thead th {
+  background-color: #f1f1f1;
+  font-weight: 600;
+  color: #333;
+}
+
+.tabla-asignacion tbody tr {
+  background-color: #f9f9f9;
+}
+
+.tabla-asignacion tbody tr:hover {
+  background-color: #e0f7fa;
+  transition: background-color 0.3s ease;
+}
+
+.tabla-asignacion button {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
+.consulta-ayuda {
+    background-color: #FAFAFA;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    max-width: 850px;
+    margin: 1.5rem auto;
+}
+
+.consulta-ayuda summary {
+    background-color: #00897B;
+    color: #FAFAFA;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+}
+
+.consulta-ayuda summary:hover {
+    background-color: #00796B;
+}
+
+.consulta-ayuda fieldset {
+    border: none;
+    padding-top: 20px;
+}
+
+.consulta-ayuda label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #212529;
+}
+
+.consulta-ayuda input,
+.consulta-ayuda select {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.consulta-ayuda input:focus,
+.consulta-ayuda select:focus {
+    outline: none;
+    border-color: #00897B;
+}
+
+
+
+.consulta-ayuda fieldset {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.consulta-ayuda fieldset button:first-of-type {
+    background-color: #FBC02D;
+    color: black;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.consulta-ayuda fieldset button:last-of-type {
+    background-color: #FBC02D;
+    color: black;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-end;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: #00897B;
+  color: #fff;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+#toggle-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  color: #00897B;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1001;
+}
+
+.sidebar.hidden {
+  left: -220px; /* Mueve el sidebar completamente fuera de la pantalla */
+}
+
+.sidebar i {
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Cuando el sidebar está oculto */
+.sidebar.hidden #toggle-btn {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  font-size: 24px;
+  background-color: white;
+  color: #00897B;
+  z-index: 1001;
+}
+
+/* Cuando el sidebar está oculto, mover el botón a la izquierda */
+#toggle-btn.moved {
+  left: 0;
+}
+
+/* Contenido principal */
+.main-content {
+  margin-left: 240px;
+  padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Cuando el sidebar está oculto, reducir espacio */
+.sidebar.hidden ~ .main-content,
+#toggle-btn.moved ~ .main-content {
+  margin-left: 40px;
+}
+
+
+
+
+/* Estilo general para todos los details (como los de Información Personal, etc.) */
+form#formularioAlbergue details,
+form#recursoForm details,
+form.consulta-ayuda details,
+form details {
+  background-color: #FAFAFA;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  max-width: 850px;
+  margin: 1.0rem auto;
+}
+
+form#formularioAlbergue details summary,
+form#recursoForm details summary,
+form details summary {
+  background-color: #00897B;
+  color: #FAFAFA;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+}
+
+form#formularioAlbergue details summary:hover,
+form#recursoForm details summary:hover,
+form details summary:hover {
+  background-color: #00796B;
+}
+
+form#formularioAlbergue fieldset,
+form#recursoForm fieldset {
+  border: none;
+  padding-top: 10px ;
+}
+
+.checkbox-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  max-width: 230px; /* Ajusta según tu diseño */
+}
+.checkbox-row label {
+  margin: 0;
+}
+
+
+
+.btn-limpiar {
+    background-color: #FBC02D;
+    color: white;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin-left: 600px;
+}
+
+.btn-limpiar:hover {
+  color: white;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+.paso-form {
+  transition: all 0.3s ease;
+}
+.hidden { display: none; }
+.integrante-section { display: none; }
+.integrante-section.active { display: block; }
+.principal-section { display: block; }
+.principal-section.hidden { display: none; }
+.main-content { transition: margin-left 0.3s; }
+
+/* Contenedor principal del login */
+.login {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #FAFAFA;
+}
+
+/* Título del login */
+.login h2 {
+    text-align: center;
+    color: #00897B;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* Etiquetas del formulario */
+.login label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Campos de entrada */
+.login input[type="text"],
+.login input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Efecto focus */
+.login input:focus {
+    outline: none;
+    border-color: #00897B;
+    box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.2);
+}
+
+/* Grupo de botones */
+.login .btn-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Botón principal */
+.login .btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Mensaje de error */
+.login .error {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Placeholders */
+.login ::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+/* Versión móvil */
+@media (max-width: 480px) {
+    .login {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"] {
+        padding: 10px 12px;
+}
+}
+
