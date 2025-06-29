@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consulta Albergues</title>
-  <link rel="stylesheet" href="../style/index.css">
-  <link rel="stylesheet" href="../style/formulario.css">
+  <link rel="stylesheet" href="../../style/index.css">
+  <link rel="stylesheet" href="../../style/formulario.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -15,15 +15,15 @@
 <body>
 
   <div id="sidebar-container"></div>
+  
   <script>
-    fetch('sidebar.html')
+    fetch('../sidebar.html')
       .then(res => res.text())
       .then(html => document.getElementById('sidebar-container').innerHTML = html);
   </script>
-
-  <!-- Cargar Sidebar y activar botón -->
+  <!-- Sidebar cargado dinámicamente -->
   <script>
-    fetch('sidebar.html')
+    fetch('../sidebar.html')  
       .then(res => res.text())
       .then(html => {
         document.getElementById('sidebar-container').innerHTML = html;
@@ -50,9 +50,13 @@
 
   <div class="container text-center">
     <h2>
-      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary"
+     <button
+        onclick="window.location.href='../inicio.html'" 
+        type="button"
+        class="btn btn-secondary"
         style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
-        aria-label="Regresar">
+        aria-label="Regresar"
+      >
         <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
           arrow_back
         </span>
@@ -102,7 +106,7 @@
     </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="ubicaciones.js"></script>
+  <script src="../../js/grupo2/ubicaciones.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -111,7 +115,7 @@
 
 
   </script>
-<script src="consultarAlbergues.js"></script>
+<script src="../../js/grupo2/consultarAlbergues.js"></script>
 </body>
 
 </html>
