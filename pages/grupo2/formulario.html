@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registro de Albergue</title>
-  <link rel="stylesheet" href="./formulario.css" />
+  <link rel="stylesheet" href="../../style/formulario.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
@@ -22,7 +22,7 @@
 <body>
   <div id="sidebar-container"></div>
   <script>
-    fetch('sidebar.html')
+    fetch('../sidebar.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('sidebar-container').innerHTML = html;
@@ -48,7 +48,7 @@
 
   <div class="container mt-4 main-content">
     <h2>
-      <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary" style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;" aria-label="Regresar">
+      <button onclick="window.location.href='../inicio.html'" type="button" class="btn btn-secondary" style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;" aria-label="Regresar">
         <span class="material-icons" style="font-size: 24px; vertical-align: middle;">arrow_back</span>
       </button>
       Registro de Datos - Albergue

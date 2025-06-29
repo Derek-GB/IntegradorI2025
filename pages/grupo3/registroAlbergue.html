@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="../../style/formulario.css" />
+  <link rel="stylesheet" href="../../index.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Registro de Albergue</title>
+</head>
+<body>
+
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('../sidebar.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+  </script>
+
+  <div class="container mt-4">
+    <h2>
+      <button
+        onclick="window.location.href='index.html'"
+        type="button"
+        class="btn btn-secondary"
+        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar"
+      >
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+          arrow_back
+        </span>
+      </button>
+      Registro de Albergue
+    </h2>
+
+    <form id="formularioAlbergue">
+      <details open>
+        <summary><strong>Información del Albergue</strong></summary>
+     <fieldset class="mt-2">
+
+  <label>ID:</label>
+  <input name="id" type="number" class="form-control mb-2" placeholder="ID numérico" required />
+
+  <label>Especificación:</label>
+  <input name="especificacion" type="text" class="form-control mb-2" placeholder="Ingrese la especificación" required />
+
+  <label>Detalle de Condición:</label>
+  <input name="detalle_condicion" type="text" class="form-control mb-2" placeholder="Detalle de la condición" required />
+
+  <label>Sección:</label>
+  <input name="seccion" type="text" class="form-control mb-2" placeholder="Sección correspondiente" required />
+
+  <label>Requerimientos Técnicos:</label>
+  <textarea name="requerimientos_tecnicos" class="form-control mb-2" rows="2" placeholder="Describa los requerimientos técnicos" required></textarea>
+
+  <label>Coordenada X:</label>
+<input name="coordenadaX" type="number" step="any" class="form-control mb-2" required />
+
+<label>Coordenada Y:</label>
+<input name="coordenadaY" type="number" step="any" class="form-control mb-2" required />
+
+  <label>Nombre del Albergue:</label>
+  <input name="nombreAlbergue" type="text" class="form-control mb-2" placeholder="Ingrese el nombre del albergue" required />
+
+  <label>Región CNE:</label>
+  <select name="regionCNE" class="form-control mb-2" required>
+    <option value="">Seleccione una región</option>
+    <option>Región Central</option>
+    <option>Región Chorotega</option>
+    <option>Región Brunca</option>
+    <option>Región Huetar Caribe</option>
+    <option>Región Huetar Norte</option>
+    <option>Región Pacífico Central</option>
+  </select>
+
+  <label>Provincia:</label>
+  <select id="provincia" name="provincia" class="form-control mb-2" required>
+    <option value="">Seleccione una provincia</option>
+    <option value="San José">San José</option>
+    <option value="Alajuela">Alajuela</option>
+    <option value="Cartago">Cartago</option>
+    <option value="Heredia">Heredia</option>
+    <option value="Guanacaste">Guanacaste</option>
+    <option value="Puntarenas">Puntarenas</option>
+    <option value="Limón">Limón</option>
+  </select>
+
+  <label>Cantón:</label>
+  <select id="canton" name="canton" class="form-control mb-2" required>
+    <option value="">Seleccione un cantón</option>
+  </select>
+
+  <label>Distrito:</label>
+  <input name="distrito" type="text" class="form-control mb-2" placeholder="Ingrese el distrito" required />
+
+  <label>Dirección:</label>
+  <textarea name="direccion" class="form-control mb-2" rows="3" placeholder="Ingrese la dirección exacta" required></textarea>
+
+  <label>Capacidad Total de Personas:</label>
+  <input name="capacidad" type="number" class="form-control mb-2" min="0" placeholder="Ej: 150" required />
+
+<label>Costo Requerimientos Técnicos:</label>
+<input name="costo_requerimientos_tecnicos" type="number" step="any" class="form-control mb-2" required />
+
+  <label>Estado del Albergue:</label>
+  <select name="estado" class="form-control mb-2" required>
+    <option value="">Seleccione el estado</option>
+    <option>Abierto</option>
+    <option>Cerrado</option>
+  </select>
+
+  <label>Tipo de Albergue:</label>
+  <select name="tipoAlbergue" class="form-control mb-2" required>
+    <option value="">Seleccione el tipo de albergue</option>
+    <option>Centro Educativo</option>
+    <option>Salón Comunal</option>
+    <option>Iglesia</option>
+    <option>Redondel</option>
+    <option>Gimnasio</option>
+    <option>Casa de Acogida</option>
+    <option>Zona de Refugio Temporal</option>
+  </select>
+
+  <label>Tipo de Establecimiento:</label>
+  <select name="tipoEstablecimiento" class="form-control mb-2">
+    <option value="">Seleccione el tipo de establecimiento</option>
+  </select>
+
+  <label>Ubicación:</label>
+<select id="selectUbicacion" name="idUbicacion" class="form-control mb-2" required>
+  <option value="">Cargando ubicaciones...</option>
+</select>
+
+<label>Capacidad:</label>
+<select id="selectCapacidad" name="idCapacidad" class="form-control mb-2" required>
+  <option value="">Cargando capacidades...</option>
+</select>
+
+<label>Infraestructura:</label>
+<select id="selectInfraestructura" name="idInfraestructura" class="form-control mb-2" required>
+  <option value="">Cargando infraestructuras...</option>
+</select>
+
+<label>Municipalidad:</label>
+<select id="selectMunicipalidad" name="idMunicipalidad" class="form-control mb-2" required>
+  <option value="">Cargando municipalidades...</option>
+</select>
+
+  <label>Administrador:</label>
+  <input name="administrador" type="text" class="form-control mb-2" placeholder="Nombre del administrador" required />
+
+  <label>Teléfono:</label>
+  <input name="telefono" type="tel" class="form-control mb-2" placeholder="Ej: 8888-8888" pattern="[0-9]{4}-[0-9]{4}" required />
+
+  <label>Cantidad de Familias:</label>
+  <input name="cantidadFamilias" type="number" class="form-control mb-2" min="0" placeholder="Ej: 35" required />
+
+  <label>Área Total (m²):</label>
+  <input name="areaTotal" type="number" class="form-control mb-2" min="0" placeholder="Ej: 250" required />
+
+</fieldset>
+
+      </details>
+
+      <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+    </form>
+  </div>
+
+  <script>
+    const cantonesPorProvincia = {
+      "San José": ["San José","Escazú","Desamparados","Puriscal","Tarrazú","Aserrí","Mora","Goicoechea","Santa Ana","Alajuelita","Vázquez de Coronado","Acosta","Tibás","Moravia","Montes de Oca","Turrubares","Dota","Curridabat","Pérez Zeledón","León Cortés Castro"],
+      "Alajuela": ["Alajuela", "San Ramón", "Grecia", "San Mateo", "Atenas", "Naranjo", "Palmares", "Poás", "Orotina", "San Carlos", "Zarcero", "Sarchí", "Upala", "Los Chiles", "Guatuso", "Río Cuarto"],
+      "Cartago": ["Cartago", "Paraíso", "La Unión", "Jiménez", "Turrialba", "Alvarado", "Oreamuno", "El Guarco"],
+      "Heredia": ["Heredia", "Barva", "Santo Domingo", "Santa Bárbara", "San Rafael", "San Isidro", "Belén", "Flores", "San Pablo", "Sarapiquí"],
+      "Guanacaste":["Liberia", "Nicoya", "Santa Cruz", "Bagaces", "Carrillo", "Cañas", "Abangares", "Tilarán", "Nandayure", "La Cruz", "Hojancha"],
+      "Puntarenas":["Puntarenas", "Esparza", "Buenos Aires", "Montes de Oro", "Osa", "Quepos", "Golfito", "Coto Brus", "Parrita", "Corredores", "Garabito"],
+      "Limón":["Limón", "Pococí", "Siquirres", "Talamanca", "Matina", "Guácimo"]
+    };
+
+    document.getElementById("provincia").addEventListener("change", function () {
+      const cantonSelect = document.getElementById("canton");
+      const provincia = this.value;
+
+      // Limpiar cantones anteriores
+      cantonSelect.innerHTML = '<option value="">Seleccione un cantón</option>';
+
+      if (cantonesPorProvincia[provincia]) {
+        cantonesPorProvincia[provincia].forEach(canton => {
+          const option = document.createElement("option");
+          option.value = canton;
+          option.textContent = canton;
+          cantonSelect.appendChild(option);
+        });
+      }
+    });
+  </script>
+<script>
+async function llenarSelect(url, selectId, formatOption) {
+  try {
+    const response = await axios.get(url);
+    const datos = Array.isArray(response.data) ? response.data : response.data.data || response.data.result || [];
+
+    if (!Array.isArray(datos)) throw new Error("Respuesta inesperada");
+
+    const select = document.getElementById(selectId);
+    select.innerHTML = '<option value="">Seleccione una opción</option>';
+    datos.forEach(item => {
+      const option = document.createElement("option");
+      option.value = item.id;
+      option.textContent = formatOption(item);
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error(`Error al llenar ${selectId}:`, error);
+  }
+}
+
+  llenarSelect(
+    'https://apiintegrador-production-8ef8.up.railway.app/api/Ubicaciones/all',
+    'selectUbicacion',
+    i => `${i.provincia} / ${i.canton} / ${i.distrito} / ${i.ubicacion}`
+  );
+
+  llenarSelect(
+    'https://apiintegrador-production-8ef8.up.railway.app/api/capacidadAlbergues/all',
+    'selectCapacidad',
+    i => `ID ${i.id} - Personas: ${i.capacidadPersonas}, Colectiva: ${i.capacidadColectiva}, Familias: ${i.cantidadFamilias}`
+  );
+
+  llenarSelect(
+    'https://apiintegrador-production-8ef8.up.railway.app/api/infraestructuraAlbergues/all',
+    'selectInfraestructura',
+    i => `ID ${i.id} - Cocina: ${i.cocina}, Ducha: ${i.duchas}, SS: ${i.serviciosSanitarios}, Área: ${i.areaTotalM2} m²`
+  );
+
+  llenarSelect(
+    'https://apiintegrador-production-8ef8.up.railway.app/api/municipalidad/all',
+    'selectMunicipalidad',
+    i => `ID ${i.id} - ${i.nombre}`
+  );
+</script>
+<script>
+document.getElementById("formularioAlbergue").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const form = e.target;
+
+  const data = {
+    idAlbergue: form.id.value,
+    nombre: form.nombreAlbergue.value,
+    region: form.regionCNE.value,
+    coordenadaX: parseFloat(form.coordenadaX.value),
+    coordenadaY: parseFloat(form.coordenadaY.value),
+    idUbicacion: parseInt(form.idUbicacion.value),
+    tipo_establecimiento: "defecto",                   //esperando respuesta de la muni
+    tipo_albergue: form.tipoAlbergue.value,
+    condicion_albergue: form.estado.value,
+    especificacion: form.especificacion.value,
+    detalle_condicion: form.detalle_condicion.value,
+    administrador: form.administrador.value,
+    telefono: form.telefono.value,
+    idCapacidad: parseInt(form.idCapacidad.value),
+    seccion: form.seccion.value,
+    requerimientos_tecnicos: form.requerimientos_tecnicos.value,
+    costo_requerimientos_tecnicos: parseFloat(form.costo_requerimientos_tecnicos.value),
+    idInfraestructura: parseInt(form.idInfraestructura.value),
+    idMunicipalidad: parseInt(form.idMunicipalidad.value),
+    color: "verde" 
+  };
+
+  axios.post("https://apiintegrador-production-8ef8.up.railway.app/api/albergues", data)
+    .then(res => {
+      alert("Albergue registrado correctamente");
+      form.reset();
+    })
+    .catch(err => {
+      console.error("Error al registrar albergue:", err);
+      alert("Hubo un error al registrar el albergue.");
+    });
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

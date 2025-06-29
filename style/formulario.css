@@ -6,17 +6,20 @@ body {
     line-height: 1.6;
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
 }
 
 
-h2, h4 {
+h2,
+h4 {
     background-color: #00897B;
     color: #FAFAFA;
     text-align: center;
-    padding: 2rem 1rem 2rem 120px; 
+    padding: 2rem 1rem 2rem 120px;
     position: relative;
     bottom: 8px;
-    left: 8px; 
+    left: 8px;
     margin-top: 0px;
 }
 
@@ -46,6 +49,7 @@ form#formularioAlbergue label,
 /* Inputs, select, textarea */
 form#formularioAlbergue input[type="text"],
 form#formularioAlbergue input[type="number"],
+form#formularioAlbergue input[type="password"],
 form#formularioAlbergue input[type="date"],
 form#formularioAlbergue input[type="email"],
 form#formularioAlbergue select,
@@ -63,6 +67,7 @@ form#formularioAlbergue input[type="tel"] {
 
 form#formularioAlbergue input[type="text"]:focus,
 form#formularioAlbergue input[type="number"]:focus,
+form#formularioAlbergue input[type="password"]:focus,
 form#formularioAlbergue input[type="date"]:focus,
 form#formularioAlbergue input[type="email"]:focus,
 form#formularioAlbergue select:focus,
@@ -102,6 +107,7 @@ form#recursoForm summary strong {
 /* Inputs, select, textarea */
 form#recursoForm input[type="text"],
 form#recursoForm input[type="number"],
+form#recursoForm input[type="password"],
 form#recursoForm select,
 form#recursoForm textarea {
     width: 100%;
@@ -115,6 +121,7 @@ form#recursoForm textarea {
 }
 
 form#recursoForm input[type="text"]:focus,
+form#recursoForm input[type="password"]:focus,
 form#recursoForm input[type="number"]:focus,
 form#recursoForm select:focus,
 form#recursoForm textarea:focus {
@@ -160,7 +167,7 @@ form#recursoForm .item {
 
 /* este de pre es para cambiar el color del form preformulario */
 
-.pre{
+.pre {
     color: black;
 }
 
@@ -273,7 +280,7 @@ form#recursoForm .item {
 }
 
 .accordion-css summary {
-    background-color:  #00897B;
+    background-color: #00897B;
     color: #212529;
     padding: 10px;
     cursor: pointer;
@@ -282,14 +289,14 @@ form#recursoForm .item {
 }
 
 .accordion-css summary:hover {
-    background-color:  #00897B;
+    background-color: #00897B;
 }
 
 .accordion-css details[open] summary {
     border-bottom: 1px solid #212529;
 }
 
-.accordion-css details > div {
+.accordion-css details>div {
     padding: 10px;
     background-color: #f8f9fa;
 }
@@ -299,7 +306,7 @@ form#recursoForm .item {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color:  #00897B;
+    background-color: #00897B;
     color: white;
     border: none;
     border-radius: 50%;
@@ -334,7 +341,7 @@ form#recursoForm .item {
     margin: 6px 0;
     padding: 8px;
     font-size: 14px;
-    background-color:  #00897B;
+    background-color: #00897B;
     color: white;
     border: none;
     border-radius: 5px;
@@ -343,7 +350,7 @@ form#recursoForm .item {
 }
 
 #accesibilidad-panel button:hover {
-    background-color:  #00897B;
+    background-color: #00897B;
 }
 
 /* -------- ACCESIBILIDAD -------- */
@@ -426,7 +433,7 @@ template#templateAlbergue {
 }
 
 /* Etiquetas */
-template#templateAlbergue  label,
+template#templateAlbergue label,
 .accordion-body label {
     font-weight: 600;
     display: block;
@@ -482,6 +489,7 @@ template#templateAlbergue input[type="radio"] {
     padding-top: 60px;
     z-index: 1000;
 }
+
 .sidebar nav ul {
     position: absolute;
     top: 8px;
@@ -489,9 +497,11 @@ template#templateAlbergue input[type="radio"] {
     padding: 0;
     margin: 0;
 }
+
 .sidebar nav ul li {
     margin: 20px 0;
 }
+
 .sidebar nav ul li a {
     color: #fff;
     text-decoration: none;
@@ -499,17 +509,17 @@ template#templateAlbergue input[type="radio"] {
     display: block;
     transition: background 0.2s;
 }
+
 .sidebar nav ul li a:hover {
     background: #1a2230;
     border-radius: 4px;
 }
+
 /* Ajusta el contenido principal para dejar espacio al sidebar */
 .main-content {
     margin-left: 240px;
     padding: 30px;
 }
-
-
 
 /* color para radio  */
 .radio-group {
@@ -808,3 +818,94 @@ form#recursoForm fieldset {
 .principal-section { display: block; }
 .principal-section.hidden { display: none; }
 .main-content { transition: margin-left 0.3s; }
+
+/* Contenedor principal del login */
+.login {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #FAFAFA;
+}
+
+/* Título del login */
+.login h2 {
+    text-align: center;
+    color: #00897B;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* Etiquetas del formulario */
+.login label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Campos de entrada */
+.login input[type="text"],
+.login input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Efecto focus */
+.login input:focus {
+    outline: none;
+    border-color: #00897B;
+    box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.2);
+}
+
+/* Grupo de botones */
+.login .btn-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Botón principal */
+.login .btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Mensaje de error */
+.login .error {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Placeholders */
+.login ::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+/* Versión móvil */
+@media (max-width: 480px) {
+    .login {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"] {
+        padding: 10px 12px;
+}
+}
+

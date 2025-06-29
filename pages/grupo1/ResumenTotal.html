@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resumen Total</title>
+  <link rel="stylesheet" href="/style/formAbasteci.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul class="nav">
+      <li><a href="/pages/grupo1/formAbasteci.html"><span class="material-icons">home</span> Inicio</a></li>
+      <li><a href="/pages/grupo1/resumenParcial.html"><span class="material-icons">check_circle</span> Resumen Parcial</a></li>
+      <li><a href="#" class="active"><span class="material-icons">assessment</span> Resumen Final</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenedor general -->
+  <div class="content-area">
+    <!-- Header -->
+    <header class="top-header">
+      <h1>Resumen Total de Abastecimiento</h1>
+      <a href="/pages/grupo1/formAbasteci.html" class="back-button" aria-label="Volver al formulario">
+        <span class="material-icons">arrow_back</span>
+      </a>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <div class="card" style="max-width: 800px; width: 100%;">
+        <div id="resumenFormulario"></div>
+
+        <h2 style="margin-top: 2rem;">Productos Registrados</h2>
+        <table id="tablaResumen">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Producto</th>
+              <th>Unidad</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+      <div class="boton-resumen-final">
+      <button id="btnGuardarDatos">Guardar datos</button>
+     <button id="descargarBtn">Descargar Formulario</button>
+    </div>
+
+      </div>
+    </main>
+  </div>
+  <script src="/js/grupo1/resumenTotal.js"></script>
+</body>
+</html>

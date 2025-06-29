@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../style/formulario.css" />
+  <link rel="stylesheet" href="../../index.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Registrar Producto</title>
+</head>
+<body>
+
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('../sidebar.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+  </script>
+
+  <div class="container mt-4">
+    <h2>
+      <button
+        onclick="window.location.href='index.html'"
+        type="button"
+        class="btn btn-secondary"
+        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar"
+      >
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle;">
+          arrow_back
+        </span>
+      </button>
+      Registro de Productos
+    </h2>
+
+    <form id="formularioAlbergue">
+      <details open>
+        <summary><strong>Formulario de Registro</strong></summary>
+        
+  <fieldset class="mt-2">
+
+    <label>Código de Producto:</label>
+    <input name="codigo" type="text" class="form-control mb-2" placeholder="Ingrese el código del producto" required />
+
+    <label>Descripción:</label>
+    <input name="descripcion" type="text" class="form-control mb-2" placeholder="Ingrese una descripción del producto" required />
+
+    <label>Categoría:</label>
+    <select name="categoria" class="form-control mb-2" required>
+      <option value="">Seleccione una opción</option>
+      <option value="Carne">Carne</option>
+      <option value="Proteina">Proteína</option>
+      <option value="Verdura">Verdura</option>
+      <option value="Reperte">Reperte</option>
+      <option value="Olores">Olores</option>
+      <option value="Abarrotes">Abarrotes</option>
+      <option value="Limpieza">Limpieza</option>
+      <option value="Mobiliario">Mobiliario</option>
+    </select>
+
+    <label>Nombre del Producto:</label>
+    <input name="producto" type="text" class="form-control mb-2" placeholder="Ingrese el nombre del producto" required />
+
+    <label>Unidad:</label>
+    <select name="unidad" class="form-control mb-2" required>
+      <option value="">Seleccione una unidad</option>
+      <option value="Mililitros">Mililitros</option>
+      <option value="Gramos">Gramos</option>
+      <option value="Unidades">Unidades</option>
+    </select>
+
+    <label>Cantidad:</label>
+    <input name="cantidad" type="number" class="form-control mb-2" placeholder="Ingrese la cantidad" min="0" required />
+
+  </fieldset>
+  
+</details>
+      <button type="submit" class="btn btn-primary mt-3">Agregar</button>
+    </form>
+  </div>
+<script>
+
+  document.getElementById("formularioAlbergue").addEventListener("submit", function (e) {
+    e.preventDefault(); 
+
+    const form = e.target;
+
+    const data = {
+      codigoProducto: form.codigo.value,
+      nombre: form.producto.value,
+      descripcion: form.descripcion.value,
+      cantidad: parseInt(form.cantidad.value),
+      categoria: form.categoria.value,
+      unidadMedida: form.unidad.value
+    };
+
+    axios.post("https://apiintegrador-production-8ef8.up.railway.app/api/Productos", data)
+      .then(response => {
+        alert("Producto registrado correctamente");
+        form.reset(); 
+      })
+      .catch(error => {
+        console.error("Error al registrar producto:", error);
+        alert("Hubo un error al registrar el producto. Intente de nuevo.");
+      });
+  });
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

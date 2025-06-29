@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="formulario.css">
+    <link rel="stylesheet" href="../../style/formulario.css">
     <link rel="stylesheet" href="pages/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <title>Recursos</title>
+    <title>Ayudas</title>
 </head>
 <body>
     <div id="sidebar-container"></div>
 <script>
-  fetch('sidebar.html')
+  fetch('../sidebar.html')
     .then(res => res.text())
     .then(html => document.getElementById('sidebar-container').innerHTML = html);
 </script>
 
 <!-- Cargar Sidebar y activar botón -->
   <script>
-    fetch('sidebar.html')
+    fetch('../sidebar.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('sidebar-container').innerHTML = html;
@@ -50,7 +50,7 @@
     <div class="container mt-4">
         <h2>
             <button
-                onclick="window.location.href='index.html'"
+                onclick="window.location.href='../inicio.html'"
                 type="button"
                 class="btn btn-secondary"
                 style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
