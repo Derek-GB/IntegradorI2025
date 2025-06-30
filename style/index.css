@@ -25,11 +25,11 @@ h2, h4 {
     max-width: 100%;
     margin: 0px auto;
     margin-left: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 20px;
     text-align: center;
     background-color: #FAFAFA;
-    color: #FAFAFA;
+    color: #0000;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
@@ -49,7 +49,7 @@ h2, h4 {
   position: relative;
   top: 20px;
   left: 20%;
-  
+  margin-bottom: 19%;
   text-align: center;
 }
 
@@ -144,7 +144,7 @@ h2, h4 {
     padding: 20px;
     text-align: center;
     background-color: #00897B;
-    color: #FAFAFA;
+    color: #0000;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
@@ -375,29 +375,9 @@ h2, h4 {
     margin-bottom: 0.5rem;
 }
 
-.sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 220px;
-    height: 100vh;
-    background: #00897B;
-    color: #000;
-    padding-top: 60px;
-    z-index: 1000;
-}
 
-.sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 220px;
-    height: 100vh;
-    background: #00897B;
-    color: #000;
-    padding-top: 60px;
-    z-index: 1000;
-}
+
+
 .sidebar nav ul {
     position: absolute;
     top: 8px;
@@ -495,16 +475,17 @@ h2, h4 {
 
 /* Sidebar */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background: #00897B;
-  color: #fff;
-  padding-top: 60px;
-  transition: left 0.3s ease;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background: #00897B;
+    overflow-y: auto;
+    color: #fff;
+    padding-top: 60px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
   border-right: rgb(0, 110, 101) 2px solid;
 }
 
@@ -512,10 +493,10 @@ h2, h4 {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: fff;
+  background-color: white;
   color: #00897B;
   border: none;
-  padding: 8px 10px;
+  padding: px 10px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 20px;
@@ -614,22 +595,16 @@ h2, h4 {
 
 footer {
   width: 100%;
-  background: rgb(0, 119, 107) ;
+  background: rgb(0, 119, 107);
   color: #fff;
   text-align: center;
   padding: 18px 0 12px 0;
-  position: fixed;
-  left: 0;
-  bottom: 0;
   font-size: 1.05em;
   letter-spacing: 0.5px;
   box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+  margin-top: 40px;
+  position: static;
+  left: unset;
+  bottom: unset;
   z-index: 100;
-}
-
-@media (max-width: 600px) {
-  footer {
-    font-size: 0.95em;
-    padding: 14px 0 10px 0;
-  }
 }

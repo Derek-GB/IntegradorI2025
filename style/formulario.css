@@ -497,15 +497,17 @@ template#templateAlbergue input[type="radio"] {
 
 
 .sidebar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 220px;
     height: 100vh;
     background: #00897B;
-    color: #000;
+    overflow-y: auto;
+    color: #fff;
     padding-top: 60px;
     z-index: 1000;
+    transition: left 0.3s ease;
 }
 
 .sidebar nav ul {
@@ -695,21 +697,6 @@ template#templateAlbergue input[type="radio"] {
 }
 
 
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background: #00897B;
-  color: #fff;
-  padding-top: 60px;
-  transition: left 0.3s ease;
-  z-index: 1000;
-  border-right: rgb(0, 110, 101) 2px solid;
-}
 
 #toggle-btn {
   position: absolute;
@@ -931,7 +918,7 @@ form#recursoForm fieldset {
     padding: 20px;
     text-align: center;
     background-color: #FAFAFA;
-    color: #FAFAFA;
+    color: black;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
@@ -985,10 +972,11 @@ footer {
   z-index: 100;
 }
 
-@media (max-width: 600px) {
+
   footer {
+    position: relative;
+    bottom: auto;
+
     font-size: 0.95em;
     padding: 14px 0 10px 0;
   }
-}
-
