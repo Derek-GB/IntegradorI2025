@@ -38,32 +38,44 @@
     <form id="formularioAlbergue">
       <details open>
         <summary><strong>Información del Albergue</strong></summary>
-     <fieldset class="mt-2">
+   <fieldset class="mt-2">
 
+  <legend><strong>Identificación del Albergue</strong></legend>
   <label>ID:</label>
   <input name="id" type="number" class="form-control mb-2" placeholder="ID numérico" required />
 
-  <label>Especificación:</label>
-  <input name="especificacion" type="text" class="form-control mb-2" placeholder="Ingrese la especificación" required />
-
-  <label>Detalle de Condición:</label>
-  <input name="detalle_condicion" type="text" class="form-control mb-2" placeholder="Detalle de la condición" required />
-
-  <label>Sección:</label>
-  <input name="seccion" type="text" class="form-control mb-2" placeholder="Sección correspondiente" required />
-
-  <label>Requerimientos Técnicos:</label>
-  <textarea name="requerimientos_tecnicos" class="form-control mb-2" rows="2" placeholder="Describa los requerimientos técnicos" required></textarea>
-
-  <label>Coordenada X:</label>
-<input name="coordenadaX" type="number" step="any" class="form-control mb-2" required />
-
-<label>Coordenada Y:</label>
-<input name="coordenadaY" type="number" step="any" class="form-control mb-2" required />
-
   <label>Nombre del Albergue:</label>
-  <input name="nombreAlbergue" type="text" class="form-control mb-2" placeholder="Ingrese el nombre del albergue" required />
+  <input name="nombreAlbergue" type="text" class="form-control mb-2" placeholder="Nombre del albergue" required />
 
+  <label>Especificación:</label>
+  <input name="especificacion" type="text" class="form-control mb-2" placeholder="Especificación" required />
+
+  <label>Tipo de Albergue:</label>
+  <select name="tipoAlbergue" class="form-control mb-2" required>
+    <option value="">Seleccione el tipo de albergue</option>
+    <option>Centro Educativo</option>
+    <option>Salón Comunal</option>
+    <option>Iglesia</option>
+    <option>Redondel</option>
+    <option>Gimnasio</option>
+    <option>Casa de Acogida</option>
+    <option>Zona de Refugio Temporal</option>
+  </select>
+
+  <label>Tipo de Establecimiento:</label>
+  <select name="tipoEstablecimiento" class="form-control mb-2">
+    <option value="">Seleccione el tipo de establecimiento</option>
+  </select>
+
+  <label>Estado del Albergue:</label>
+  <select name="estado" class="form-control mb-2" required>
+    <option value="">Seleccione el estado</option>
+    <option>Abierto</option>
+    <option>Cerrado</option>
+  </select>
+
+  <hr>
+  <legend><strong>Ubicación Geográfica</strong></legend>
   <label>Región CNE:</label>
   <select name="regionCNE" class="form-control mb-2" required>
     <option value="">Seleccione una región</option>
@@ -93,72 +105,132 @@
   </select>
 
   <label>Distrito:</label>
-  <input name="distrito" type="text" class="form-control mb-2" placeholder="Ingrese el distrito" required />
+  <input name="distrito" type="text" class="form-control mb-2" placeholder="Distrito" required />
 
   <label>Dirección:</label>
-  <textarea name="direccion" class="form-control mb-2" rows="3" placeholder="Ingrese la dirección exacta" required></textarea>
+  <textarea name="direccion" class="form-control mb-2" rows="3" placeholder="Dirección exacta" required></textarea>
+
+  <label>Coordenada X:</label>
+  <input name="coordenadaX" type="number" step="any" class="form-control mb-2" required />
+
+  <label>Coordenada Y:</label>
+  <input name="coordenadaY" type="number" step="any" class="form-control mb-2" required />
+
+  <label>Ubicación:</label>
+  <select id="selectUbicacion" name="idUbicacion" class="form-control mb-2" required>
+    <option value="">Cargando ubicaciones...</option>
+  </select>
+
+  <label>Municipalidad:</label>
+  <select id="selectMunicipalidad" name="idMunicipalidad" class="form-control mb-2" required>
+    <option value="">Cargando municipalidades...</option>
+  </select>
+
+  <hr>
+  <legend><strong>Capacidad y Ocupación</strong></legend>
 
   <label>Capacidad Total de Personas:</label>
   <input name="capacidad" type="number" class="form-control mb-2" min="0" placeholder="Ej: 150" required />
 
-<label>Costo Requerimientos Técnicos:</label>
-<input name="costo_requerimientos_tecnicos" type="number" step="any" class="form-control mb-2" required />
+  <label>Capacidad Colectiva:</label>
+  <input name="capacidadColectiva" type="number" class="form-control mb-2" min="0" required />
 
-  <label>Estado del Albergue:</label>
-  <select name="estado" class="form-control mb-2" required>
-    <option value="">Seleccione el estado</option>
-    <option>Abierto</option>
-    <option>Cerrado</option>
+  <label>Ocupación:</label>
+  <input name="ocupacion" type="number" class="form-control mb-2" min="0" required />
+
+  <label>Egresos:</label>
+  <input name="egresos" type="number" class="form-control mb-2" min="0" required />
+
+  <label>Sospechosos Sanos:</label>
+  <input name="sospechososSanos" type="number" class="form-control mb-2" min="0" required />
+
+  <label>Otros (observaciones):</label>
+  <input name="otros" type="text" class="form-control mb-2" />
+
+  <label>Familias:</label>
+  <input name="cantidadFamilias" type="number" class="form-control mb-2" min="0" required />
+
+  <label>Área Total (m²):</label>
+  <input name="areaTotal" type="number" class="form-control mb-2" min="0" required />
+
+  <label>Capacidad Detallada:</label>
+  <select id="selectCapacidad" name="idCapacidad" class="form-control mb-2" required>
+    <option value="">Cargando capacidades...</option>
   </select>
 
-  <label>Tipo de Albergue:</label>
-  <select name="tipoAlbergue" class="form-control mb-2" required>
-    <option value="">Seleccione el tipo de albergue</option>
-    <option>Centro Educativo</option>
-    <option>Salón Comunal</option>
-    <option>Iglesia</option>
-    <option>Redondel</option>
-    <option>Gimnasio</option>
-    <option>Casa de Acogida</option>
-    <option>Zona de Refugio Temporal</option>
+  <hr>
+  <legend><strong>Condición y Requerimientos Técnicos</strong></legend>
+
+  <label>Detalle de Condición:</label>
+  <input name="detalle_condicion" type="text" class="form-control mb-2" required />
+
+  <label>Sección:</label>
+  <input name="seccion" type="text" class="form-control mb-2" required />
+
+  <label>Requerimientos Técnicos:</label>
+  <textarea name="requerimientos_tecnicos" class="form-control mb-2" rows="2" required></textarea>
+
+  <label>Costo Requerimientos Técnicos:</label>
+  <input name="costo_requerimientos_tecnicos" type="number" step="any" class="form-control mb-2" required />
+
+  <hr>
+  <legend><strong>Infraestructura</strong></legend>
+
+  <label>Infraestructura Asociada:</label>
+  <select id="selectInfraestructura" name="idInfraestructura" class="form-control mb-2" required>
+    <option value="">Cargando infraestructuras...</option>
   </select>
 
-  <label>Tipo de Establecimiento:</label>
-  <select name="tipoEstablecimiento" class="form-control mb-2">
-    <option value="">Seleccione el tipo de establecimiento</option>
+  <label>Cocina:</label>
+  <select name="cocina" class="form-control mb-2" required>
+    <option value="">¿Tiene cocina?</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
   </select>
 
-  <label>Ubicación:</label>
-<select id="selectUbicacion" name="idUbicacion" class="form-control mb-2" required>
-  <option value="">Cargando ubicaciones...</option>
-</select>
+  <label>Duchas:</label>
+  <select name="duchas" class="form-control mb-2" required>
+    <option value="">¿Tiene duchas?</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
+  </select>
 
-<label>Capacidad:</label>
-<select id="selectCapacidad" name="idCapacidad" class="form-control mb-2" required>
-  <option value="">Cargando capacidades...</option>
-</select>
+  <label>Servicios Sanitarios:</label>
+  <select name="serviciosSanitarios" class="form-control mb-2" required>
+    <option value="">¿Tiene servicios sanitarios?</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
+  </select>
 
-<label>Infraestructura:</label>
-<select id="selectInfraestructura" name="idInfraestructura" class="form-control mb-2" required>
-  <option value="">Cargando infraestructuras...</option>
-</select>
+  <label>Bodega:</label>
+  <select name="bodega" class="form-control mb-2" required>
+    <option value="">¿Tiene bodega?</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
+  </select>
 
-<label>Municipalidad:</label>
-<select id="selectMunicipalidad" name="idMunicipalidad" class="form-control mb-2" required>
-  <option value="">Cargando municipalidades...</option>
-</select>
+  <label>Menaje / Mobiliario:</label>
+  <select name="menaje_mobiliario" class="form-control mb-2" required>
+    <option value="">¿Tiene menaje?</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
+  </select>
+
+  <label>Tanque de Agua:</label>
+  <select name="tanque_agua" class="form-control mb-2" required>
+    <option value="">¿Tiene tanque de agua?</option>
+    <option value="true">Sí</option>
+    <option value="false">No</option>
+  </select>
+
+  <hr>
+  <legend><strong>Administración y Contacto</strong></legend>
 
   <label>Administrador:</label>
-  <input name="administrador" type="text" class="form-control mb-2" placeholder="Nombre del administrador" required />
+  <input name="administrador" type="text" class="form-control mb-2" required />
 
   <label>Teléfono:</label>
   <input name="telefono" type="tel" class="form-control mb-2" placeholder="Ej: 8888-8888" pattern="[0-9]{4}-[0-9]{4}" required />
-
-  <label>Cantidad de Familias:</label>
-  <input name="cantidadFamilias" type="number" class="form-control mb-2" min="0" placeholder="Ej: 35" required />
-
-  <label>Área Total (m²):</label>
-  <input name="areaTotal" type="number" class="form-control mb-2" min="0" placeholder="Ej: 250" required />
 
 </fieldset>
 

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../style/formulario.css" />
+  <link rel="stylesheet" href="../../index.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Albergues</title>
+</head>
+<body>
+ <div id="sidebar-container"></div>
+  <script>
+    fetch('../sidebar.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+  </script>
+
+
+  <div class="container mt-4">
+    <h2>
+      <button
+        onclick="window.location.href='index.html'"
+        type="button"
+        class="btn btn-secondary"
+        style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
+        aria-label="Regresar"
+      >
+        <span class="material-icons" style="font-size: 24px;">arrow_back</span>
+      </button>
+      Lista de Albergues
+    </h2>
+
+    <form id="formularioAlbergue">
+      <details open>
+        <summary><strong>Albergues</strong></summary>
+
+        <fieldset class="mt-2">
+          <label>Seleccionar albergue:</label>
+          <select id="selectAlbergue" class="form-control mb-2">
+            <option value="">Cargando albergues...</option>
+          </select>
+
+          <fieldset id="detallesAlbergue" style="display: none;">
+            <label for="id">ID:</label>
+            <input type="text" id="id" class="form-control mb-2" readonly />
+
+            <label for="idAlbergue">Código:</label>
+            <input type="text" id="idAlbergue" class="form-control mb-2" required />
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" class="form-control mb-2" required />
+
+            <label for="region">Región:</label>
+            <input type="text" id="region" class="form-control mb-2" />
+
+            <label for="coordenadaX">Coordenada X:</label>
+            <input type="text" id="coordenadaX" class="form-control mb-2" />
+
+            <label for="coordenadaY">Coordenada Y:</label>
+            <input type="text" id="coordenadaY" class="form-control mb-2" />
+
+            <label for="tipoEstablecimiento">Tipo Establecimiento:</label>
+            <input type="text" id="tipoEstablecimiento" class="form-control mb-2" />
+
+            <label for="tipoAlbergue">Tipo Albergue:</label>
+            <input type="text" id="tipoAlbergue" class="form-control mb-2" />
+
+            <label for="condicionAlbergue">Condición:</label>
+            <input type="text" id="condicionAlbergue" class="form-control mb-2" />
+
+            <label for="especificacion">Especificación:</label>
+            <input type="text" id="especificacion" class="form-control mb-2" />
+
+            <label for="detalleCondicion">Detalle de Condición:</label>
+            <input type="text" id="detalleCondicion" class="form-control mb-2" />
+
+            <label for="administrador">Administrador:</label>
+            <input type="text" id="administrador" class="form-control mb-2" />
+
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" class="form-control mb-2" />
+
+            <label for="seccion">Sección:</label>
+            <input type="text" id="seccion" class="form-control mb-2" />
+
+            <label for="requerimientosTecnicos">Requerimientos Técnicos:</label>
+            <textarea id="requerimientosTecnicos" class="form-control mb-2"></textarea>
+
+            <label for="costoRequerimientosTecnicos">Costo Requerimientos:</label>
+            <input type="text" id="costoRequerimientosTecnicos" class="form-control mb-2" />
+
+            <label for="color">Color:</label>
+            <input type="text" id="color" class="form-control mb-2" />
+          </fieldset>
+        </fieldset>
+      </details>
+
+      <div id="botonesAcciones" class="mt-3" style="display: none;">
+        <button type="button" class="btn btn-success me-2" onclick="actualizarAlbergue()">Actualizar</button>
+        <button type="button" class="btn btn-danger" onclick="eliminarAlbergue()">Eliminar</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let albergues = [];
+
+    async function llenarSelect() {
+      try {
+        const res = await axios.get('https://apiintegrador-production-8ef8.up.railway.app/api/albergues/all');
+        albergues = res.data.data || [];
+        const select = document.getElementById("selectAlbergue");
+        select.innerHTML = '<option value="">Seleccione un albergue</option>';
+        albergues.forEach(a => {
+          const opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = `${a.idAlbergue} - ${a.nombre}`;
+          select.appendChild(opt);
+        });
+      } catch (e) {
+        console.error("Error cargando albergues:", e);
+      }
+    }
+
+    document.getElementById("selectAlbergue").addEventListener("change", e => {
+      const albergue = albergues.find(a => a.id == e.target.value);
+      if (!albergue) {
+        document.getElementById("detallesAlbergue").style.display = "none";
+        document.getElementById("botonesAcciones").style.display = "none";
+        return;
+      }
+
+      document.getElementById("detallesAlbergue").style.display = "block";
+      document.getElementById("botonesAcciones").style.display = "block";
+
+      for (const key in albergue) {
+        const input = document.getElementById(key);
+        if (input) input.value = albergue[key];
+      }
+    });
+
+    async function actualizarAlbergue() {
+      const id = document.getElementById("id").value;
+      const body = {
+        id,
+        idAlbergue: document.getElementById("idAlbergue").value,
+        nombre: document.getElementById("nombre").value,
+        region: document.getElementById("region").value,
+        coordenadaX: document.getElementById("coordenadaX").value,
+        coordenadaY: document.getElementById("coordenadaY").value,
+        tipoEstablecimiento: document.getElementById("tipoEstablecimiento").value,
+        tipoAlbergue: document.getElementById("tipoAlbergue").value,
+        condicionAlbergue: document.getElementById("condicionAlbergue").value,
+        especificacion: document.getElementById("especificacion").value,
+        detalleCondicion: document.getElementById("detalleCondicion").value,
+        administrador: document.getElementById("administrador").value,
+        telefono: document.getElementById("telefono").value,
+        seccion: document.getElementById("seccion").value,
+        requerimientosTecnicos: document.getElementById("requerimientosTecnicos").value,
+        costoRequerimientosTecnicos: document.getElementById("costoRequerimientosTecnicos").value,
+        color: document.getElementById("color").value,
+      };
+
+      try {
+        await axios.put(`https://apiintegrador-production-8ef8.up.railway.app/api/albergues/id/${id}`, body);
+        alert("Albergue actualizado con éxito.");
+      } catch (error) {
+        console.error("Error al actualizar:", error);
+        alert("Error al actualizar el albergue.");
+      }
+    }
+
+    async function eliminarAlbergue() {
+      const id = document.getElementById("id").value;
+      if (!confirm("¿Estás seguro de eliminar este albergue?")) return;
+      try {
+        await axios.delete(`https://apiintegrador-production-8ef8.up.railway.app/api/albergues/id/${id}`);
+        alert("Albergue eliminado.");
+        location.reload();
+      } catch (error) {
+        console.error("Error al eliminar:", error);
+        alert("No se pudo eliminar el albergue.");
+      }
+    }
+
+    llenarSelect();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
