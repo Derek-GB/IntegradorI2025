@@ -45,8 +45,8 @@
 
 
 
-   <div id="sidebar-container"></div>
-    
+  <div id="sidebar-container"></div>
+
   <script>
     fetch('../sidebar.html')
       .then(res => res.text())
@@ -107,7 +107,7 @@
             <label>Nombre del Albergue:</label>
             <input name="albergue-nombre" type="text" class="form-control mb-2" />
             <label>Código de Familia:</label>
-            <input name="idFamilia" type="text" class="form-control mb-2" placeholder="YYYY-Prov-Canton-N°Familia"/>
+            <input name="idFamilia" type="text" class="form-control mb-2" placeholder="YYYY-Prov-Canton-N°Familia" />
           </fieldset>
         </details>
         <details>
@@ -151,21 +151,13 @@
               <option selected>Cisgenero</option>
               <option>Otro</option>
             </select>
-            <label>Teléfono:</label><input name="telefono" type="tel" class="form-control mb-2"
-              placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
+            <label>Teléfono:</label><input name="telefono" type="tel" class="form-control mb-2" placeholder="1234-5678"
+              oninput="formatearTelefono(this)" maxlength="9" />
             <label>Contacto de Emergencia:</label><input name="integrante1-contacto_emergencia" type="tel"
               class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
           </fieldset>
         </details>
-        <details>
-          <summary><strong>Ubicación</strong></summary>
-          <fieldset class="mt-2">
-            <label>Provincia:</label><select name="provincia" id="provincia" class="form-select mb-2" ></select>
-            <label>Cantón:</label><select name="canton" id="canton" class="form-select mb-2" disabled ></select>
-            <label>Distrito:</label><select name="distrito" id="distrito" class="form-select mb-2" ></select>
-            <label>Dirección:</label><textarea name="direccion" class="form-control mb-2" ></textarea>
-          </fieldset>
-        </details>
+       
         <details>
           <summary><strong>Condiciones Especiales</strong></summary>
           <fieldset class="mt-2">
@@ -240,33 +232,7 @@
   <script>
     // Implementación de inicializarUbiSelects
     function inicializarUbiSelects(provinciaId, cantonId, distritoId) {
-      const provincias = [
-        { id: '1', nombre: 'San José' },
-        { id: '2', nombre: 'Alajuela' },
-        { id: '3', nombre: 'Cartago' }
-      ];
-      const cantones = {
-        '1': [
-          { id: '1-1', nombre: 'San José' },
-          { id: '1-2', nombre: 'Escazú' }
-        ],
-        '2': [
-          { id: '2-1', nombre: 'Alajuela' },
-          { id: '2-2', nombre: 'San Ramón' }
-        ],
-        '3': [
-          { id: '3-1', nombre: 'Cartago' },
-          { id: '3-2', nombre: 'Paraíso' }
-        ]
-      };
-      const distritos = {
-        '1-1': ['Carmen', 'Merced'],
-        '1-2': ['Escazú', 'San Antonio'],
-        '2-1': ['Alajuela', 'Carrizal'],
-        '2-2': ['San Ramón', 'Peñas Blancas'],
-        '3-1': ['Oriental', 'Occidental'],
-        '3-2': ['Paraíso', 'Orosi']
-      };
+      
 
       const provinciaSelect = document.getElementById(provinciaId);
       const cantonSelect = document.getElementById(cantonId);
@@ -318,7 +284,9 @@
         }
       });
     }
-
+ function confirmarGuardado() {
+        return confirm('¿Deseas guardar la información?');
+      }
     document.addEventListener('DOMContentLoaded', () => {
       inicializarUbiSelects('provincia', 'canton', 'distrito');
 
@@ -522,16 +490,26 @@
         input.parentNode.innerHTML = '';
       }
 
-      function confirmarGuardado() {
-        return confirm('¿Deseas guardar la información?');
-      }
-
       function limpiarFirma() {
         signaturePad.clear();
       }
 
-      // Form submission handling
-      document.getElementById('formularioAlbergue').addEventListener('submit', (e) => {
+    
+    });
+    // envio de datos a la api
+    function enviarFormulario(data) {
+      axios.post('https://apiintegrador-production-8ef8.up.railway.app/api/personas', data)
+        .then(response => {
+          alert('Formulario enviado correctamente.');
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error('Error al enviar el formulario:', error);
+          alert('Hubo un error al enviar el formulario.');
+        });
+    }
+
+    document.getElementById('formularioAlbergue').addEventListener('submit', (e) => {
         e.preventDefault();
         if (confirmarGuardado()) {
           const formData = new FormData(e.target);
@@ -540,11 +518,11 @@
             data[key] = value;
           });
           console.log('Datos del formulario:', data);
-          // Add logic to save data (e.g., send to server via axios)
-          alert('Formulario guardado exitosamente.');
+          enviarFormulario(data);
         }
       });
-    });
+
+
 
     function formatearTelefono(input) {
       let value = input.value.replace(/\D/g, '');
@@ -567,6 +545,8 @@
     <button onclick="document.body.classList.toggle('saturacion')">Activar Saturación</button>
     <button onclick="cambiarAlturaLinea()">Altura de la línea</button>
   </div>
+
+
   <script>
     document.getElementById('accesibilidad-toggle').addEventListener('click', () => {
       document.getElementById('accesibilidad-panel').classList.toggle('active');
@@ -585,47 +565,39 @@
   </script>
 
   <footer>
-        <p>© 2025 Integrador I - Todos los derechos reservados.</p>
+    <p>© 2025 Integrador I - Todos los derechos reservados.</p>
   </footer>
 
-   <script src="../../js/grupo2/ubicaciones.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      inicializarUbiSelects('busquedaProvincia', 'busquedaCanton', 'busquedaDistrito');
-    });
-  </script>
-
-<style>
-  #accesibilidad-panel {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    display: none;
-  }
-
-  #accesibilidad-panel.active {
-    display: block;
-  }
+  <script src="../../js/grupo2/ubicaciones.js"></script>
 
 
-  #accesibilidad-toggle {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-</style>
+  <style>
+    #accesibilidad-panel {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: white;
+      padding: 10px;
+      border: 1px solid #ccc;
+      display: none;
+    }
+
+    #accesibilidad-panel.active {
+      display: block;
+    }
+
+
+    #accesibilidad-toggle {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
 </body>
+
 </html>
-
- 
-
-
