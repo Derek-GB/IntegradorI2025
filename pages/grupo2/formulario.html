@@ -20,7 +20,12 @@
   </style>
 </head>
 <body>
-  <div id="sidebar-container"></div>
+
+
+
+
+   <div id="sidebar-container"></div>
+    
   <script>
     fetch('../sidebar.html')
       .then(res => res.text())
@@ -28,20 +33,35 @@
         document.getElementById('sidebar-container').innerHTML = html;
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggle-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
         const headers = document.querySelectorAll('h2, h4');
         const mainContent = document.querySelector('.main-content');
+
+        function updateSidebarUI() {
+          const isHidden = sidebar.classList.contains('hidden');
+          toggleBtn.style.display = isHidden ? 'none' : '';
+          headers.forEach(h => {
+            h.style.paddingLeft = isHidden ? '20px' : '120px';
+          });
+          mainContent.style.marginLeft = isHidden ? '40px' : '240px';
+        }
+
         if (!sidebar || !toggleBtn || !mainContent) {
           console.error('One or more elements not found:', { sidebar, toggleBtn, mainContent });
           return;
         }
+
         toggleBtn.addEventListener('click', () => {
           sidebar.classList.toggle('hidden');
-          toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
-          headers.forEach(h => {
-            h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
-          });
-          mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
+          updateSidebarUI();
         });
+
+        hamburgerBtn.addEventListener('click', () => {
+          sidebar.classList.remove('hidden');
+          updateSidebarUI();
+        });
+
+        updateSidebarUI();
       })
       .catch(error => console.error('Error fetching sidebar.html:', error));
   </script>
@@ -82,6 +102,15 @@
             <label>Género:</label><select name="integrante1-genero" class="form-select mb-2"><option>Transexual</option><option>No binario</option><option>Genero fluido</option><option selected>Cisgenero</option><option>Otro</option></select>
             <label>Teléfono:</label><input name="integrante1-telefono" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
             <label>Contacto de Emergencia:</label><input name="integrante1-contacto_emergencia" type="tel" class="form-control mb-2" placeholder="1234-5678" oninput="formatearTelefono(this)" maxlength="9" />
+          </fieldset>
+        </details>
+        <details>
+          <summary><strong>Ubicación</strong></summary>
+          <fieldset class="mt-2">
+            <label>Provincia:</label><select name="provincia" id="provincia" class="form-select mb-2" ></select>
+            <label>Cantón:</label><select name="canton" id="canton" class="form-select mb-2" disabled ></select>
+            <label>Distrito:</label><select name="distrito" id="distrito" class="form-select mb-2" ></select>
+            <label>Dirección:</label><textarea name="direccion" class="form-control mb-2" ></textarea>
           </fieldset>
         </details>
         <details>
@@ -479,6 +508,9 @@
     function alinearTexto() { document.body.classList.toggle('texto-centrado'); }
     function cambiarAlturaLinea() { document.body.classList.toggle('alto-linea'); }
   </script>
+  <footer>
+        <p>© 2025 Integrador I - Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>
   <style>
