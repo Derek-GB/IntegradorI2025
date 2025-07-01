@@ -547,41 +547,73 @@ template#templateAlbergue input[type="radio"] {
 
 .sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 220px;
+    width: 65px;
     height: 100vh;
     background: #00897B;
-    overflow-y: auto;
+    overflow: hidden;
     color: #fff;
-    padding-top: 60px;
-    z-index: 1000;
-    transition: left 0.3s ease;
+    z-index: 100;
+    transition: width 0.3s ease;
 }
 
+.sidebar:hover {
+    width: 290px; /* Ancho expandido al pasar el mouse */
+    overflow-y: auto; 
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el texto que no cabe */
+    transition: color 0.2s;
+}
+
+.sidebar ul li a:hover {
+    color: #FBC02D;
+}
+
+.sidebar:not(:hover) ul li a span,
+.sidebar:not(:hover) ul li a:not(:has(i)) {
+  display: none; /* Oculta el texto cuando no hay hover */
+}
+
+
+.sidebar ul li a i {
+  min-width: 24px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.sidebar nav {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+
 .sidebar nav ul {
-    position: absolute;
-    top: 8px;
-    list-style: none;
     padding: 0;
     margin: 0;
+    list-style: none;
 }
 
 .sidebar nav ul li {
-    margin: 20px 0;
+    padding: 15px 20px;
+    transition: background 0.2s;
+}
+
+.sidebar nav ul li:hover {
+    background: #1a2230;
 }
 
 .sidebar nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 30px;
-    display: block;
-    transition: background 0.2s;
-}
-
-.sidebar nav ul li a:hover {
-    background: #1a2230;
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 /* Ajusta el contenido principal para dejar espacio al sidebar */
@@ -744,56 +776,6 @@ template#templateAlbergue input[type="radio"] {
     transition: background-color 0.3s ease;
     align-self: flex-end;
 }
-
-
-
-#toggle-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: white;
-  color: #00897B;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 20px;
-  z-index: 1001;
-}
-
-.sidebar.hidden {
-  left: -220px; /* Mueve el sidebar completamente fuera de la pantalla */
-}
-
-.sidebar i {
-  margin-right: 8px;
-  width: 20px;
-  text-align: center;
-}
-
-/* Cuando el sidebar está oculto */
-.sidebar.hidden #toggle-btn {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  font-size: 24px;
-  background-color: white;
-  color: #00897B;
-  z-index: 1001;
-}
-
-/* Cuando el sidebar está oculto, mover el botón a la izquierda */
-#toggle-btn.moved {
-  left: 0;
-}
-
-
-/* Cuando el sidebar está oculto, reducir espacio */
-.sidebar.hidden ~ .main-content,
-#toggle-btn.moved ~ .main-content {
-  margin-left: 40px;
-}
-
 
 
 
@@ -1001,8 +983,8 @@ form#recursoForm fieldset {
 }
 
 
-
-/* Botón hamburguesa para mostrar el sidebar cuando está oculto */
+/* 
+Botón hamburguesa para mostrar el sidebar cuando está oculto
 #hamburger-btn {
   position: fixed;
   top: 20px;
@@ -1029,10 +1011,10 @@ form#recursoForm fieldset {
 #hamburger-btn span:nth-child(2) { width: 20px; margin-left: 4px; }
 #hamburger-btn span:nth-child(3) { width: 16px; margin-left: 8px; }
 
-/* Mostrar el botón hamburguesa solo cuando el sidebar está oculto */
+Mostrar el botón hamburguesa solo cuando el sidebar está oculto 
 .sidebar.hidden ~ #hamburger-btn {
   display: block !important;
-}
+} */
 
 footer {
   width: 100%;

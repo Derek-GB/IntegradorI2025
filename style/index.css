@@ -1,7 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     background-color: #FAFAFA;
-    color: #212121;
+    color: #212529;
     line-height: 1.6;
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
@@ -25,7 +25,7 @@ h2, h4 {
     max-width: 100%;
     margin: 0px auto;
     margin-left: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 20px;
     text-align: center;
     background-color: #FAFAFA;
@@ -41,7 +41,7 @@ h2, h4 {
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 40px 30px 30px 30px;
-  margin: 40px auto 30px auto;
+  margin: 0px auto 30px auto;
   max-width: 900px;
 
   min-height: 420px;
@@ -335,21 +335,6 @@ h2, h4 {
     border: 1px solid #ced4da;
 }
 
-/* .search-bar button[type="submit"] {
-    padding: 0.5rem 1rem;
-    margin-left: 1rem;
-    background-color: #FBC02D;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search-bar button[type="submit"]:hover {
-    background-color: #00695c;
-} */
 
 .albergue-resultado {
     border: 1px solid #ccc;
@@ -376,32 +361,9 @@ h2, h4 {
 }
 
 
-
-
-.sidebar nav ul {
-    position: absolute;
-    top: 8px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.sidebar nav ul li {
-    margin: 20px 0;
-}
-.sidebar nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 30px;
-    display: block;
-    transition: background 0.2s;
-}
-.sidebar nav ul li a:hover {
-    background: #1a2230;
-    border-radius: 4px;
-}
 /* Ajusta el contenido principal para dejar espacio al sidebar */
 .main-content {
-    margin-left: 240px;
+    margin-left: 100px;
     padding: 30px;
     transition: margin-left 0.3s ease;
 }
@@ -473,76 +435,79 @@ h2, h4 {
     background-color: #e0ac27;
 }
 
-/* Sidebar */
+
 .sidebar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 220px;
+    margin-top: 0px;
+    width: 65px;
     height: 100vh;
     background: #00897B;
-    overflow-y: auto;
+    overflow: hidden;
+   
     color: #fff;
-    padding-top: 60px;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-  border-right: rgb(0, 110, 101) 2px solid;
+    /* padding-top: 60px; */
+    z-index: 100;
+    transition: width 0.3s ease;
 }
 
-#toggle-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: white;
-  color: #00897B;
-  border: none;
-  padding: px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);  
-  z-index: 2001;
-  cursor: pointer;
+.sidebar:hover {
+    width: 290px; /* Ancho expandido al pasar el mouse */
+    overflow-y: auto; 
 }
 
-#toggle-btn:hover {
-    border-radius: 6px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #00897B;
-  background-color: #bbbaba;
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el texto que no cabe */
+    transition: color 0.2s;
 }
 
-.sidebar.hidden {
-  left: -220px; /* Mueve el sidebar completamente fuera de la pantalla */
+.sidebar ul li a:hover {
+    color: #FBC02D;
 }
 
-.sidebar i {
-  margin-right: 8px;
-  width: 20px;
+.sidebar:not(:hover) ul li a span,
+.sidebar:not(:hover) ul li a:not(:has(i)) {
+  display: none; /* Oculta el texto cuando no hay hover */
+}
+
+
+.sidebar ul li a i {
+  min-width: 24px;
   text-align: center;
+  font-size: 1.2em;
 }
 
-/* Cuando el sidebar está oculto */
-.sidebar.hidden #toggle-btn {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  font-size: 24px;
-  background-color: #00897B;
-  color: white;
-  z-index: 1001;
+.sidebar nav {
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
-/* Cuando el sidebar está oculto, mover el botón a la izquierda */
-#toggle-btn.moved {
-  left: 0;
+
+.sidebar nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-/* Cuando el sidebar está oculto, reducir espacio */
-.sidebar.hidden ~ .main-content,
-#toggle-btn.moved ~ .main-content {
-  margin-left: 40px;
+.sidebar nav ul li {
+    padding: 15px 20px;
+    transition: background 0.2s;
+}
+
+.sidebar nav ul li:hover {
+    background: #1a2230;
+}
+
+.sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .hidden { display: none; }
@@ -553,45 +518,7 @@ h2, h4 {
 .main-content { transition: margin-left 0.3s; }
 
 /* Botón hamburguesa para mostrar el sidebar cuando está oculto */
-#hamburger-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 2001;
-  background: #fff;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  display: none;
-  cursor: pointer;
-}
- 
 
-#hamburger-btn:hover {
-  border-radius: 4px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #00897B;
-  background-color: #bbbaba;
-}
-
-#hamburger-btn span {
-  display: block;
-  height: 3px;
-  border-radius: 2px;
-  background: #333;
-  margin: 4px 0;
-}
-
-#hamburger-btn span:nth-child(1) { width: 24px; }
-#hamburger-btn span:nth-child(2) { width: 20px; margin-left: 4px; }
-#hamburger-btn span:nth-child(3) { width: 16px; margin-left: 8px; }
-
-/* Mostrar el botón hamburguesa solo cuando el sidebar está oculto */
-.sidebar.hidden ~ #hamburger-btn {
-  display: block !important;
-}
 
 footer {
   width: 100%;
