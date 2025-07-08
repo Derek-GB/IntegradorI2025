@@ -63,7 +63,7 @@ body {
 }
 
 .material-icons {
-  font-size: 20px;
+  font-size: 2px;
   vertical-align: middle;
 }
 
@@ -76,14 +76,17 @@ body {
   overflow-y: auto;
 }
 
+
 /* Header */
 .top-header {
   background-color: #00897B;
   color: white;
   padding: 20px 40px;
-  position: relative; 
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  /* Añade esto para controlar el espacio entre los items flex */
 }
 
 .top-header h1 {
@@ -102,19 +105,24 @@ body {
   padding: 6px 8px;
   text-decoration: none;
   font-weight: bold;
-  /* Mantener en el flujo normal (a la derecha) */
   margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
+  /* IMPEDIR QUE SE ENCOJA */
+  flex-grow: 0;
+  /* IMPEDIR QUE SE ESTIRE */
 }
 
 .back-button .material-icons {
   vertical-align: middle;
   font-size: 24px;
 }
+
+/* ... (el resto de tu CSS anterior sin cambios) ... */
 
 /* Área principal con el formulario centrado */
 .main-content {
@@ -134,11 +142,12 @@ body {
   background-color: #FAFAFA;
   border-radius: 8px;
   padding: 25px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Titulos centrados */
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   margin-bottom: 16px;
 }
@@ -153,20 +162,24 @@ h2 {
 
 /* Tarjetas blancas con sombra */
 .card {
-  max-width: 700px; /* antes 600px o menos */
-  width: 90%;       /* para que se adapte bien en pantallas chicas */
-  margin: 0 auto;   /* centrado horizontal */
+  max-width: 700px;
+  /* antes 600px o menos */
+  width: 90%;
+  /* para que se adapte bien en pantallas chicas */
+  margin: 0 auto;
+  /* centrado horizontal */
   background-color: var(--color-blanco);
   padding: 20px;
   margin-bottom: 24px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
 /* Formularios */
 form {
-  margin: 0; /* Lo controlamos en #formularioAbarrotes */
+  margin: 0;
+  /* Lo controlamos en #formularioAbarrotes */
 }
 
 /* Etiquetas */
@@ -178,7 +191,9 @@ label {
 }
 
 /* Inputs, selects, textarea */
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid #ced4da;
@@ -189,7 +204,9 @@ input, select, textarea {
   transition: border-color 0.3s ease;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: none;
   border-color: var(--color-verde-form);
 }
@@ -221,7 +238,8 @@ table {
   margin-top: 12px;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
@@ -264,7 +282,7 @@ details[open] summary {
   border-bottom: 1px solid var(--color-gris-borde);
 }
 
-details > *:not(summary) {
+details>*:not(summary) {
   padding: 10px;
   background-color: var(--color-gris-claro);
 }
@@ -349,4 +367,7 @@ details > *:not(summary) {
   background-color: var(--color-amarillo-hover);
 }
 
-
+#toggle-btn {
+  width: auto;
+  padding: 8px 12px;
+}

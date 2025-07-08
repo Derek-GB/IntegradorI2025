@@ -20,7 +20,7 @@ const CONVERSION_RATES_LIMPIEZA = {
     "Limpiones": { basePersonas: 100, baseCantidad: 4, unidad: "Unidad" },
     "Trapos o mechas": { basePersonas: 100, baseCantidad: 3, unidad: "Unidad" },
     "Toallas de papel": { basePersonas: 100, baseCantidad: 3, unidad: "Rollo" },
-    "Bomba desatorar servicios": { basePersonas: 100, baseCantidad: 2, unidad: "Unidad" },
+    "Boma desatorar servicios": { basePersonas: 100, baseCantidad: 2, unidad: "Unidad" },
     "Toalla sanitaria": { basePersonas: 100, baseCantidad: 5, unidad: "Paquete de al menos 10 unidades" },
     "Pañales niño M unidades": { basePersonas: 100, baseCantidad: 200, unidad: "Unidad" },
     "Pañales niño L unidades": { basePersonas: 100, baseCantidad: 200, unidad: "Unidad" },
@@ -58,42 +58,22 @@ const CONVERSION_RATES_OLORES_Y_OTROS = {
     "Olor (L)": { basePersonas: 100, baseCantidad: 40, unidad: "Litro" },
 };
 
-// --- TASAS DE CONVERSIÓN PARA PRODUCTOS DE ABARROTES (CORREGIDO SEGÚN IMAGEN image_fc9993.png - Cantidad para 30 personas) ---
+// --- TASAS DE CONVERSIÓN PARA PRODUCTOS DE ABARROTES ---
 const CONVERSION_RATES_ABARROTES = {
-    // Nombre del producto: { basePersonas: CANTIDAD_PERSONAS_PARA_REFERENCIA, baseCantidad: CANTIDAD_PARA_ESAS_PERSONAS, unidad: "UNIDAD" }
-    // Arroz: 3 Kg para 30 personas -> 3/30 = 0.1 Kg por persona
     "Arroz 80% grano entero": { basePersonas: 30, baseCantidad: 3, unidad: "Kilogramo" },
-    // Frijoles: 1.5 Kg para 30 personas -> 1.5/30 = 0.05 Kg por persona
     "Frijoles": { basePersonas: 30, baseCantidad: 1.5, unidad: "Kilogramo" },
-    // Azúcar: 0.75 Kg para 30 personas -> 0.75/30 = 0.025 Kg por persona
     "Azúcar": { basePersonas: 30, baseCantidad: 0.75, unidad: "Kilogramo" },
-    // Aceite de soya: 1 Litro para 30 personas -> 1/30 = 0.0333 Litros por persona
     "Aceite de soya": { basePersonas: 30, baseCantidad: 1, unidad: "Litro" },
-    // Café: 1 Kg para 30 personas -> 1/30 = 0.0333 Kg por persona
     "Café": { basePersonas: 30, baseCantidad: 1, unidad: "Kilogramo" },
-    // Espagueti: 1 Kg para 30 personas -> 1/30 = 0.0333 Kg por persona
     "Espagueti": { basePersonas: 30, baseCantidad: 1, unidad: "Kilogramo" },
-    // Atún en trozos: 1 Lata (170g) para 8 personas. Asumiré que quieres la cantidad de la lata (0.170kg) para las 8 personas.
-    // O si es por persona: 0.170 / 8 = 0.02125 Kg por persona
-    "Atún en trozos": { basePersonas: 8, baseCantidad: 0.170, unidad: "Kilogramo" }, // Asumiendo lata de 170g
-    // Avena en polvo: 0.4 Kg para 15 personas -> 0.4/15 = 0.0266 Kg por persona
+    "Atún en trozos": { basePersonas: 8, baseCantidad: 0.170, unidad: "Kilogramo" },
     "Avena en polvo": { basePersonas: 15, baseCantidad: 0.4, unidad: "Kilogramo" },
-    // Refresco: 1 Paquete para 1 persona
     "Refresco": { basePersonas: 1, baseCantidad: 1, unidad: "Paquete para Litro" },
-    // Leche en polvo: 1.3 Kg para 25 personas -> 1.3/25 = 0.052 Kg por persona
     "Leche en polvo": { basePersonas: 25, baseCantidad: 1.3, unidad: "Kilogramo" },
-    // Agua dulce en polvo: 0.2 Kg para 15 personas -> 0.2/15 = 0.0133 Kg por persona
     "Agua dulce en polvo": { basePersonas: 15, baseCantidad: 0.2, unidad: "Kilogramo" },
-    // Pan Cuadrado: 2 Rebanadas para 1 persona
     "Pan Cuadrado": { basePersonas: 1, baseCantidad: 2, unidad: "Rebanadas" },
-    // Tortillas: 2 Unidades para 1 persona
     "Tortillas": { basePersonas: 1, baseCantidad: 2, unidad: "Unidad" },
-    // Pasta de tomate: 1 Kg para 30 personas -> 1/30 = 0.0333 Kg por persona
     "Pasta de tomate": { basePersonas: 30, baseCantidad: 1, unidad: "Kilogramo" },
-
-    // Mantengo el resto de tus abarrotes que no estaban en la imagen,
-    // con sus valores originales o asumiendo que quieres basePersonas: 1
-    // Si no los necesitas o si tienen nombres diferentes en tu HTML, puedes eliminarlos.
     "Galletas": { basePersonas: 1, baseCantidad: 0.02, unidad: "Paquete" },
     "Cereal": { basePersonas: 1, baseCantidad: 0.015, unidad: "Caja" },
     "Sardinas enlatadas": { basePersonas: 3, baseCantidad: 1, unidad: "Lata" },
@@ -139,15 +119,15 @@ const CONVERSION_RATES_ABARROTES = {
     "Frijoles molidos": { basePersonas: 1, baseCantidad: 0.05, unidad: "Kilogramo" },
 };
 
+// --- TASAS DE CONVERSIÓN PARA VERDURAS ---
+const CONVERSION_RATES_VERDURAS = {
+    "Yuca": 120,
+    "Papa": 120,
+    "Camote": 120,
+    "Chayote": 120,
+};
 
 // --- FUNCIONES COMUNES PARA SECCIONES CON CHECKBOX (ABARROTES, LIMPIEZA, OLORES) ---
-/**
- * Guarda o actualiza un producto en el localStorage.
- * @param {string} key - La clave del localStorage.
- * @param {string} name - Nombre del producto.
- * @param {number} quantity - Cantidad del producto.
- * @param {string} unit - Unidad del producto.
- */
 function guardarProductoEnLocalStorage(key, name, quantity, unit) {
     let currentSelected = JSON.parse(localStorage.getItem(key)) || [];
     const newProduct = {
@@ -164,25 +144,12 @@ function guardarProductoEnLocalStorage(key, name, quantity, unit) {
     localStorage.setItem(key, JSON.stringify(currentSelected));
 }
 
-/**
- * Elimina un producto del localStorage.
- * @param {string} key - La clave del localStorage.
- * @param {string} name - Nombre del producto a eliminar.
-*/
 function eliminarProductoDeLocalStorage(key, name) {
     let currentSelected = JSON.parse(localStorage.getItem(key)) || [];
     currentSelected = currentSelected.filter(item => item.nombre !== name);
     localStorage.setItem(key, JSON.stringify(currentSelected));
 }
 
-/**
- * Actualiza la tabla de resumen (añade, actualiza o elimina filas).
- * @param {string} tablaId
- * @param {string} productoNombre
- * @param {number} cantidad
- * @param {string} unidadTipo
- * @param {string} categoria
-*/
 function actualizarTablaResumen(tablaId, productoNombre, cantidad, unidadTipo, categoria) {
     const tablaBody = document.getElementById(tablaId)?.querySelector('tbody');
     if (!tablaBody) {
@@ -224,10 +191,6 @@ function adjuntarEventListenersEliminarCheckbox() {
     });
 }
 
-/**
- * Maneja la eliminación de un producto desde la tabla de resumen de las secciones con checkbox.
- * @param {Event} event - El evento de click.
- */
 function manejarEliminarProductoDesdeResumenCheckbox(event) {
     const button = event.target.closest('button.btn-eliminar-checkbox');
     if (!button) return;
@@ -266,19 +229,10 @@ function manejarEliminarProductoDesdeResumenCheckbox(event) {
     if (productDivInForm) {
         const checkbox = productDivInForm.querySelector('input[type="checkbox"]');
         if (checkbox) checkbox.checked = false;
-        productDivInForm.style.display = 'flex'; // Vuelve a mostrar el producto en la lista
+        productDivInForm.style.display = 'flex';
     }
 }
 
-
-// FUNCIONES DE CÁLCULO ESPECÍFICAS PARA PRODUCTOS CON CONVERSIÓN
-/**
- * Calcula la cantidad de un producto basado en el número de personas y tasas de conversión.
- * @param {string} productName - El nombre del producto.
- * @param {number} personas - El número de personas.
- * @param {object} conversionRatesObject - El objeto de tasas de conversión (ej. CONVERSION_RATES_LIMPIEZA).
- * @returns {object|null} Un objeto con { cantidad, unidad } o null si no se encuentra el producto o personas <= 0.
- */
 function calcularCantidadPorPersonas(productName, personas, conversionRatesObject) {
     const conversion = conversionRatesObject[productName];
     if (!conversion || personas <= 0) {
@@ -289,11 +243,6 @@ function calcularCantidadPorPersonas(productName, personas, conversionRatesObjec
     return { cantidad: cantidadFormateada, unidad: conversion.unidad };
 }
 
-/**
- * Inicializa y actualiza la UI y localStorage para productos con checkbox de la sección de Limpieza.
- * Se llama al cargar la página y cuando cambian las personas.
- * @param {number} personas - Número actual de personas.
- */
 function inicializarYActualizarProductosCheckboxLimpieza(personas) {
     const formContainer = document.getElementById('productosLimpiezaDisponibles');
     if (!formContainer) {
@@ -342,11 +291,6 @@ function inicializarYActualizarProductosCheckboxLimpieza(personas) {
     adjuntarEventListenersEliminarCheckbox();
 }
 
-/**
- * Inicializa y actualiza la UI y localStorage para productos con checkbox de la sección de Olores y otros.
- * Se llama al cargar la página y cuando cambian las personas.
- * @param {number} personas - Número actual de personas.
- */
 function inicializarYActualizarProductosCheckboxOlores(personas) {
     const formContainer = document.getElementById('productosOloresDisponibles');
     if (!formContainer) {
@@ -395,11 +339,6 @@ function inicializarYActualizarProductosCheckboxOlores(personas) {
     adjuntarEventListenersEliminarCheckbox();
 }
 
-/**
- * Inicializa y actualiza la UI y localStorage para productos con checkbox de la sección de Abarrotes.
- * Se llama al cargar la página y cuando cambian las personas.
- * @param {number} personas - Número actual de personas.
- */
 function inicializarYActualizarProductosCheckboxAbarrotes(personas) {
     const formContainer = document.getElementById('seccionAbarrotes');
     if (!formContainer) {
@@ -448,13 +387,7 @@ function inicializarYActualizarProductosCheckboxAbarrotes(personas) {
     adjuntarEventListenersEliminarCheckbox();
 }
 
-
-// --- FUNCIONES ORIGINALES PARA CARNES Y PROTEÍNAS (y otras secciones con botón "Agregar") ---
-/**
- * Crea una fila en la tabla para los productos que se añaden con botón "Agregar".
- * @param {Array<string>} datos - Array con [tipo, unidad, cantidad].
- * @param {string} tablaId - ID de la tabla donde insertar la fila.
- */
+// --- FUNCIONES PARA SECCIONES CON BOTÓN "AGREGAR" (CARNES, PROTEÍNAS, VERDURAS) ---
 function crearFila(datos, tablaId) {
     const tabla = document.getElementById(tablaId)?.querySelector('tbody') || document.getElementById(tablaId);
     if (!tabla) {
@@ -478,11 +411,7 @@ function crearFila(datos, tablaId) {
     tabla.appendChild(fila);
 }
 
-/**
- * Actualiza el localStorage para las tablas que se rellenan con botón "Agregar".
- * @param {string} tablaId
- */
-function actualizarLocalStorageManual(tablaId) {
+function actualizarLocalStorage(tablaId) {
     const tablaBody = document.getElementById(tablaId)?.querySelector('tbody') || document.getElementById(tablaId);
     if (!tablaBody) return;
 
@@ -494,130 +423,27 @@ function actualizarLocalStorageManual(tablaId) {
             productos.push({
                 producto: celdas[0].textContent,
                 unidad: celdas[1].textContent,
-                cantidad: celdas[2].textContent
+                cantidad: parseFloat(celdas[2].textContent)
             });
         }
     });
 
-    // Mapeo de IDs de tabla a claves de localStorage para las secciones manuales
     const claveLocalStorage = {
-        'tablaResumen': 'carnes',
+        'tablaCarnes': 'carnes',
         'tablaProteina': 'proteinas',
         'tablaVerdura': 'verduras',
-    }[tablaId]; // ¡Aquí ya NO se incluyen las claves de checkbox!
+    }[tablaId];
 
     if (claveLocalStorage) {
         localStorage.setItem(claveLocalStorage, JSON.stringify(productos));
-        console.log(`LocalStorage '${claveLocalStorage}' actualizado:`, productos);
     } else {
         console.warn(`No se encontró clave de LocalStorage para tablaId: ${tablaId}`);
     }
 }
-function guardarProductoEnLocalStorageCheckbox(key, name, quantity, unit) {
-    let currentSelected = JSON.parse(localStorage.getItem(key)) || [];
-    const newProduct = {
-        nombre: name,
-        cantidad: quantity,
-        unidad: unit
-    };
-    const existingIndex = currentSelected.findIndex(item => item.nombre === name);
-    if (existingIndex > -1) {
-        currentSelected[existingIndex] = newProduct;
-    } else {
-        currentSelected.push(newProduct);
-    }
-    localStorage.setItem(key, JSON.stringify(currentSelected));
-}
 
-function eliminarProductoDeLocalStorageCheckbox(key, name) {
-    let currentSelected = JSON.parse(localStorage.getItem(key)) || [];
-    currentSelected = currentSelected.filter(item => item.nombre !== name);
-    localStorage.setItem(key, JSON.stringify(currentSelected));
-}
-
-
-/**
- * Agrega un producto (para Carnes y Proteinas, asumiendo tu estructura original)
- */
-function agregarProductoOriginal(tipoId, unidadId, cantidadId, tablaId, claveLocalStorage = null) {
-    const tipo = document.getElementById(tipoId)?.value.trim();
-    const unidad = document.getElementById(unidadId)?.value.trim();
-    const cantidad = document.getElementById(cantidadId)?.value.trim();
-    if (tipo && unidad && cantidad && parseFloat(cantidad) > 0) {
-        crearFila([tipo, unidad, cantidad], tablaId);
-        if (claveLocalStorage) {
-            const datos = JSON.parse(localStorage.getItem(claveLocalStorage)) || [];
-            datos.push({
-                producto: tipo,
-                unidad,
-                cantidad
-            });
-            localStorage.setItem(claveLocalStorage, JSON.stringify(datos));
-        }
-        document.getElementById(tipoId).value = "";
-        document.getElementById(unidadId).value = "";
-        document.getElementById(cantidadId).value = "";
-    }
-}
-
-
-// --- FUNCIONES Y LÓGICA PARA VERDURAS (CON EDICIÓN) ---
-let verdurasAgregadas = JSON.parse(localStorage.getItem('verduras')) || [];
-let editandoVerdura = false;
-let indiceEdicion = null;
-
-function actualizarTablaVerduras() {
-    const tabla = document.getElementById("tablaVerdura")?.querySelector('tbody') || document.getElementById("tablaVerdura");
-    if (!tabla) {
-        console.error("Elemento con ID 'tablaVerdura' o su tbody no encontrado.");
-        return;
-    }
-    tabla.innerHTML = ""; // Limpiar la tabla
-
-    verdurasAgregadas.forEach((verdura, index) => {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${verdura.tipo}</td>
-            <td>${verdura.unidad}</td>
-            <td>${verdura.cantidad}</td>
-            <td>
-                <button type="button" onclick="eliminarVerdura(${index})">
-                    <span class="material-icons">delete</span>
-                </button>
-            </td>
-        `;
-        tabla.appendChild(fila);
-    });
-
-    localStorage.setItem('verduras', JSON.stringify(verdurasAgregadas));
-}
-
-// Funciones globales para ser llamadas desde onclick en el HTML
-window.eliminarVerdura = function(index) {
-    verdurasAgregadas.splice(index, 1);
-    actualizarTablaVerduras();
-};
-
-window.editarVerdura = function(index) {
-    const verdura = verdurasAgregadas[index];
-    const tipoVerduraEl = document.getElementById("tipoVerdura");
-    const cantidadVerduraEl = document.getElementById("cantidadVerdura");
-    const unidadVerduraEl = document.getElementById("unidadVerdura");
-    const btnAgregarVerduraEl = document.getElementById("btnAgregarVerdura");
-
-    if (tipoVerduraEl) tipoVerduraEl.value = verdura.tipo;
-    if (cantidadVerduraEl) cantidadVerduraEl.value = verdura.cantidad;
-    if (unidadVerduraEl) unidadVerduraEl.value = verdura.unidad;
-
-    editandoVerdura = true;
-    indiceEdicion = index;
-    if (btnAgregarVerduraEl) btnAgregarVerduraEl.textContent = "Guardar Cambios";
-};
-
-
-//   INICIALIZACIÓN PRINCIPAL AL CARGAR EL CONTENIDO DEL DOM
+// INICIALIZACIÓN PRINCIPAL AL CARGAR EL CONTENIDO DEL DOM
 document.addEventListener('DOMContentLoaded', () => {
-    //Lógica para el manejo de pasos (navegación entre formularios)
+    // Lógica para el manejo de pasos (navegación entre formularios)
     const pasos = document.querySelectorAll(".paso");
     let pasoActual = 0;
     function mostrarPaso(index) {
@@ -644,35 +470,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- CARGA INICIAL DE DATOS DESDE LOCALSTORAGE ---
-    // Carga inicial para Carnes y Proteínas (usando la lógica original)
-    const clavesOriginales = [{
-        tabla: 'tablaResumen',
-        clave: 'carnes'
-    }, {
-        tabla: 'tablaProteina',
-        clave: 'proteinas'
-    }];
+    // CARGA INICIAL DE DATOS DESDE LOCALSTORAGE
+    const clavesOriginales = [
+        { tabla: 'tablaCarnes', clave: 'carnes' },
+        { tabla: 'tablaProteina', clave: 'proteinas' },
+        { tabla: 'tablaVerdura', clave: 'verduras' }
+    ];
 
-    clavesOriginales.forEach(({
-        tabla,
-        clave
-    }) => {
+    clavesOriginales.forEach(({ tabla, clave }) => {
         const datos = JSON.parse(localStorage.getItem(clave)) || [];
         const tablaBody = document.getElementById(tabla)?.querySelector('tbody');
         if (tablaBody) {
             tablaBody.innerHTML = '';
-            datos.forEach(({
-                producto,
-                unidad,
-                cantidad
-            }) => {
+            datos.forEach(({ producto, unidad, cantidad }) => {
                 crearFila([producto, unidad, cantidad], tabla);
             });
         }
     });
 
-    // --- MANEJO DE EVENTO PARA EL CAMPO DE PERSONAS ---
+    // MANEJO DE EVENTO PARA EL CAMPO DE PERSONAS
     const personasInput = document.getElementById("personasCarnes");
     let initialPersonas = 0;
     if (personasInput) {
@@ -684,37 +500,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         personasInput.addEventListener('input', () => {
             const personas = parseInt(personasInput.value) || 0;
-            // Actualizar todas las secciones que dependen de personas
-            inicializarYActualizarProductosCheckboxAbarrotes(personas); // Abarrotes añadido aquí
+            inicializarYActualizarProductosCheckboxAbarrotes(personas);
             inicializarYActualizarProductosCheckboxLimpieza(personas);
             inicializarYActualizarProductosCheckboxOlores(personas);
         });
     }
 
-    // Asignación de Event Listeners y Carga Inicial para Abarrotes, Limpieza, Olores (solo checkbox)
-    const categoriesWithCheckboxes = [{
-        formId: 'seccionAbarrotes',
-        localStorageKey: 'abarrotesSeleccionados',
-        tableId: 'tablaResumenAbarrotes',
-        categoryNameForTable: 'abarrotes',
-        conversionRates: CONVERSION_RATES_ABARROTES, // Asignado ahora
-        initializer: inicializarYActualizarProductosCheckboxAbarrotes // Asignado ahora
-    }, {
-        formId: 'productosLimpiezaDisponibles',
-        localStorageKey: 'limpiezaSeleccionados',
-        tableId: 'tablaResumenLimpieza',
-        categoryNameForTable: 'limpieza',
-        conversionRates: CONVERSION_RATES_LIMPIEZA,
-        initializer: inicializarYActualizarProductosCheckboxLimpieza
-    }, {
-        formId: 'productosOloresDisponibles',
-        localStorageKey: 'oloresSeleccionados',
-        tableId: 'tablaResumenOlores',
-        categoryNameForTable: 'olores',
-        conversionRates: CONVERSION_RATES_OLORES_Y_OTROS,
-        initializer: inicializarYActualizarProductosCheckboxOlores
-    }];
-
+    // ASIGNACIÓN DE EVENT LISTENERS PARA CHECKBOXES (ABARROTES, LIMPIEZA, OLORES)
+    const categoriesWithCheckboxes = [
+        {
+            formId: 'seccionAbarrotes',
+            localStorageKey: 'abarrotesSeleccionados',
+            tableId: 'tablaResumenAbarrotes',
+            categoryNameForTable: 'abarrotes',
+            conversionRates: CONVERSION_RATES_ABARROTES,
+            initializer: inicializarYActualizarProductosCheckboxAbarrotes
+        },
+        {
+            formId: 'productosLimpiezaDisponibles',
+            localStorageKey: 'limpiezaSeleccionados',
+            tableId: 'tablaResumenLimpieza',
+            categoryNameForTable: 'limpieza',
+            conversionRates: CONVERSION_RATES_LIMPIEZA,
+            initializer: inicializarYActualizarProductosCheckboxLimpieza
+        },
+        {
+            formId: 'productosOloresDisponibles',
+            localStorageKey: 'oloresSeleccionados',
+            tableId: 'tablaResumenOlores',
+            categoryNameForTable: 'olores',
+            conversionRates: CONVERSION_RATES_OLORES_Y_OTROS,
+            initializer: inicializarYActualizarProductosCheckboxOlores
+        }
+    ];
 
     categoriesWithCheckboxes.forEach(cat => {
         const formContainer = document.getElementById(cat.formId);
@@ -728,14 +546,13 @@ document.addEventListener('DOMContentLoaded', () => {
         formProducts.forEach(productDiv => {
             const checkbox = productDiv.querySelector('input[type="checkbox"]');
             const productName = productDiv.dataset.productName;
-            const unitType = productDiv.dataset.unitType; // Atributo para la unidad por defecto si no hay conversión
+            const unitType = productDiv.dataset.unitType;
 
             if (!checkbox || !productName) {
                 console.warn(`Elemento de producto incompleto en ${cat.formId}:`, productDiv);
                 return;
             }
 
-            // Remueve el event listener anterior si existe para evitar duplicados
             const oldChangeListener = productDiv._changeListener;
             if (oldChangeListener) {
                 checkbox.removeEventListener('change', oldChangeListener);
@@ -750,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (personas === 0 && cat.conversionRates && cat.conversionRates[productName]) {
                         alert(`Por favor, ingrese un número de personas mayor a 0 para calcular la cantidad de "${productName}".`);
                         checkbox.checked = false;
-                        productDiv.style.display = 'flex'; // Mantener visible si no se pudo agregar
+                        productDiv.style.display = 'flex';
                         return;
                     }
 
@@ -760,31 +577,27 @@ document.addEventListener('DOMContentLoaded', () => {
                             quantityToUse = calculated.cantidad;
                             unitToUse = calculated.unidad;
                         } else {
-                            // Esto podría ocurrir si personas es 0 o hay un problema con la conversión específica.
-                            // Ya se maneja personas === 0 arriba, así que esto sería más por un dato incorrecto.
                             alert(`No se pudo calcular la cantidad para "${productName}".`);
                             checkbox.checked = false;
                             productDiv.style.display = 'flex';
                             return;
                         }
                     } else {
-                        // Para productos sin tasa de conversión específica, asumimos cantidad 1 y la unidad del dataset
                         quantityToUse = 1;
-                        unitToUse = unitType || "Unidad"; // Asegurarse de que unitType esté definido
+                        unitToUse = unitType || "Unidad";
                     }
                     guardarProductoEnLocalStorage(cat.localStorageKey, productName, quantityToUse, unitToUse);
                     actualizarTablaResumen(cat.tableId, productName, quantityToUse, unitToUse, cat.categoryNameForTable);
-                    productDiv.style.display = 'none'; // Ocultar si se agregó correctamente
+                    productDiv.style.display = 'none';
                 } else {
                     eliminarProductoDeLocalStorage(cat.localStorageKey, productName);
-                    actualizarTablaResumen(cat.tableId, productName, 0, unitToUse, cat.categoryNameForTable); // 0 para eliminar
-                    productDiv.style.display = 'flex'; // Mostrar si se deseleccionó
+                    actualizarTablaResumen(cat.tableId, productName, 0, unitToUse, cat.categoryNameForTable);
+                    productDiv.style.display = 'flex';
                 }
             };
             checkbox.addEventListener('change', newChangeListener);
-            productDiv._changeListener = newChangeListener; // Guardar referencia para removerlo después
+            productDiv._changeListener = newChangeListener;
 
-            // Estado inicial al cargar
             const savedItem = JSON.parse(localStorage.getItem(cat.localStorageKey))?.find(item => item.nombre === productName);
             if (savedItem) {
                 checkbox.checked = true;
@@ -795,11 +608,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Si hay una función inicializadora específica para la categoría (que maneja cálculos por personas)
         if (cat.initializer && initialPersonas > 0) {
             cat.initializer(initialPersonas);
-        } else if (!cat.initializer) {
-            // Si no hay inicializador específico, cargar simplemente lo que esté guardado
+        } else {
             const tableBody = document.getElementById(cat.tableId)?.querySelector('tbody');
             if (tableBody) {
                 tableBody.innerHTML = '';
@@ -811,337 +622,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const CONVERSION_RATES_VERDURAS = {
-  "Yuca": 120,
-  "Papa": 120,
-  "Camote": 120,
-  "Chayote": 120,
-};
-
-// Botón agregar verdura
-const btnAgregarVerdura = document.getElementById("btnAgregarVerdura");
-if (btnAgregarVerdura) {
-  btnAgregarVerdura.addEventListener("click", () => {
-    const tipo = document.getElementById("tipoVerdura")?.value;
-    const personas = parseInt(document.getElementById("personasCarnes")?.value) || 0;
-
-    if (!tipo || personas <= 0) {
-      alert("Por favor seleccione una verdura e ingrese una cantidad válida de personas.");
-      return;
-    }
-
-    const gramosPorPersona = CONVERSION_RATES_VERDURAS[tipo];
-    const cantidadTotalGramos = gramosPorPersona * personas;
-    const cantidadKilos = +(cantidadTotalGramos / 1000).toFixed(2); // Redondeado a 2 decimales
-    const unidad = "kg";
-
-    // Obtener verduras guardadas
-    const verdurasGuardadas = JSON.parse(localStorage.getItem("verduras")) || [];
-
-    if (verdurasGuardadas.some(v => v.producto === tipo)) {
-      alert("Ya has agregado esa verdura.");
-      return;
-    }
-
-    if (verdurasGuardadas.length >= 2) {
-      alert("Solo se pueden agregar 2 verduras.");
-      return;
-    }
-
-    // Agregar al localStorage
-    verdurasGuardadas.push({
-      producto: tipo,
-      unidad: unidad,
-      cantidad: cantidadKilos
-    });
-    localStorage.setItem("verduras", JSON.stringify(verdurasGuardadas));
-
-    // Insertar en la tabla específica de verduras
-    crearFila([tipo, unidad, cantidadKilos], "tablaVerdura");
-
-    // También agregar al resumen general si usas tablaResumenFinal
-    if (typeof actualizarTablaResumen === "function") {
-      actualizarTablaResumen("tablaResumenFinal", tipo, cantidadKilos, unidad, "verduras");
-    }
-  });
-
-  // Carga inicial de verduras desde localStorage
-  const verdurasGuardadas = JSON.parse(localStorage.getItem("verduras")) || [];
-  verdurasGuardadas.forEach(({ producto, unidad, cantidad }) => {
-    crearFila([producto, unidad, cantidad], "tablaVerdura");
-  });
-}
-
-    // Asegurarse de llamar a los inicializadores con las personas actuales al cargar la página
-    const currentPersonasOnLoad = parseInt(document.getElementById("personasCarnes")?.value) || 0;
-    inicializarYActualizarProductosCheckboxAbarrotes(currentPersonasOnLoad); // Abarrotes añadido aquí
-    inicializarYActualizarProductosCheckboxLimpieza(currentPersonasOnLoad);
-    inicializarYActualizarProductosCheckboxOlores(currentPersonasOnLoad);
-
-
-    // --- EVENTOS PARA SECCIONES CON BOTÓN "AGREGAR" (CARNES, PROTEÍNAS, VERDURAS) ---
-
-    // EVENTO BOTÓN AGREGAR VERDURA
-    const btnAgregarVerduraEl = document.getElementById("btnAgregarVerdura");
-    if (btnAgregarVerduraEl) {
-        btnAgregarVerduraEl.addEventListener("click", function() {
-            const tipo = document.getElementById("tipoVerdura")?.value.trim();
-            const cantidadValor = document.getElementById("cantidadVerdura")?.value.trim().replace(',', '.');
-            const cantidad = parseFloat(cantidadValor);
-            const unidad = document.getElementById("unidadVerdura")?.value.trim();
-
-            if (!tipo || !unidad || isNaN(cantidad) || cantidad <= 0) {
-                return;
-            }
-
-            if (!editandoVerdura) {
-                if (verdurasAgregadas.some(v => v.tipo === tipo)) {
-                    alert("Ya has agregado esa verdura.");
-                    return;
-                }
-                if (verdurasAgregadas.length >= 2) {
-                    alert("Solo se pueden agregar 2 verduras.");
-                    return;
-                }
-                verdurasAgregadas.push({
-                    tipo,
-                    cantidad,
-                    unidad
-                });
-            } else {
-                verdurasAgregadas[indiceEdicion] = {
-                    tipo,
-                    cantidad,
-                    unidad
-                };
-                editandoVerdura = false;
-                indiceEdicion = null;
-                this.textContent = "Agregar";
-            }
-            actualizarTablaVerduras();
-            document.getElementById("tipoVerdura").value = "";
-            document.getElementById("cantidadVerdura").value = "";
-            document.getElementById("unidadVerdura").value = "";
-        });
-    } else {
-        console.error("Elemento con ID 'btnAgregarVerdura' no encontrado.");
-    }
-
-    // Carga inicial para la tabla de verduras
-    actualizarTablaVerduras();
-
-    // EVENTOS DE BOTONES PARA CARNES Y PROTEÍNAS
+    // EVENTOS PARA BOTONES AGREGAR
     document.getElementById('btnAgregarCarne')?.addEventListener('click', () => {
         const tipo = document.getElementById('tipoCarne')?.value.trim();
         const personas = parseInt(document.getElementById('personasCarnes')?.value) || 0;
-        if (tipo && personas > 0) {
-            const gramosTotales = personas * 120;
-            const kilos = (gramosTotales / 1000).toFixed(2);
-            crearFila([tipo, 'Kg', kilos], 'tablaResumen');
-            actualizarLocalStorage('tablaResumen');
-            document.getElementById('tipoCarne').value = '';
-        } else {
-            alert("Por favor, seleccione un tipo de carne y asegure que el número de personas sea mayor a 0.");
+
+        if (!tipo || personas <= 0) {
+            alert('Por favor, seleccione un tipo de carne e ingrese una cantidad válida de personas.');
+            return;
         }
+
+        const gramosPorPersona = 120;
+        const cantidadTotalGramos = gramosPorPersona * personas;
+        const cantidadKilos = parseFloat((cantidadTotalGramos / 1000).toFixed(2));
+        const unidad = 'kg';
+
+        let carnes = JSON.parse(localStorage.getItem('carnes')) || [];
+
+        if (carnes.some(c => c.producto === tipo)) {
+            alert('Ya has agregado esa carne.');
+            return;
+        }
+
+        carnes.push({ producto: tipo, unidad, cantidad: cantidadKilos });
+        localStorage.setItem('carnes', JSON.stringify(carnes));
+        crearFila([tipo, unidad, cantidadKilos], 'tablaCarnes');
+        document.getElementById('tipoCarne').value = '';
     });
 
-    // 1. Botón Agregar
-document.getElementById('btnAgregarProteina')?.addEventListener('click', () => {
-  agregarProductoOriginal('tipoProteina', 'unidadProteina', 'cantidadProteina', 'tablaProteina', 'proteinas');
-});
+    document.getElementById('btnAgregarProteina')?.addEventListener('click', () => {
+        const tipo = document.getElementById('tipoProteina')?.value.trim();
+        const personas = parseInt(document.getElementById('personasCarnes')?.value) || 0;
 
-document.getElementById("btnAgregarProteina").addEventListener("click", function () {
-  const tipo = document.getElementById("tipoProteina").value;
-  const tabla = document.getElementById("tablaProteina");
+        if (!tipo || personas <= 0) {
+            alert('Por favor, seleccione una proteína e ingrese una cantidad válida de personas.');
+            return;
+        }
 
-  const datosFormulario = JSON.parse(localStorage.getItem("datosFormulario"));
-  const personas = datosFormulario && datosFormulario.personas ? parseInt(datosFormulario.personas) : 0;
+        let unidad = '';
+        let cantidad = 0;
 
-  if (!tipo || !personas || personas <= 0) {
-    alert("Debe seleccionar una proteína y asegurarse de haber indicado la cantidad de personas.");
-    return;
-  }
+        switch (tipo) {
+            case 'Huevos':
+                unidad = 'Cartón';
+                cantidad = Math.ceil(personas / 30);
+                break;
+            case 'Mortadela':
+                unidad = 'kg';
+                cantidad = parseFloat((personas * 25 / 1000).toFixed(2));
+                break;
+            case 'Salchichón':
+                unidad = 'kg';
+                cantidad = parseFloat((personas * 125 / 1000).toFixed(2));
+                break;
+            default:
+                alert('Proteína no reconocida.');
+                return;
+        }
 
-  let unidad = "";
-  let cantidad = 0;
+        let proteinas = JSON.parse(localStorage.getItem('proteinas')) || [];
 
-  switch (tipo) {
-    case "Huevos":
-      unidad = "Cartón";
-      cantidad = Math.ceil(personas / 30);
-      break;
-    case "Mortadela":
-      unidad = "Kg";
-      cantidad = (personas * 25 / 1000).toFixed(2);
-      break;
-    case "Salchichón":
-      unidad = "Kg";
-      cantidad = (personas * 125 / 1000).toFixed(2);
-      break;
-  }
+        if (proteinas.some(p => p.producto === tipo)) {
+            alert('Ya has agregado esa proteína.');
+            return;
+        }
 
-  // Crear nueva fila en la tabla
-  const fila = document.createElement("tr");
-  fila.innerHTML = `
-    <td>${tipo}</td>
-    <td>${unidad}</td>
-    <td>${cantidad}</td>
-    <td>
-      <button class="btn-eliminar" aria-label="Eliminar">
-        <span class="material-icons">delete</span>
-      </button>
-    </td>
-  `;
-  tabla.appendChild(fila);
-
-  // Evento para eliminar fila
-  fila.querySelector(".btn-eliminar").addEventListener("click", () => {
-    fila.remove();
-  });
-
-  // Limpiar selección
-  document.getElementById("tipoProteina").value = "";
-});
-
-
-});
-// Función para crear fila en tabla con botón eliminar
-function crearFila(datos, tablaId) {
-  const tabla = document.getElementById(tablaId);
-  const fila = document.createElement('tr');
-  fila.innerHTML = `
-    <td>${datos[0]}</td>
-    <td>${datos[1]}</td>
-    <td>${datos[2]}</td>
-    <td><button type="button" class="btn-eliminar"><span class="material-icons">delete</span></button></td>
-  `;
-  fila.querySelector('.btn-eliminar').addEventListener('click', () => {
-    tabla.removeChild(fila);
-    actualizarLocalStorage(tablaId);
-  });
-  tabla.appendChild(fila);
-}
-
-// Función para agregar producto de forma genérica sin alertas
-function agregarProducto(tipoId, unidadId, cantidadId, tablaId, claveLocalStorage = null) {
-  const tipo = document.getElementById(tipoId).value.trim();
-  const unidad = document.getElementById(unidadId).value.trim();
-  const cantidad = document.getElementById(cantidadId).value.trim();
-
-  if (tipo && unidad && cantidad && parseInt(cantidad) > 0) {
-    crearFila([tipo, unidad, cantidad], tablaId);
-
-    if (claveLocalStorage) {
-      let datos = JSON.parse(localStorage.getItem(claveLocalStorage)) || [];
-      datos.push({ tipo, unidad, cantidad });
-      localStorage.setItem(claveLocalStorage, JSON.stringify(datos));
-    }
-
-    document.getElementById(tipoId).value = "";
-    document.getElementById(unidadId).value = "";
-    document.getElementById(cantidadId).value = "";
-  }
-}
-
-// Función para actualizar localStorage de carnes y proteínas
-function actualizarLocalStorage(tablaId) {
-  const tabla = document.getElementById(tablaId);
-  const filas = tabla.querySelectorAll('tr');
-  const productos = [];
-  filas.forEach(fila => {
-    const celdas = fila.querySelectorAll('td');
-    if (celdas.length === 4) {
-      productos.push({
-        tipo: celdas[0].textContent,
-        unidad: celdas[1].textContent,
-        cantidad: celdas[2].textContent
-      });
-    }
-  });
-  const claves = {
-    'tablaResumen': 'carnes',
-    'tablaProteina': 'proteinas',
-    'tablaVerdura': 'verduras',
-    'tablaResumenOlores': 'olores',
-    'tablaResumenAbarrotes': 'abarrotes',
-    'tablaResumenLimpieza': 'limpieza'
-  };
-  if (claves[tablaId]) {
-    localStorage.setItem(claves[tablaId], JSON.stringify(productos));
-  }
-}
-
-// Eventos para botones de agregar
-
-document.getElementById('btnAgregarCarne').addEventListener('click', () => {
-  agregarProducto('tipoCarne', 'unidad', 'cantidad', 'tablaResumen', 'carnes');
-});
-
-document.getElementById('btnAgregarProteina').addEventListener('click', () => {
-  agregarProducto('tipoProteina', 'unidadProteina', 'cantidadProteina', 'tablaProteina', 'proteinas');
-});
-
-document.getElementById('btnAgregarOlor').addEventListener('click', () => {
-  agregarProducto('tipoOlor', 'unidadOlor', 'cantidadOlor', 'tablaOlor', 'olores');
-});
-
-document.getElementById('btnAgregarAbarrotes').addEventListener('click', () => {
-  agregarProducto('tipoAbarrote', 'unidadAbarrote', 'cantidadAbarrote', 'tablaAbarroteResumen', 'abarrotes');
-});
-
-document.getElementById('btnAgregarLimpieza').addEventListener('click', () => {
-  agregarProducto('productoLimpiezaNuevo', 'unidadLimpiezaNuevo', 'cantidadLimpiezaNuevo', 'tablaLimpieza', 'limpieza');
-});
-
-// Verduras con 2 filas posibles
-
-document.getElementById('btnAgregarVerdura').addEventListener('click', () => {
-  const tipo1 = document.getElementById('tipoVerdura1').value.trim();
-  const unidad1 = document.getElementById('unidadVerdura1').value.trim();
-  const cantidad1 = document.getElementById('cantidadVerdura1').value.trim();
-
-  const tipo2 = document.getElementById('tipoVerdura2').value.trim();
-  const unidad2 = document.getElementById('unidadVerdura2').value.trim();
-  const cantidad2 = document.getElementById('cantidadVerdura2').value.trim();
-
-  const verduras = JSON.parse(localStorage.getItem('verduras')) || [];
-
-  if (tipo1 && unidad1 && cantidad1 && parseInt(cantidad1) > 0) {
-    crearFila([tipo1, unidad1, cantidad1], 'tablaVerdura');
-    verduras.push({ tipo: tipo1, unidad: unidad1, cantidad: cantidad1 });
-  }
-
-  if (tipo2 && unidad2 && cantidad2 && parseInt(cantidad2) > 0) {
-    crearFila([tipo2, unidad2, cantidad2], 'tablaVerdura');
-    verduras.push({ tipo: tipo2, unidad: unidad2, cantidad: cantidad2 });
-  }
-
-  localStorage.setItem('verduras', JSON.stringify(verduras));
-
-  document.getElementById('tipoVerdura1').value = "";
-  document.getElementById('unidadVerdura1').value = "kg";
-  document.getElementById('cantidadVerdura1').value = "";
-
-  document.getElementById('tipoVerdura2').value = "";
-  document.getElementById('unidadVerdura2').value = "kg";
-  document.getElementById('cantidadVerdura2').value = "";
-});
-
-// Al cargar la página, rellenar todas las tablas desde localStorage
-window.addEventListener('load', () => {
-  const claves = [
-    { tabla: 'tablaResumen', clave: 'carnes' },
-    { tabla: 'tablaProteina', clave: 'proteinas' },
-    { tabla: 'tablaVerdura', clave: 'verduras' },
-    { tabla: 'tablaResumenOlores', clave: 'olores' },
-    { tabla: 'tablaResumenAbarrotes', clave: 'abarrotes' },
-    { tabla: 'tablaResumenLimpieza', clave: 'limpieza' }
-  ];
-
-  claves.forEach(({ tabla, clave }) => {
-    const datos = JSON.parse(localStorage.getItem(clave)) || [];
-    datos.forEach(({ tipo, unidad, cantidad }) => {
-      crearFila([tipo, unidad, cantidad], tabla);
+        proteinas.push({ producto: tipo, unidad, cantidad });
+        localStorage.setItem('proteinas', JSON.stringify(proteinas));
+        crearFila([tipo, unidad, cantidad], 'tablaProteina');
+        document.getElementById('tipoProteina').value = '';
     });
-  });
+
+    document.getElementById('btnAgregarVerdura')?.addEventListener('click', () => {
+        const tipo = document.getElementById('tipoVerdura')?.value.trim();
+        const personas = parseInt(document.getElementById('personasCarnes')?.value) || 0;
+
+        if (!tipo || personas <= 0) {
+            alert('Por favor, seleccione una verdura e ingrese una cantidad válida de personas.');
+            return;
+        }
+
+        const gramosPorPersona = CONVERSION_RATES_VERDURAS[tipo] || 120;
+        const cantidadTotalGramos = gramosPorPersona * personas;
+        const cantidadKilos = parseFloat((cantidadTotalGramos / 1000).toFixed(2));
+        const unidad = 'kg';
+
+        let verduras = JSON.parse(localStorage.getItem('verduras')) || [];
+
+        if (verduras.some(v => v.producto === tipo)) {
+            alert('Ya has agregado esa verdura.');
+            return;
+        }
+
+        if (verduras.length >= 2) {
+            alert('Solo se pueden agregar 2 verduras.');
+            return;
+        }
+
+        verduras.push({ producto: tipo, unidad, cantidad: cantidadKilos });
+        localStorage.setItem('verduras', JSON.stringify(verduras));
+        crearFila([tipo, unidad, cantidadKilos], 'tablaVerdura');
+        document.getElementById('tipoVerdura').value = '';
+    });
+
+    // Asegurarse de inicializar las secciones con personas actuales
+    const currentPersonasOnLoad = parseInt(document.getElementById('personasCarnes')?.value) || 0;
+    inicializarYActualizarProductosCheckboxAbarrotes(currentPersonasOnLoad);
+    inicializarYActualizarProductosCheckboxLimpieza(currentPersonasOnLoad);
+    inicializarYActualizarProductosCheckboxOlores(currentPersonasOnLoad);
 });

@@ -2,22 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resumen Parcial</title>
-  <link rel="stylesheet" href="/style/formAbasteci.css" />
+  <link rel="stylesheet" href="../../style/formulario.css" />
+  <link rel="stylesheet" href="/style/menu.css" />
+  <link rel="stylesheet" href="/style/FormAbasteci.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <ul class="nav">
-      <li><a href="/pages/grupo1/formAbasteci.html"><span class="material-icons">home</span> Inicio</a></li>
-      <li><a href="#" class="active"><span class="material-icons">check_circle</span> Resumen Parcial</a></li>
-      <li><a href="/pages/grupo1/resumenTotal.html"><span class="material-icons">assessment</span> Resumen Final</a></li>
-    </ul>
-  </div>
+  <button id="toggle-btn" title="Menú">⬅</button>
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('../sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const headers = document.querySelectorAll('h2, h4');
+        const mainContent = document.querySelector('.main-content');
 
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+          toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
+          headers.forEach(h => {
+            h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
+          });
+          if (mainContent) {
+            mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
+          }
+        });
+      });
+  </script>
   <!-- Contenedor general -->
   <div class="content-area">
     <!-- Header -->

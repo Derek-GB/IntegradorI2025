@@ -2,30 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formulario Abarrotes</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="/style/formAbasteci.css" />
+  <link rel="stylesheet" href="../../style/formulario.css" />
   <link rel="stylesheet" href="/style/menu.css" />
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="/style/FormAbasteci.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+  <button id="toggle-btn" title="Menú">⬅</button>
+  <div id="sidebar-container"></div>
+  <script>
+    fetch('../sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const headers = document.querySelectorAll('h2, h4');
+        const mainContent = document.querySelector('.main-content');
 
-  <!-- Sidebar -->
-   <!-- porfavor juntar con lo de grupo 2, avisen a tony -->
-  <div class="sidebar">
-<ul class="nav">
-  <li><a href="#"><span class="material-icons">home</span> Inicio</a></li>
-  <li><a href="#"><span class="material-icons">groups</span> Registro de Familias</a></li>
-  <li><a href="#"><span class="material-icons">inventory_2</span> Registros de Suministros</a></li>
-  <li><a href="#"><span class="material-icons">assignment</span> Asignación de Suministros</a></li>
-  <li><a href="#"><span class="material-icons">location_city</span> Consulta Albergues</a></li>
-  <li><a href="/pages/grupo1/menuPrincipal.html"><span class="material-icons">local_grocery_store</span> Abastecimiento</a></li>
-  <li><a class="active" href="#"><span class="material-icons">check_circle</span> Revisión de Ayudas</a></li>
-</ul>
-
-  </div>
-
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+          toggleBtn.textContent = sidebar.classList.contains('hidden') ? '☰' : '⬅';
+          headers.forEach(h => {
+            h.style.paddingLeft = sidebar.classList.contains('hidden') ? '20px' : '120px';
+          });
+          if (mainContent) {
+            mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '40px' : '240px';
+          }
+        });
+      });
+  </script>
   <!-- Contenedor general -->
   <div class="content-area">
     <!-- Header -->
@@ -40,43 +50,39 @@
     <main class="main-content">
       <form id="formularioAbarrotes">
 
-  <!-- CARNES -->
-<details>
-  <summary><strong>Carnes</strong></summary>
-
-  <div class="form-group">
-    <label for="personasCarnes">Cantidad de personas:</label>
-    <input type="number" id="personasCarnes" min="1" step="1" />
-    <p>* Se calculan automáticamente 120 gramos por persona. *</p>
-  </div>
-
-  <div class="form-group">
-    <label for="tipoCarne">Tipo de carne:</label>
-    <select id="tipoCarne" name="tipoCarne" required>
-      <option value="">Seleccione</option>
-      <option value="Pollo">Pollo</option>
-      <option value="Cerdo">Cerdo</option>
-      <option value="Res">Res</option>
-    </select>
-  </div>
-
-  <button type="button" id="btnAgregarCarne">Agregar</button>
-
-  <div class="card">
-    <h3>Resumen</h3>
-    <table cellpadding="8" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Tipo de carne</th>
-          <th>Unidad</th>
-          <th>Cantidad</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="tablaResumen"></tbody>
-    </table>
-  </div>
-</details>
+       <!-- CARNES -->
+        <details>
+            <summary><strong>Carnes</strong></summary>
+            <div class="form-group">
+                <label for="personasCarnes">Cantidad de personas:</label>
+                <input type="number" id="personasCarnes" min="1" step="1" />
+                <p>* Se calculan automáticamente 120 gramos por persona. *</p>
+            </div>
+            <div class="form-group">
+                <label for="tipoCarne">Tipo de carne:</label>
+                <select id="tipoCarne" name="tipoCarne" required>
+                    <option value="">Seleccione</option>
+                    <option value="Pollo">Pollo</option>
+                    <option value="Cerdo">Cerdo</option>
+                    <option value="Res">Res</option>
+                </select>
+            </div>
+            <button type="button" id="btnAgregarCarne">Agregar</button>
+            <div class="card">
+                <h3>Resumen Carnes</h3>
+                <table cellpadding="8" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Unidad</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCarnes"></tbody>
+                </table>
+            </div>
+        </details>
 
 <details>
   <summary><strong>Proteínas</strong></summary>
