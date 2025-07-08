@@ -9,20 +9,55 @@
   <link rel="stylesheet" href="../../index.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Registro de Usuario</title>
 </head>
 
 <body>
 
-  <div id="sidebar-container"></div>
+<div id="sidebar-container"></div>
+    
   <script>
     fetch('../sidebar.html')
       .then(res => res.text())
-      .then(html => document.getElementById('sidebar-container').innerHTML = html);
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const headers = document.querySelectorAll('h2, h4');
+        const mainContent = document.querySelector('.main-content');
+
+        function updateSidebarUI() {
+          const isHidden = sidebar.classList.contains('hidden');
+          toggleBtn.style.display = isHidden ? 'none' : '';
+          headers.forEach(h => {
+            h.style.paddingLeft = isHidden ? '20px' : '120px';
+          });
+          mainContent.style.marginLeft = isHidden ? '40px' : '240px';
+        }
+
+        if (!sidebar || !toggleBtn || !mainContent) {
+          console.error('One or more elements not found:', { sidebar, toggleBtn, mainContent });
+          return;
+        }
+
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+          updateSidebarUI();
+        });
+
+        hamburgerBtn.addEventListener('click', () => {
+          sidebar.classList.remove('hidden');
+          updateSidebarUI();
+        });
+
+        updateSidebarUI();
+      })
+      .catch(error => console.error('Error fetching sidebar.html:', error));
   </script>
 
-  <div class="container mt-4">
+  <div class="container main-content ">
     <h2>
       <button onclick="window.location.href='index.html'" type="button" class="btn btn-secondary"
         style="position: absolute; right: 1cm; top: 50%; transform: translateY(-50%); min-width: 40px; padding: 8px;"
@@ -82,6 +117,10 @@
       <button type="submit" class="btn btn-primary mt-3">Registrar</button>
     </form>
   </div>
+
+  <footer>
+        <p>© 2025 Integrador I - Todos los derechos reservados.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
@@ -161,7 +200,7 @@
         .then(response => {
           alert("Usuario registrado correctamente.");
           form.reset();
-          window.location.href = "index.html"; 
+          window.location.href = "registroUsuario.html"; 
         })
         .catch(error => {
           console.error("Error al registrar usuario:", error);

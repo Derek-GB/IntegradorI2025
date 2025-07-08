@@ -1,8 +1,7 @@
 body {
     font-family: 'Segoe UI', sans-serif !important;
-    background-color: var(--gris-claro);
+    background-color:#FAFAFA;
     color: #212529;
-    font-size: 18px;
     line-height: 1.6;
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
@@ -23,6 +22,7 @@ h4 {
     margin-top: 0px;
 }
 
+
 hr {
     border: 1px solid #00897B;
 }
@@ -35,6 +35,16 @@ form#formularioAlbergue {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     max-width: 850px;
     margin: auto;
+    text-align: left;
+}
+
+form#formularioAlbergue h3 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #00897B;
+    padding: 25px;
+    border: #00897B solid 2px;
+    text-align: center;
 }
 
 /* Etiquetas */
@@ -85,6 +95,54 @@ form#formularioAlbergue input[type="radio"] {
 }
 
 
+form#preformularioAlbergue {
+    background-color: #FAFAFA;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 850px;
+    margin: auto;
+    text-align: left;
+}
+
+form#preformularioAlbergue h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #00897B;
+    padding: 25px;
+    border: #00897B solid 2px;
+    text-align: center;
+}
+
+/* Etiquetas */
+form#preformularioAlbergue label,
+.accordion-body label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #212529;
+}
+
+/* Inputs, select, textarea */
+form#preformularioAlbergue input[type="text"],
+form#preformularioAlbergue input[type="number"],
+form#preformularioAlbergue input[type="password"],
+form#preformularioAlbergue input[type="date"],
+form#preformularioAlbergue input[type="email"],
+form#preformularioAlbergue select,
+form#preformularioAlbergue textarea,
+form#preformularioAlbergue input[type="tel"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+
 /* --- Formulario Asignación de Recursos --- */
 form#recursoForm {
     background-color: #FAFAFA;
@@ -93,15 +151,24 @@ form#recursoForm {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     max-width: 850px;
     margin: auto;
+    text-align: left;
 }
 
 /* Etiquetas */
-form#recursoForm label,
-form#recursoForm summary strong {
+form#recursoForm label{
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
     color: #212529;
+}
+form#recursoForm summary strong {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #fafafa;
 }
 
 /* Inputs, select, textarea */
@@ -479,46 +546,81 @@ template#templateAlbergue input[type="radio"] {
 
 
 .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 220px;
+    position: fixed;
+    width: 65px;
     height: 100vh;
     background: #00897B;
-    color: #000;
-    padding-top: 60px;
-    z-index: 1000;
+    overflow: hidden;
+    color: #fff;
+    z-index: 100;
+    transition: width 0.3s ease;
 }
 
+.sidebar:hover {
+    width: 290px; /* Ancho expandido al pasar el mouse */
+    overflow-y: auto; 
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el texto que no cabe */
+    transition: color 0.2s;
+}
+
+.sidebar ul li a:hover {
+    color: #FBC02D;
+}
+
+.sidebar:not(:hover) ul li a span,
+.sidebar:not(:hover) ul li a:not(:has(i)) {
+  display: none; /* Oculta el texto cuando no hay hover */
+}
+
+
+.sidebar ul li a i {
+  min-width: 24px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.sidebar nav {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+
 .sidebar nav ul {
-    position: absolute;
-    top: 8px;
-    list-style: none;
     padding: 0;
     margin: 0;
+    list-style: none;
 }
 
 .sidebar nav ul li {
-    margin: 20px 0;
+    padding: 15px 20px;
+    transition: background 0.2s;
+}
+
+.sidebar nav ul li:hover {
+    background: #1a2230;
 }
 
 .sidebar nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 30px;
-    display: block;
-    transition: background 0.2s;
-}
-
-.sidebar nav ul li a:hover {
-    background: #1a2230;
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 /* Ajusta el contenido principal para dejar espacio al sidebar */
 .main-content {
     margin-left: 240px;
     padding: 30px;
+    transition: margin-left 0.3s ease;
 }
 
 /* color para radio  */
@@ -674,76 +776,6 @@ template#templateAlbergue input[type="radio"] {
     transition: background-color 0.3s ease;
     align-self: flex-end;
 }
-
-
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background: #00897B;
-  color: #fff;
-  padding-top: 60px;
-  transition: left 0.3s ease;
-  z-index: 1000;
-}
-
-#toggle-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: white;
-  color: #00897B;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 20px;
-  z-index: 1001;
-}
-
-.sidebar.hidden {
-  left: -220px; /* Mueve el sidebar completamente fuera de la pantalla */
-}
-
-.sidebar i {
-  margin-right: 8px;
-  width: 20px;
-  text-align: center;
-}
-
-/* Cuando el sidebar está oculto */
-.sidebar.hidden #toggle-btn {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  font-size: 24px;
-  background-color: white;
-  color: #00897B;
-  z-index: 1001;
-}
-
-/* Cuando el sidebar está oculto, mover el botón a la izquierda */
-#toggle-btn.moved {
-  left: 0;
-}
-
-/* Contenido principal */
-.main-content {
-  margin-left: 240px;
-  padding: 30px;
-  transition: margin-left 0.3s ease;
-}
-
-/* Cuando el sidebar está oculto, reducir espacio */
-.sidebar.hidden ~ .main-content,
-#toggle-btn.moved ~ .main-content {
-  margin-left: 40px;
-}
-
 
 
 
@@ -909,3 +941,101 @@ form#recursoForm fieldset {
 }
 }
 
+.container {
+    max-width: 100%;
+    margin: 0px auto;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #FAFAFA;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.preContainer {
+    max-width: 100%;
+    margin: 0px auto;
+    margin-left: 0px;
+
+    margin-bottom: 10%;
+    padding: 20px;
+    text-align: center;
+    background-color: #FAFAFA;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.listaContainer {
+    max-width: 100%;
+    margin: 0px auto;
+    margin-left: 0px;
+
+    margin-bottom: 20%;
+    padding: 20px;
+    text-align: center;
+    background-color: #FAFAFA;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+/* 
+Botón hamburguesa para mostrar el sidebar cuando está oculto
+#hamburger-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2001;
+  background: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: none;
+  cursor: pointer;
+}
+
+#hamburger-btn span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: #333;
+  margin: 4px 0;
+}
+
+#hamburger-btn span:nth-child(1) { width: 24px; }
+#hamburger-btn span:nth-child(2) { width: 20px; margin-left: 4px; }
+#hamburger-btn span:nth-child(3) { width: 16px; margin-left: 8px; }
+
+Mostrar el botón hamburguesa solo cuando el sidebar está oculto 
+.sidebar.hidden ~ #hamburger-btn {
+  display: block !important;
+} */
+
+footer {
+  width: 100%;
+  background: rgb(0, 119, 107) ;
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 1.05em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+  z-index: 100;
+}
+
+
+  footer {
+    position: relative;
+    bottom: auto;
+
+    font-size: 0.95em;
+    padding: 14px 0 10px 0;
+  }

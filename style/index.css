@@ -1,9 +1,13 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     background-color: #FAFAFA;
-    color: #212121;
+    color: #212529;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
     margin: 0;
     padding: 0;
+    
 }
 
 h2, h4 {
@@ -20,15 +24,116 @@ h2, h4 {
 .container {
     max-width: 100%;
     margin: 0px auto;
+    margin-left: 0px;
     margin-bottom: 20px;
     padding: 20px;
     text-align: center;
-    background-color: #00897B;
-    color: #FAFAFA;
+    background-color: #FAFAFA;
+    color: #0000;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+
+.containerIndex {
+  background: linear-gradient(135deg, #00897B 0%, #004D40 100%);
+  color: #f4f8f7;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 40px 30px 30px 30px;
+  margin: 0px auto 30px auto;
+  max-width: 900px;
+
+  min-height: 420px;
+  height: 520px;
+  position: relative;
+  top: 20px;
+  left: 20%;
+  margin-bottom: 19%;
+  text-align: center;
+}
+
+.containerIndex .bienvenida h1 {
+  color: #FBC02D;
+  font-size: 2.2em;
+  margin-bottom: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.containerIndex .intro {
+  font-size: 1.15em;
+  margin-bottom: 22px;
+  color: #e0f7fa;
+}
+
+.containerIndex .ventajas {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.containerIndex .ventajas li {
+  background: rgba(255,255,255,0.10);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 14px 22px;
+  font-size: 1.08em;
+  color: #ffe082;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+  border: 1px solid rgba(255,255,255,0.13);
+}
+
+.containerIndex .ventajas i {
+  font-size: 1.3em;
+  color: #FBC02D;
+}
+
+.containerIndex .progreso {
+  margin-top: 18px;
+}
+
+.containerIndex .badge {
+  background: #FBC02D;
+  color: #212121;
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+
+@media (max-width: 700px) {
+  .containerIndex {
+    padding: 18px 6px 18px 6px;
+    min-height: 320px;
+  }
+  .containerIndex .ventajas {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.containerCONSULTA {
+    max-width: 100%;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    background-color: #FAFAFA;
+    color: #FAFAFA;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
 
 .container1 {
     max-width: 100%;
@@ -39,7 +144,7 @@ h2, h4 {
     padding: 20px;
     text-align: center;
     background-color: #00897B;
-    color: #FAFAFA;
+    color: #0000;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
@@ -230,21 +335,6 @@ h2, h4 {
     border: 1px solid #ced4da;
 }
 
-/* .search-bar button[type="submit"] {
-    padding: 0.5rem 1rem;
-    margin-left: 1rem;
-    background-color: #FBC02D;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.search-bar button[type="submit"]:hover {
-    background-color: #00695c;
-} */
 
 .albergue-resultado {
     border: 1px solid #ccc;
@@ -270,54 +360,12 @@ h2, h4 {
     margin-bottom: 0.5rem;
 }
 
-.sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 220px;
-    height: 100vh;
-    background: #00897B;
-    color: #000;
-    padding-top: 60px;
-    z-index: 1000;
-}
 
-.sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 220px;
-    height: 100vh;
-    background: #00897B;
-    color: #000;
-    padding-top: 60px;
-    z-index: 1000;
-}
-.sidebar nav ul {
-    position: absolute;
-    top: 8px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.sidebar nav ul li {
-    margin: 20px 0;
-}
-.sidebar nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 30px;
-    display: block;
-    transition: background 0.2s;
-}
-.sidebar nav ul li a:hover {
-    background: #1a2230;
-    border-radius: 4px;
-}
 /* Ajusta el contenido principal para dejar espacio al sidebar */
 .main-content {
-    margin-left: 240px;
+    margin-left: 100px;
     padding: 30px;
+    transition: margin-left 0.3s ease;
 }
 
 .form-ayuda-revision {
@@ -388,75 +436,78 @@ h2, h4 {
 }
 
 
-
-
-
-
-/* Sidebar */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background: #00897B;
-  color: #fff;
-  padding-top: 60px;
-  transition: left 0.3s ease;
-  z-index: 1000;
+    position: fixed;
+    margin-top: 0px;
+    width: 65px;
+    height: 100vh;
+    background: #00897B;
+    overflow: hidden;
+   
+    color: #fff;
+    /* padding-top: 60px; */
+    z-index: 100;
+    transition: width 0.3s ease;
 }
 
-#toggle-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: white;
-  color: #00897B;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 20px;
-  z-index: 1001;
+.sidebar:hover {
+    width: 290px; /* Ancho expandido al pasar el mouse */
+    overflow-y: auto; 
 }
 
-.sidebar.hidden {
-  left: -220px; /* Mueve el sidebar completamente fuera de la pantalla */
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el texto que no cabe */
+    transition: color 0.2s;
 }
 
-.sidebar i {
-  margin-right: 8px;
-  width: 20px;
+.sidebar ul li a:hover {
+    color: #FBC02D;
+}
+
+.sidebar:not(:hover) ul li a span,
+.sidebar:not(:hover) ul li a:not(:has(i)) {
+  display: none; /* Oculta el texto cuando no hay hover */
+}
+
+
+.sidebar ul li a i {
+  min-width: 24px;
   text-align: center;
+  font-size: 1.2em;
 }
 
-/* Cuando el sidebar está oculto */
-.sidebar.hidden #toggle-btn {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  font-size: 24px;
-  background-color: #00897B;
-  color: white;
-  z-index: 1001;
+.sidebar nav {
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
-/* Cuando el sidebar está oculto, mover el botón a la izquierda */
-#toggle-btn.moved {
-  left: 0;
+
+.sidebar nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-/* Contenido principal */
-.main-content {
-  margin-left: 240px;
-  padding: 30px;
-  transition: margin-left 0.3s ease;
+.sidebar nav ul li {
+    padding: 15px 20px;
+    transition: background 0.2s;
 }
 
-/* Cuando el sidebar está oculto, reducir espacio */
-.sidebar.hidden ~ .main-content,
-#toggle-btn.moved ~ .main-content {
-  margin-left: 40px;
+.sidebar nav ul li:hover {
+    background: #1a2230;
+}
+
+.sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .hidden { display: none; }
@@ -465,3 +516,22 @@ h2, h4 {
 .principal-section { display: block; }
 .principal-section.hidden { display: none; }
 .main-content { transition: margin-left 0.3s; }
+
+/* Botón hamburguesa para mostrar el sidebar cuando está oculto */
+
+
+footer {
+  width: 100%;
+  background: rgb(0, 119, 107);
+  color: #fff;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  font-size: 1.05em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+  margin-top: 40px;
+  position: static;
+  left: unset;
+  bottom: unset;
+  z-index: 100;
+}
